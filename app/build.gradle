@@ -51,9 +51,9 @@ dependencies {
     compile "io.reactivex.rxjava2:rxandroid:$rx_android_version"
     //endregion
     //region Architecture Components
-    compile "android.arch.lifecycle:extensions:$architecture_components_version"
+//    compile "android.arch.lifecycle:extensions:$architecture_components_version"
     compile "android.arch.persistence.room:runtime:$architecture_components_version"
-    annotationProcessor "android.arch.lifecycle:compiler:$architecture_components_version"
+//    annotationProcessor "android.arch.lifecycle:compiler:$architecture_components_version"
     annotationProcessor "android.arch.persistence.room:compiler:$architecture_components_version"
     //endregion
 }
