@@ -1,0 +1,1798 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--region Тип недвижимости-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Тип недвижимости:" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text"
+                        android:layout_alignTop="@+id/info_label_text"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Класс жилья-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Конструктивно-правовое состояние-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Конструктивно-правовое состояние:" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Тип дома-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Тип дома:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region Количество комнат в квартире-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Количество комнат в квартире:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Этажность дома-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Этажность дома:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Этаж-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Этаж:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Общая площадь квартиры-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Общая площадь квартиры:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Ценовой диапазон-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Ценовой диапазон:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Размер доли-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Размер доли:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Число собственников-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Число собственников:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region Тип обременения-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Тип обременения:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Жилая площадь-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Жилая площадь:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Площадь кухни-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Площадь кухни:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Санузел-->
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Санузел:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region Балкон-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Балкон:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region Ремонт-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Ремонт:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Класс жилья:" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp">
+
+                    <View
+                        android:id="@+id/info_label_indicator2"
+                        android:layout_width="2dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/info_label_text2"
+                        android:layout_alignTop="@+id/info_label_text2"
+                        android:layout_marginBottom="-4dp"
+                        android:layout_marginTop="-4dp"
+                        tools:background="@color/red" />
+
+                    <TextView
+                        android:id="@+id/info_label_text2"
+                        style="@style/Widget.Immovables.TextView.Caption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:textColor="@color/grey"
+                        tools:text="Any text in the InfoLabel\nAnd a next line" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--endregion-->
+
+            <!--region-->
+            <!--endregion-->
+
+            <!--region-->
+            <!--endregion-->
+
+            <!--region-->
+            <!--endregion-->
+
+            <!--region-->
+            <!--endregion-->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Высота потолков:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Вид из окна:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Межкомнатные двери:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Мебель:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Кухонный гарнитур:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Интернет:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Телефон:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Кабельное ТВ:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Кондиционер:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Год постройки:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Год ввода в эксплуатацию:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Лифт:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Парковка:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Консьерж:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Охрана:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Источники информации:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Отопление:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Тип продажи:" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Дата подачи объявления:" />
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>
