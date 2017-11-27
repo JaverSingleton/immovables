@@ -2,9 +2,9 @@ package ru.vstu.immovables.ui.items
 
 import com.avito.konveyor.blueprint.Item
 
-data class DoubleChooser(
+data class Input(
         override val id: Long,
         val name: String,
         val description: String
-): Item {
+) : Item {
 }
