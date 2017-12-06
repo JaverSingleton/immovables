@@ -1,16 +1,29 @@
 package ru.vstu.immovables.di
 
+import dagger.BindsInstance
 import dagger.Component
-import ru.vstu.immovables.MainActivity
-import ru.vstu.immovables.api.di.ApiModule
+import dagger.android.AndroidInjectionModule
+import ru.vstu.immovables.App
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(
-        ApiModule::class
-))
+@Component(
+        modules = arrayOf(
+                AndroidInjectionModule::class,
+                AppBuilder::class
+        )
+)
 interface AppComponent {
 
-    fun inject(activity: MainActivity)
+    @Component.Builder
+    interface Builder {
+
+        fun build(): AppComponent
+
+        @BindsInstance
+        fun application(application: App): Builder
+    }
+
+    fun inject(application: App)
 
 }

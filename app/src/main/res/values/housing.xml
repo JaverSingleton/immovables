@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="property_type">
+        <item>Квартира</item>
+        <item>Комната</item>
+        <item>Дом</item>
+        <item>Земельный участок</item>
+        <item>Офис</item>
+        <item>Торговая площадка</item>
+        <item>Склад</item>
+        <item>Помещение свободного назначения</item>
+        <item>Гараж</item>
+        <item>Здание</item>
+    </string-array>
+
+    <string-array name="housing_class">
+        <item>Неважно</item>
+        <item>Эконом</item>
+        <item>Бизнес</item>
+        <item>Элитное</item>
+    </string-array>
+
+    <string-array name="constructive_legal_status">
+        <item>Неважно</item>
+        <item>Строящиеся</item>
+        <item>Новостройка</item>
+        <item>Вторичное</item>
+    </string-array>
+
+    <string-array name="house_type">
+        <item>Неважно</item>
+        <item>Кирпичный</item>
+        <item>Деревянный</item>
+        <item>Монолитный</item>
+        <item>Панельный</item>
+        <item>Блочный</item>
+    </string-array>
+
+    <string-array name="room_count">
+        <item>Студия</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6+</item>
+        <item>Свободная планировка</item>
+    </string-array>
+
+    <string-array name="encumbrance_type">
+        <item>Неважно</item>
+        <item>Аренда</item>
+        <item>Ипотека</item>
+        <item>Другое</item>
+    </string-array>
+
+    <string-array name="bathroom">
+        <item>Неважно</item>
+        <item>Совмещенный</item>
+        <item>Раздельный</item>
+    </string-array>
+
+    <string-array name="bathroom_count">
+        <item>Неважно</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3+</item>
+    </string-array>
+
+    <string-array name="balcony">
+        <item>Неважно</item>
+        <item>Балкон</item>
+        <item>Лоджия</item>
+        <item>Оба варианта</item>
+    </string-array>
+
+    <string-array name="balcony_count">
+        <item>Неважно</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3+</item>
+    </string-array>
+
+    <string-array name="repairs">
+        <item>Неважно</item>
+        <item>Косметический</item>
+        <item>Евроремонт</item>
+        <item>Дизайнерский</item>
+        <item>Без ремонта</item>
+    </string-array>
+
+    <string-array name="outer_view">
+        <item>Неважно</item>
+        <item>во двор</item>
+        <item>На улицу</item>
+        <item>Оба варианта</item>
+    </string-array>
+
+    <string-array name="common">
+        <item>Неважно</item>
+        <item>Есть</item>
+        <item>Нет</item>
+    </string-array>
+
+    <string-array name="lift">
+        <item>Неважно</item>
+        <item>Есть грузовой</item>
+        <item>Нет грузового</item>
+    </string-array>
+
+    <string-array name="lift_count">
+        <item>Неважно</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4+</item>
+    </string-array>
+
+    <string-array name="parking">
+        <item>Неважно</item>
+        <item>Наземная</item>
+        <item>Подземная</item>
+        <item>Многоуровневая</item>
+        <item>На крыше</item>
+    </string-array>
+
+    <string-array name="information_sources">
+        <item>Неважно</item>
+        <item>Сайты объявлений</item>
+        <item>Аукционы</item>
+    </string-array>
+
+    <string-array name="heating">
+        <item>Неважно</item>
+        <item>Автономное</item>
+        <item>Централизованное</item>
+    </string-array>
+
+    <string-array name="sell_type">
+        <item>Неважно</item>
+        <item>Свободная</item>
+        <item>Альтернативная</item>
+        <item>Возможная ипотека</item>
+    </string-array>
+</resources>

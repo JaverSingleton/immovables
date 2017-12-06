@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Immovables</string>
+    <string name="not_implemented_property_type">Выбранный тип недвижимости не поддерживается</string>
 </resources>
