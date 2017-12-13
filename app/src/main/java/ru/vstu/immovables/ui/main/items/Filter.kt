@@ -46,10 +46,15 @@ sealed class Filter : Item, Parcelable {
     class Date(
             override val id: Long,
             val name: String,
-            val description: String
+            val description: String,
+            var from: String = "",
+            var to: String = ""
     ): Filter() {
+
         constructor(parcel: Parcel) : this(
                 parcel.readLong(),
+                parcel.readString(),
+                parcel.readString(),
                 parcel.readString(),
                 parcel.readString()
         )
@@ -58,6 +63,8 @@ sealed class Filter : Item, Parcelable {
             dest?.writeLong(id)
             dest?.writeString(name)
             dest?.writeString(description)
+            dest?.writeString(from)
+            dest?.writeString(to)
         }
 
         override fun describeContents(): Int = 0
@@ -76,10 +83,12 @@ sealed class Filter : Item, Parcelable {
     class Input(
             override val id: Long,
             val name: String,
-            val description: String
+            val description: String,
+            var input: String = ""
     ): Filter() {
         constructor(parcel: Parcel) : this(
                 parcel.readLong(),
+                parcel.readString(),
                 parcel.readString(),
                 parcel.readString()
         )

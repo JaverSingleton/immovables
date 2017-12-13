@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import com.avito.konveyor.ItemBinder
 import com.avito.konveyor.adapter.AdapterPresenter
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     companion object {
         const val SAVED_PRESENTER_STATE = "savedPresenterState"
+        const val EXTRA_PROPERTY_TYPE = "propertyType"
     }
 
     @Inject
@@ -37,19 +40,19 @@ class MainActivity : AppCompatActivity(), MainView {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        presenter.onCreate(savedInstanceState?.getBundle(SAVED_PRESENTER_STATE))
+        val propertyType = intent.extras.getString(EXTRA_PROPERTY_TYPE)
+
+        presenter.onCreate(savedInstanceState?.getBundle(SAVED_PRESENTER_STATE), propertyType)
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
         outState?.putBundle(SAVED_PRESENTER_STATE, presenter.onSaveState())
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -71,8 +74,25 @@ class MainActivity : AppCompatActivity(), MainView {
         presenter.onDestroy()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        android.R.id.home -> {
+            finish()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
+
     override fun showNotImplementedPropertyTypeMessage() {
         Toast.makeText(this, R.string.not_implemented_property_type, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun hide() {
+        finish()
     }
 
     override fun showHousingParameters(propertyFilters: List<Filter>) {

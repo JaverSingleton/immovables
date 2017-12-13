@@ -30,10 +30,6 @@ class MainActivityModule {
 
     @Provides
     @PerActivity
-    fun provideProperty(context: Context): Property = Property(context)
-
-    @Provides
-    @PerActivity
     fun provideMainPresenter(mainView: MainView, property: Property): MainPresenter =
             MainPresenterImpl(mainView, clicks, property)
 

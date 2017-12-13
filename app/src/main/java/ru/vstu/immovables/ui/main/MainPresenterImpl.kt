@@ -45,20 +45,27 @@ class MainPresenterImpl(
         )
     }
 
-    override fun onCreate(savedState: Bundle?) {
-        if (savedState == null) {
-            view.chooseForResult(-1, property.types)
+    override fun onCreate(savedState: Bundle?, propertyType: String?) {
+        if (savedState == null && propertyType == null) {
+            view.hide()
         }
 
-        if (savedState != null) {
-            val propertyType = savedState.getString(SAVED_PROPERTY_TYPE)
+        this.propertyType = propertyType
+
+        if (savedState != null && propertyType == null) {
+            this.propertyType = savedState.getString(SAVED_PROPERTY_TYPE)
             val savedItems: ArrayList<Filter> = savedState.getParcelableArrayList(SAVED_ITEM_LIST) ?: arrayListOf()
 
-            if (propertyType == null || savedItems.isEmpty()) {
-                view.chooseForResult(-1, property.types)
+            if (this.propertyType == null || savedItems.isEmpty()) {
+                view.hide()
             } else {
                 view.showHousingParameters(savedItems)
             }
+        }
+
+        if(propertyType != null){
+            val position = property.types.indexOf(propertyType)
+            performItemList(position)
         }
     }
 
@@ -97,7 +104,7 @@ class MainPresenterImpl(
         }
         else -> {
             view.showNotImplementedPropertyTypeMessage()
-            view.chooseForResult(-1, property.types)
+            view.hide()
         }
     }
 

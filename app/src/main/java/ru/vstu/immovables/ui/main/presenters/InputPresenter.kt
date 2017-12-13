@@ -11,5 +11,6 @@ class InputPresenter: ItemPresenter<InputView, Filter.Input> {
     override fun bindView(view: InputView, item: Filter.Input, position: Int) {
         view.setTitle(item.name)
         view.setDescription(item.description)
+        view.setInput(item.input)
     }
 }

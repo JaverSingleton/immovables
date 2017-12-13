@@ -3,55 +3,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/selectable_item_background"
     android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:textColor="#b8b8b8"
+        android:textSize="12sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         tools:text="Тип недвижимости:" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/choose_group"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp">
-
-        <View
-            android:id="@+id/info_label_indicator"
-            android:layout_width="2dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/info_label_text"
-            android:layout_alignTop="@+id/info_label_text"
-            android:layout_marginBottom="-4dp"
-            android:layout_marginTop="-4dp"
-            tools:background="@color/red" />
+        android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/info_label_text"
-            style="@style/Widget.Immovables.TextView.Caption"
+            android:id="@+id/choose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="2dp"
-            android:textColor="@color/grey"
-            tools:text="Any text in the InfoLabel\nAnd a next line" />
+            android:textSize="16sp"
+            android:fontFamily="sans-serif"
+            android:textColor="#212121"/>
 
-    </RelativeLayout>
+    </FrameLayout>
 
-    <TextView
-        android:id="@+id/choose"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        android:background="?attr/selectableItemBackground"/>
 
 </LinearLayout>

@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
 import javax.inject.Inject
@@ -30,6 +32,9 @@ class ChooseActivity : AppCompatActivity(), ChooseView{
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
+        setSupportActionBar(findViewById(R.id.toolbar))
+        actionBar?.setDisplayShowHomeEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
 
         val elementId = intent.extras.getLong(EXTRA_ELEMENT_ID)
         val data = intent.extras.getStringArray(EXTRA_DATA_TO_CHOOSE)
@@ -42,13 +47,25 @@ class ChooseActivity : AppCompatActivity(), ChooseView{
         presenter.onDestroy()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        android.R.id.home -> {
+            finish()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
+    }
+
     override fun showData(data: Array<String>) {
         val adapter = ChooseAdapter(data, { presenter.onClick(it) })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        val dividerDecorator = DividerItemDecoration(this, layoutManager.orientation)
+//        val dividerDecorator = DividerItemDecoration(this, layoutManager.orientation)
         val chooseList: RecyclerView = findViewById(R.id.choose_list)
 
-        chooseList.addItemDecoration(dividerDecorator)
+//        chooseList.addItemDecoration(dividerDecorator)
         chooseList.layoutManager = layoutManager
         chooseList.adapter = adapter
 

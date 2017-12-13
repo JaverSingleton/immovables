@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -20,6 +20,12 @@
     <style name="Widget.Immovables.TextView.Caption">
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">1sp</item>
+    </style>
+
+    <style name="TextHint" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize">12sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 
 </resources>

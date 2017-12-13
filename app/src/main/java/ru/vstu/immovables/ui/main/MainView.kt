@@ -7,4 +7,5 @@ interface MainView {
     fun updateHousingParameters(propertyFilters: List<Filter>)
     fun chooseForResult(elementId: Long, chooseIn: List<String>)
     fun showNotImplementedPropertyTypeMessage()
+    fun hide()
 }
