@@ -21,6 +21,7 @@ class ChooseActivity : AppCompatActivity(), ChooseView{
         const val RESULT_SUCCESS = 1
 
         const val EXTRA_ELEMENT_ID = "extraElementId"
+        const val EXTRA_TITLE = "extraTitle"
         const val EXTRA_DATA_TO_CHOOSE = "extraData"
         const val EXTRA_CHOOSEN_POSITION = "extraChoosen"
     }
@@ -33,11 +34,14 @@ class ChooseActivity : AppCompatActivity(), ChooseView{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list)
         setSupportActionBar(findViewById(R.id.toolbar))
-        actionBar?.setDisplayShowHomeEnabled(true)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val title = intent.extras.getString(EXTRA_TITLE)
         val elementId = intent.extras.getLong(EXTRA_ELEMENT_ID)
         val data = intent.extras.getStringArray(EXTRA_DATA_TO_CHOOSE)
+
+        supportActionBar?.title = title
 
         presenter.onCreate(elementId, data)
     }

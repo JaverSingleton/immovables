@@ -9,6 +9,7 @@ class Property(private val context: Context) {
     val types: List<String> = getList(R.array.property_type)
 
     fun apartment(): List<Filter> = listOf(
+            Filter.Input(10, "Число собственников", ""),
             Filter.Chooser(1, "Класс жилья", "", getList(R.array.housing_class)),
             Filter.Chooser(2, "Конструктивно-правовое состояние", "", getList(R.array.constructive_legal_status)),
             Filter.Chooser(3, "Тип дома", "", getList(R.array.house_type)),
@@ -18,7 +19,6 @@ class Property(private val context: Context) {
             Filter.Range(7, "Общая площадь квартиры", ""),
             Filter.Range(8, "Ценовой диапазон", ""),
             Filter.Range(9, "Размер доли", ""),
-            Filter.Input(10, "Число собственников", ""),
             Filter.Chooser(11, "Тип обременения", "", getList(R.array.encumbrance_type)),
             Filter.Range(12, "Жилая площадь", ""),
             Filter.Range(13, "Площадь кухни", ""),

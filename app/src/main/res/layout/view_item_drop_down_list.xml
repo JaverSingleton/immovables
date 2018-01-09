@@ -16,15 +16,15 @@
         android:fontFamily="sans-serif"
         android:textColor="#b8b8b8"
         android:textSize="12sp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         tools:text="Тип недвижимости:" />
 
     <FrameLayout
         android:id="@+id/choose_group"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="4dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

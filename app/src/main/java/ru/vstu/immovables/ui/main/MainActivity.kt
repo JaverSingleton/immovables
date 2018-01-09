@@ -16,6 +16,7 @@ import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
 import ru.vstu.immovables.ui.choose_from_list.ChooseActivity
 import ru.vstu.immovables.ui.main.items.Filter
+import ru.vstu.immovables.utils.VerticalDividerDecoration
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity(), MainView {
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Квартира"
 
         val propertyType = intent.extras.getString(EXTRA_PROPERTY_TYPE)
 
@@ -99,8 +101,15 @@ class MainActivity : AppCompatActivity(), MainView {
         val recycler: RecyclerView = findViewById(R.id.recycler)
         recyclerAdapter = SimpleRecyclerAdapter(adapterPresenter, binder)
 
+        val padding = resources.getDimensionPixelSize(R.dimen.divider_padding)
+
+        val dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider))
+                .setPadding(padding, padding)
+                .build()
+
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = recyclerAdapter
+        recycler.addItemDecoration(dividerDecoration)
 
         updateHousingParameters(propertyFilters)
     }
@@ -110,9 +119,10 @@ class MainActivity : AppCompatActivity(), MainView {
         recyclerAdapter.notifyDataSetChanged()
     }
 
-    override fun chooseForResult(elementId: Long, chooseIn: List<String>) {
+    override fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>) {
         val intent = Intent(this, ChooseActivity::class.java)
         intent.putExtra(ChooseActivity.EXTRA_ELEMENT_ID, elementId)
+        intent.putExtra(ChooseActivity.EXTRA_TITLE, title)
         intent.putExtra(ChooseActivity.EXTRA_DATA_TO_CHOOSE, chooseIn.toTypedArray())
         startActivityForResult(intent, ChooseActivity.REQUEST_CODE)
     }

@@ -11,4 +11,8 @@
 
     <drawable name="pressed_color">#00aaff</drawable>
     <drawable name="normal_color">#b8b8b8</drawable>
+
+    <color name="grey_300">#E0E0E0</color>
+    <color name="transparent">#00000000</color>
+
 </resources>
