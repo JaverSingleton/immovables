@@ -1,0 +1,32 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="ru.vstu.immovables.ui.location.LocationActivity" />
+
+    <Button
+        android:id="@+id/apply_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_btn_fab"
+        android:drawablePadding="-4dp"
+        android:drawableRight="@drawable/ic_chevron_right_white_24dp"
+        android:gravity="center"
+        android:minHeight="72dp"
+        android:minWidth="0dp"
+        android:paddingLeft="20dp"
+        android:text="@string/Button.Apply"
+        android:textColor="@color/white"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+    <include layout="@layout/view_search_bar" />
+
+</FrameLayout>

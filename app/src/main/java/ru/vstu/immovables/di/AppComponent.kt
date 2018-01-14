@@ -4,6 +4,8 @@ import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
 import ru.vstu.immovables.App
+import ru.vstu.immovables.ui.location.di.LocationComponent
+import ru.vstu.immovables.ui.location.di.LocationModule
 import javax.inject.Singleton
 
 @Singleton
@@ -25,5 +27,7 @@ interface AppComponent {
     }
 
     fun inject(application: App)
+
+    fun plus(module: LocationModule) : LocationComponent
 
 }

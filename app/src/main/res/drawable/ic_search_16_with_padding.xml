@@ -1,0 +1,5 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:right="12dp"
+        android:drawable="@drawable/ic_search_16" />
+</layer-list>

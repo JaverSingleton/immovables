@@ -13,6 +13,7 @@ import com.avito.konveyor.adapter.AdapterPresenter
 import com.avito.konveyor.adapter.SimpleRecyclerAdapter
 import com.avito.konveyor.data_source.ListDataSource
 import dagger.android.AndroidInjection
+import dagger.android.AndroidInjectionModule
 import ru.vstu.immovables.R
 import ru.vstu.immovables.ui.choose_from_list.ChooseActivity
 import ru.vstu.immovables.ui.main.items.Filter

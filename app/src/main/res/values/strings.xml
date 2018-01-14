@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Immovables</string>
     <string name="not_implemented_property_type">Выбранный тип недвижимости не поддерживается</string>
-    <string name="from">с</string>
-    <string name="to">по</string>
+    <string name="from">С</string>
+    <string name="to">По</string>
+    <string name="title_activity_location">Map</string>
+    <string name="Button.Apply">Продолжить</string>
+    <string name="Location.InputAddress">Введите адрес</string>
 </resources>
