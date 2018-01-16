@@ -1,4 +1,4 @@
-package ru.vstu.immovables.repository
+package ru.vstu.immovables.repository.location
 
 import android.location.Address
 import android.location.Geocoder
@@ -37,7 +37,7 @@ class LocationRepositoryImpl(private val geocoder: Geocoder) : LocationRepositor
                     .subscribeOn(Schedulers.io())
 
     fun Address.toLocationData() = LocationData(
-            (0 .. Math.min(maxAddressLineIndex, 3)).map { getAddressLine(it) }.joinToString(", "),
+            (0..Math.min(maxAddressLineIndex, 3)).map { getAddressLine(it) }.joinToString(", "),
             LatLng(latitude, longitude)
     )
 

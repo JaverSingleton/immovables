@@ -6,4 +6,9 @@
     <string name="title_activity_location">Map</string>
     <string name="Button.Apply">Продолжить</string>
     <string name="Location.InputAddress">Введите адрес</string>
+    <string name="Report.Cost">%s руб.</string>
+    <string name="Report.AveCost">%s руб./м²</string>
+    <string name="Report.Cost.Hint">Возможный дипазон цен</string>
+    <string name="Report.Button.Title">Получить отчет</string>
+    <string name="Report.Error.WrongFormat">Неверный формат файла</string>
 </resources>

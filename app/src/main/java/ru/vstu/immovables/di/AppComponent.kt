@@ -6,6 +6,8 @@ import dagger.android.AndroidInjectionModule
 import ru.vstu.immovables.App
 import ru.vstu.immovables.ui.location.di.LocationComponent
 import ru.vstu.immovables.ui.location.di.LocationModule
+import ru.vstu.immovables.ui.report.di.ReportComponent
+import ru.vstu.immovables.ui.report.di.ReportModule
 import javax.inject.Singleton
 
 @Singleton
@@ -29,5 +31,7 @@ interface AppComponent {
     fun inject(application: App)
 
     fun plus(module: LocationModule) : LocationComponent
+
+    fun plus(module: ReportModule) : ReportComponent
 
 }

@@ -10,9 +10,9 @@ import com.jakewharton.rxrelay2.PublishRelay
 import dagger.Module
 import dagger.Provides
 import ru.vstu.immovables.di.PerActivity
-import ru.vstu.immovables.repository.LocationData
-import ru.vstu.immovables.repository.LocationRepository
-import ru.vstu.immovables.repository.LocationRepositoryImpl
+import ru.vstu.immovables.repository.location.LocationData
+import ru.vstu.immovables.repository.location.LocationRepository
+import ru.vstu.immovables.repository.location.LocationRepositoryImpl
 import ru.vstu.immovables.ui.location.LocationPresenter
 import ru.vstu.immovables.ui.location.LocationPresenterImpl
 import ru.vstu.immovables.ui.location.item.LocationSearchBlueprint

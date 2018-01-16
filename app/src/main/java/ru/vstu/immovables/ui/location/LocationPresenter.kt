@@ -10,8 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import ru.vstu.immovables.completableOnNext
-import ru.vstu.immovables.repository.LocationData
-import ru.vstu.immovables.repository.LocationRepository
+import ru.vstu.immovables.repository.location.LocationData
+import ru.vstu.immovables.repository.location.LocationRepository
 import ru.vstu.immovables.singleMap
 import ru.vstu.immovables.toObservable
 import ru.vstu.immovables.ui.location.item.LocationSearchItem

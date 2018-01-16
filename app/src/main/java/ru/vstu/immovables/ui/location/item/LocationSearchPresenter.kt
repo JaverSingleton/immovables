@@ -2,7 +2,7 @@ package ru.vstu.immovables.ui.location.item
 
 import com.avito.konveyor.blueprint.ItemPresenter
 import io.reactivex.functions.Consumer
-import ru.vstu.immovables.repository.LocationData
+import ru.vstu.immovables.repository.location.LocationData
 
 class LocationSearchPresenter(
         private val valueConsumer: Consumer<LocationData>

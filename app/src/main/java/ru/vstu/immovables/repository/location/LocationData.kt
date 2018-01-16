@@ -1,4 +1,4 @@
-package ru.vstu.immovables.repository
+package ru.vstu.immovables.repository.location
 
 import android.os.Parcel
 import android.os.Parcelable

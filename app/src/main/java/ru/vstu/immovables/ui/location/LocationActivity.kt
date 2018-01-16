@@ -11,7 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
 import ru.vstu.immovables.getContainerView
-import ru.vstu.immovables.repository.LocationData
+import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.location.di.LocationModule
 import javax.inject.Inject
 
