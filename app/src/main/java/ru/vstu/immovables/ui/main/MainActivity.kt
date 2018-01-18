@@ -13,7 +13,6 @@ import com.avito.konveyor.adapter.AdapterPresenter
 import com.avito.konveyor.adapter.SimpleRecyclerAdapter
 import com.avito.konveyor.data_source.ListDataSource
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjectionModule
 import ru.vstu.immovables.R
 import ru.vstu.immovables.ui.choose_from_list.ChooseActivity
 import ru.vstu.immovables.ui.main.items.Filter
@@ -104,7 +103,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
         val padding = resources.getDimensionPixelSize(R.dimen.divider_padding)
 
-        val dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider))
+        val dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider_and_padding))
                 .setPadding(padding, padding)
                 .build()
 

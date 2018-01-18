@@ -13,14 +13,14 @@ interface ReportRepository {
 
 }
 
-class ReportRepositoryImpl(): ReportRepository {
+class ReportRepositoryImpl : ReportRepository {
 
     override fun find(id: Long): Single<ReportData> =
-            ReportData(id = id, metres = 38, cost = 5000000000, filePath = "Path").toSingle()
+            ReportData(id = id, address = "Дом #1", metres = 38, cost = 5000000000, filePath = "Path").toSingle()
 
     override fun save(report: ReportData): Single<ReportData> =
-            ReportData(1, metres = 38, cost = 5000000000, filePath = "Path").toSingle()
+            ReportData(1, address = "Дом #1", metres = 38, cost = 5000000000, filePath = "Path").toSingle()
 
     override fun getAll(): Single<List<ReportData>> =
-            listOf<ReportData>().toSingle()
+            find(1).map { listOf(it) }
 }

@@ -13,7 +13,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:fontFamily="sans-serif-medium"
-        android:paddingTop="@dimen/report_top_padding"
+        android:paddingTop="46dp"
         android:textColor="#de000000"
         android:textSize="24sp"
         android:textStyle="normal"
@@ -50,18 +50,17 @@
 
         <TextView
             android:id="@+id/min"
-            android:layout_width="90dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:ellipsize="end"
             android:fontFamily="sans-serif"
             android:gravity="right|center_vertical"
             android:lineSpacingExtra="6sp"
-            android:maxLines="1"
             android:textColor="#de000000"
             android:textSize="10sp"
             android:textStyle="normal"
+            android:maxLines="1"
             tools:text="6 077 914 руб." />
 
         <FrameLayout
@@ -86,15 +85,13 @@
 
         <TextView
             android:id="@+id/max"
-            android:layout_width="90dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:ellipsize="end"
             android:fontFamily="sans-serif"
             android:gravity="left|center_vertical"
             android:lineSpacingExtra="6sp"
-            android:maxLines="1"
             android:textColor="#de000000"
             android:textSize="10sp"
             android:textStyle="normal"

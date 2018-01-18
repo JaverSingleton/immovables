@@ -7,6 +7,7 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.toSingle
 import ru.vstu.immovables.repository.report.ReportData
 import ru.vstu.immovables.repository.report.ReportRepository
+import ru.vstu.immovables.toNumberString
 import java.text.NumberFormat
 
 interface ReportPresenter {
@@ -86,8 +87,6 @@ class ReportPresenterImpl(
     override fun onSaveState(): Bundle = Bundle().apply {
         putParcelable(KEY_REPORT, report)
     }
-
-    private fun Long.toNumberString() = NumberFormat.getNumberInstance().format(this)
 
 }
 

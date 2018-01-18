@@ -37,15 +37,15 @@ class ReportViewImpl(view: View): ReportView {
     private val reportButton: View = view.findViewById(R.id.report)
 
     override fun showCost(cost: String) {
-        costView.text = context.getString(R.string.Report_Cost, cost)
+        costView.text = context.getString(R.string.Common_Cost, cost)
     }
 
     override fun showMaxCost(cost: String) {
-        maxCostView.text = context.getString(R.string.Report_Cost, cost)
+        maxCostView.text = context.getString(R.string.Common_Cost, cost)
     }
 
     override fun showMinCost(cost: String) {
-        minCostView.text = context.getString(R.string.Report_Cost, cost)
+        minCostView.text = context.getString(R.string.Common_Cost, cost)
     }
 
     override fun showAveCost(cost: String) {
