@@ -59,10 +59,16 @@ class HistoryPresenterImpl(
     override fun attachRouter(router: HistoryPresenter.Router) {
         this.router = router
         disposables += reportRepository.getAll().subscribe { items ->
-            adapterPresenter.updateItems(items.mapIndexed { index, reportData ->
+            val reports = items.mapIndexed { index, reportData ->
                 HistoryItem(index.toLong(), reportData)
-            })
+            }
+            adapterPresenter.updateItems(reports)
             view?.updateItems()
+            if (reports.isEmpty()) {
+                view?.showNoElements()
+            } else {
+                view?.showItems()
+            }
         }
     }
 

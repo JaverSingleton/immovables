@@ -11,6 +11,8 @@ import com.avito.konveyor.blueprint.ViewHolderBuilder
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
 import ru.vstu.immovables.R
+import ru.vstu.immovables.hide
+import ru.vstu.immovables.show
 import ru.vstu.immovables.utils.VerticalDividerDecoration
 
 interface HistoryView {
@@ -18,6 +20,10 @@ interface HistoryView {
     fun updateItems()
 
     fun addClicks(): Observable<Unit>
+
+    fun showNoElements()
+
+    fun showItems()
 
 }
 
@@ -32,6 +38,8 @@ class HistoryViewImpl(
     private val addButton: View = view.findViewById(R.id.add_button)
 
     private val recycler: RecyclerView = view.findViewById(R.id.reports_recycler)
+
+    private val noElements: View = view.findViewById(R.id.no_elements)
 
     private val toolbar: Toolbar = view.findViewById(R.id.toolbar)
 
@@ -52,4 +60,13 @@ class HistoryViewImpl(
 
     override fun addClicks(): Observable<Unit> = addButton.clicks()
 
+    override fun showNoElements() {
+        noElements.show()
+        recycler.hide()
+    }
+
+    override fun showItems() {
+        recycler.show()
+        noElements.hide()
+    }
 }

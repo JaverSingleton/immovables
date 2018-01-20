@@ -10,6 +10,7 @@ import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
 import ru.vstu.immovables.getContainerView
 import ru.vstu.immovables.ui.history.di.HistoryModule
+import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
 import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportSreen
 import javax.inject.Inject
 
@@ -52,7 +53,7 @@ class HistoryActivity : AppCompatActivity(), HistoryPresenter.Router {
     }
 
     override fun addImmovable() {
-
+        startActivity(propertyChooseScreen())
     }
 
     companion object {

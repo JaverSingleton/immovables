@@ -22,5 +22,6 @@ class ReportRepositoryImpl : ReportRepository {
             ReportData(1, address = "Дом #1", metres = 38, cost = 5000000000, filePath = "Path").toSingle()
 
     override fun getAll(): Single<List<ReportData>> =
-            find(1).map { listOf(it) }
+//            find(1).map { listOf(it) }
+            listOf<ReportData>().toSingle()
 }

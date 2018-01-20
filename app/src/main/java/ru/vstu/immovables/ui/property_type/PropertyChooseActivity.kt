@@ -1,5 +1,6 @@
 package ru.vstu.immovables.ui.property_type
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
+import ru.vstu.immovables.ui.history.HistoryActivity
 import ru.vstu.immovables.ui.main.MainActivity
 import javax.inject.Inject
 
@@ -68,5 +70,12 @@ class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
         val intent = Intent(this, MainActivity::class.java)
         intent.putExtra(MainActivity.EXTRA_PROPERTY_TYPE, propertyType)
         startActivity(intent)
+    }
+
+    companion object {
+
+        fun Context.propertyChooseScreen() =
+                Intent(this, PropertyChooseActivity::class.java)
+
     }
 }
