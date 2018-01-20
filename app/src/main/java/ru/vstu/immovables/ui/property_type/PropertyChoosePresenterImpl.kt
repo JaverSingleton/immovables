@@ -1,18 +1,14 @@
 package ru.vstu.immovables.ui.property_type
 
-import ru.vstu.immovables.Property
-
-/**
- * Created by Mekamello on 13.12.17.
- */
 class PropertyChoosePresenterImpl(
-        private val property: Property,
+        private val items: List<String>,
+        private val selectedItem: Int,
         private val view: PropertyChooseView
-): PropertyChoosePresenter {
+) : PropertyChoosePresenter {
 
 
     override fun onCreate() {
-        view.showData(property.types.toTypedArray())
+        view.showData(items, selectedItem)
     }
 
     override fun onResume() {
@@ -24,6 +20,6 @@ class PropertyChoosePresenterImpl(
     }
 
     override fun onClick(position: Int) {
-        view.openImmovableProperties(property.types[position])
+        view.applySelecting(position)
     }
 }

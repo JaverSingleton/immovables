@@ -14,8 +14,10 @@ import com.avito.konveyor.adapter.SimpleRecyclerAdapter
 import com.avito.konveyor.data_source.ListDataSource
 import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
-import ru.vstu.immovables.ui.choose_from_list.ChooseActivity
 import ru.vstu.immovables.ui.main.items.Filter
+import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractId
+import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
+import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
 import ru.vstu.immovables.utils.VerticalDividerDecoration
 import javax.inject.Inject
 
@@ -60,10 +62,10 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            ChooseActivity.REQUEST_CODE -> presenter.onActivityResult(
+            REQ_SELECT_ITEM -> presenter.onActivityResult(
                     resultCode,
-                    data?.extras?.getLong(ChooseActivity.EXTRA_ELEMENT_ID),
-                    data?.extras?.getInt(ChooseActivity.EXTRA_CHOOSEN_POSITION)
+                    data?.extractId(),
+                    data?.extractSelectedItem()
             )
             else -> {
                 /*Ignore*/
@@ -119,12 +121,18 @@ class MainActivity : AppCompatActivity(), MainView {
         recyclerAdapter.notifyDataSetChanged()
     }
 
-    override fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>) {
-        val intent = Intent(this, ChooseActivity::class.java)
-        intent.putExtra(ChooseActivity.EXTRA_ELEMENT_ID, elementId)
-        intent.putExtra(ChooseActivity.EXTRA_TITLE, title)
-        intent.putExtra(ChooseActivity.EXTRA_DATA_TO_CHOOSE, chooseIn.toTypedArray())
-        startActivityForResult(intent, ChooseActivity.REQUEST_CODE)
+    override fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>, selectedPosition: Int) {
+        startActivityForResult(
+                propertyChooseScreen(
+                        title = title,
+                        items = chooseIn,
+                        selectedItem = selectedPosition,
+                        id = elementId
+                ),
+                REQ_SELECT_ITEM
+        )
     }
 
 }
+
+private const val REQ_SELECT_ITEM = 0

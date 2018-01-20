@@ -5,7 +5,7 @@ import ru.vstu.immovables.ui.main.items.Filter
 interface MainView {
     fun showHousingParameters(propertyFilters: List<Filter>)
     fun updateHousingParameters(propertyFilters: List<Filter>)
-    fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>)
+    fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>, selectedPosition: Int)
     fun showNotImplementedPropertyTypeMessage()
     fun hide()
 }

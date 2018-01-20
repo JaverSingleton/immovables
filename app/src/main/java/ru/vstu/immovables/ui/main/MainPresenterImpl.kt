@@ -110,7 +110,7 @@ class MainPresenterImpl(
 
     private fun chooseFromList(filter: Filter) {
         if (filter is Filter.Chooser) {
-            view.chooseForResult(filter.name, filter.id, filter.list)
+            view.chooseForResult(filter.name, filter.id, filter.list, filter.choosenPosition)
         }
     }
 }

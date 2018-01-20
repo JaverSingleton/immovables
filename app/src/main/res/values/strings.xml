@@ -14,4 +14,5 @@
     <string name="History.Title">История</string>
     <string name="History.NoElements.Title">Ничего не найдено</string>
     <string name="History.NoElements.Description">Вы еще не делали запросов на оценку.\nДля этого, нажмите на кнопку снизу</string>
+    <string name="Property.ImmovableType.Title">Тип жилья</string>
 </resources>

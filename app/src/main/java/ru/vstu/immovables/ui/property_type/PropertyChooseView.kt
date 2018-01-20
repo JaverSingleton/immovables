@@ -1,10 +1,7 @@
 package ru.vstu.immovables.ui.property_type
 
-/**
- * Created by Mekamello on 13.12.17.
- */
 interface PropertyChooseView {
-    fun showData(data: Array<String>)
+    fun showData(data: List<String>, selectedItem: Int)
     fun restoreData()
-    fun openImmovableProperties(propertyType: String)
+    fun applySelecting(selectedItem: Int)
 }

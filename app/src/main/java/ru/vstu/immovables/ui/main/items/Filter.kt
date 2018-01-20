@@ -11,7 +11,10 @@ sealed class Filter : Item, Parcelable {
             val description: String,
             val list: List<String>,
             var choosenField: String = ""
-    ): Filter() {
+    ) : Filter() {
+
+        val choosenPosition
+            get() = list.indexOf(choosenField)
 
         constructor(parcel: Parcel) : this(
                 parcel.readLong(),
@@ -49,7 +52,7 @@ sealed class Filter : Item, Parcelable {
             val description: String,
             var from: String = "",
             var to: String = ""
-    ): Filter() {
+    ) : Filter() {
 
         constructor(parcel: Parcel) : this(
                 parcel.readLong(),
@@ -85,7 +88,7 @@ sealed class Filter : Item, Parcelable {
             val name: String,
             val description: String,
             var input: String = ""
-    ): Filter() {
+    ) : Filter() {
         constructor(parcel: Parcel) : this(
                 parcel.readLong(),
                 parcel.readString(),
@@ -116,7 +119,7 @@ sealed class Filter : Item, Parcelable {
             override val id: Long,
             val name: String,
             val description: String
-    ): Filter() {
+    ) : Filter() {
         constructor(parcel: Parcel) : this(
                 parcel.readLong(),
                 parcel.readString(),

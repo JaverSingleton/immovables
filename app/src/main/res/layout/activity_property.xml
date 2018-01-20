@@ -19,7 +19,7 @@
         android:textColor="#212121"
         android:fontFamily="sans-serif-medium"
         android:layout_below="@+id/toolbar"
-        android:text="Выберите тип жилья"/>
+        tools:text="Выберите тип жилья"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list"

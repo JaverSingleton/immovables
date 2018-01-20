@@ -7,8 +7,11 @@ import android.support.annotation.StringRes
 import android.support.v4.content.ContextCompat
 import android.widget.Toast
 
-fun Context.getDrawable(@DrawableRes drawableRes: Int) =
+fun Context.getDrawableCompat(@DrawableRes drawableRes: Int) =
         ContextCompat.getDrawable(this, drawableRes)
+
+fun Context.getColorCompat(@DrawableRes colorRes: Int) =
+        ContextCompat.getColor(this, colorRes)
 
 fun Context.getDimen(@DimenRes dimenRes: Int) =
         resources.getDimensionPixelSize(dimenRes)

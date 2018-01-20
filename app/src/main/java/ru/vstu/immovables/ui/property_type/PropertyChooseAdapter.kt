@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import ru.vstu.immovables.R
+import ru.vstu.immovables.getColorCompat
 
-/**
- * Created by Mekamello on 13.12.17.
- */
 class PropertyChooseAdapter(
-        private val array: Array<String>,
+        private val items: List<String>,
+        private val selectedItem: Int,
         private val onChoose: (Int) -> Unit
 ) : RecyclerView.Adapter<PropertyChooseAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bind(array[position], { onChoose(array.indexOf(it)) })
+        holder?.bind(items[position], position == selectedItem, { onChoose(items.indexOf(it)) })
     }
 
-    override fun getItemCount(): Int = array.size
+    override fun getItemCount(): Int = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context)
@@ -29,9 +28,13 @@ class PropertyChooseAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        private val context = view.context
         private val chooseTitle: TextView = view.findViewById(R.id.choose_title)
 
-        fun bind(title: String, callback: (String) -> Unit) {
+        fun bind(title: String, isSelected: Boolean, callback: (String) -> Unit) {
+            if (isSelected) {
+                chooseTitle.setTextColor(context.getColorCompat(R.color.blue))
+            }
             chooseTitle.text = title
 
             itemView.setOnClickListener { callback(title) }

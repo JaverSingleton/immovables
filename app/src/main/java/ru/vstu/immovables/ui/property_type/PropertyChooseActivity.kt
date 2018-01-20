@@ -1,5 +1,6 @@
 package ru.vstu.immovables.ui.property_type
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,15 +9,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
-import ru.vstu.immovables.ui.history.HistoryActivity
-import ru.vstu.immovables.ui.main.MainActivity
+import ru.vstu.immovables.appComponent
+import ru.vstu.immovables.ui.property_type.di.PropertyChooseModule
 import javax.inject.Inject
 
-/**
- * Created by Mekamello on 13.12.17.
- */
 class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
 
     @Inject
@@ -25,9 +24,17 @@ class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
     private lateinit var adapter: PropertyChooseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        appComponent
+                .plus(PropertyChooseModule(
+                        this,
+                        intent.getStringArrayListExtra(KEY_ITEMS),
+                        intent.getIntExtra(KEY_SELECTED_ITEM, -1)
+                ))
+                .inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_property)
+        (findViewById<TextView>(R.id.title)).text = intent.extras.getString(KEY_TITLE)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -53,8 +60,8 @@ class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
         else -> super.onOptionsItemSelected(item)
     }
 
-    override fun showData(data: Array<String>) {
-        adapter = PropertyChooseAdapter(data, { presenter.onClick(it) })
+    override fun showData(data: List<String>, selectedItem: Int) {
+        adapter = PropertyChooseAdapter(data, selectedItem, { presenter.onClick(it) })
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         val chooseList: RecyclerView = findViewById(R.id.list)
 
@@ -66,16 +73,33 @@ class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
         adapter.notifyDataSetChanged()
     }
 
-    override fun openImmovableProperties(propertyType: String) {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra(MainActivity.EXTRA_PROPERTY_TYPE, propertyType)
-        startActivity(intent)
+    override fun applySelecting(selectedItem: Int) {
+        setResult(
+                Activity.RESULT_OK,
+                Intent()
+                        .putExtra(KEY_SELECTED_ITEM, selectedItem)
+                        .putExtra(KEY_ID, intent.extractId())
+        )
+        finish()
     }
 
     companion object {
 
-        fun Context.propertyChooseScreen() =
+        fun Context.propertyChooseScreen(title: String, items: List<String>, selectedItem: Int = -1, id: Long = 0) =
                 Intent(this, PropertyChooseActivity::class.java)
+                        .putExtra(KEY_TITLE, title)
+                        .putStringArrayListExtra(KEY_ITEMS, ArrayList(items))
+                        .putExtra(KEY_SELECTED_ITEM, selectedItem)
+                        .putExtra(KEY_ID, id)
+
+        fun Intent.extractSelectedItem() = getIntExtra(KEY_SELECTED_ITEM, -1)
+
+        fun Intent.extractId() = getLongExtra(KEY_ID, 0)
+
+        private const val KEY_SELECTED_ITEM = "selectedItem"
+        private const val KEY_ITEMS = "items"
+        private const val KEY_TITLE = "title"
+        private const val KEY_ID = "id"
 
     }
 }
