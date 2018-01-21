@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.jakewharton.rxrelay2.PublishRelay
 import dagger.Module
 import dagger.Provides
+import ru.vstu.immovables.database.MainDatabase
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.repository.report.ReportRepository
 import ru.vstu.immovables.repository.report.ReportRepositoryImpl
@@ -25,6 +26,7 @@ class ReportModule(
             ReportPresenterImpl(reportId, reportRepository, presenterState)
 
     @Provides
-    fun provideRepository(): ReportRepository = ReportRepositoryImpl()
+    fun provideRepository(database: MainDatabase): ReportRepository =
+            ReportRepositoryImpl(database.getReportDao())
 
 }

@@ -4,19 +4,19 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import ru.vstu.immovables.database.dao.ApartmentDao
-import ru.vstu.immovables.database.entities.Apartment
+import ru.vstu.immovables.database.dao.ReportDao
+import ru.vstu.immovables.database.entities.Report
 
 @Database(
         entities = arrayOf(
-                Apartment::class
+                Report::class
         ),
         version = 1
 )
 abstract class MainDatabase : RoomDatabase() {
 
     companion object {
-        private const val DATABASE_NAME = "db"
+        private const val DATABASE_NAME = "database"
 
         @JvmStatic
         fun createPersistenceDatabase(context: Context): MainDatabase =
@@ -26,5 +26,5 @@ abstract class MainDatabase : RoomDatabase() {
 
     }
 
-    abstract fun getApartmentDao(): ApartmentDao
+    abstract fun getReportDao(): ReportDao
 }

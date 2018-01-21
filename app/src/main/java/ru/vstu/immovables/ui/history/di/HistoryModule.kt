@@ -6,6 +6,7 @@ import com.avito.konveyor.adapter.SimpleAdapterPresenter
 import com.jakewharton.rxrelay2.PublishRelay
 import dagger.Module
 import dagger.Provides
+import ru.vstu.immovables.database.MainDatabase
 import ru.vstu.immovables.di.PerActivity
 import ru.vstu.immovables.repository.report.ReportRepository
 import ru.vstu.immovables.repository.report.ReportRepositoryImpl
@@ -27,7 +28,8 @@ class HistoryModule() {
             HistoryPresenterImpl(reportRepository, adapterPresenter, reportSelectedRelay)
 
     @Provides
-    fun provideRepository(): ReportRepository = ReportRepositoryImpl()
+    fun provideRepository(database: MainDatabase): ReportRepository =
+            ReportRepositoryImpl(database.getReportDao())
 
     @Provides
     @PerActivity
