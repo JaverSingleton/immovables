@@ -8,6 +8,8 @@ import ru.vstu.immovables.ui.history.di.HistoryComponent
 import ru.vstu.immovables.ui.history.di.HistoryModule
 import ru.vstu.immovables.ui.location.di.LocationComponent
 import ru.vstu.immovables.ui.location.di.LocationModule
+import ru.vstu.immovables.ui.main.di.PropertiesComponent
+import ru.vstu.immovables.ui.main.di.PropertiesModule
 import ru.vstu.immovables.ui.property_type.di.PropertyChooseComponent
 import ru.vstu.immovables.ui.property_type.di.PropertyChooseModule
 import ru.vstu.immovables.ui.report.di.ReportComponent
@@ -41,5 +43,7 @@ interface AppComponent {
     fun plus(module: HistoryModule) : HistoryComponent
 
     fun plus(module: PropertyChooseModule) : PropertyChooseComponent
+
+    fun plus(module: PropertiesModule) : PropertiesComponent
 
 }

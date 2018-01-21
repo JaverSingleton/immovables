@@ -219,3 +219,9 @@ fun <E : Enum<E>> Parcel.readOptEnum(values: Array<E>): E? {
 }
 
 fun <E : Enum<E>> Parcel.readEnum(values: Array<E>): E = values[readInt()]
+
+fun Parcel.readStringList(): List<String> {
+    val list = mutableListOf<String>()
+    readStringList(list)
+    return list
+}

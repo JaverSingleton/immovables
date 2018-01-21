@@ -13,7 +13,7 @@ import ru.vstu.immovables.ui.main.views.InputView
 class InputViewHolder(view: View): BaseViewHolder(view), InputView{
 
     private val title: TextView = view.findViewById(R.id.title)
-    private val input: TextView = view.findViewById(R.id.input)
+    private val input: TextView = view.findViewById(R.id.title)
 
     override fun setTitle(title: String) {
         this.title.text = title

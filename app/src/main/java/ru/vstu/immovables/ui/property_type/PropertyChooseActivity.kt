@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
-import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
+import ru.vstu.immovables.inject
 import ru.vstu.immovables.ui.property_type.di.PropertyChooseModule
 import javax.inject.Inject
 
@@ -78,7 +78,7 @@ class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
                 Activity.RESULT_OK,
                 Intent()
                         .putExtra(KEY_SELECTED_ITEM, selectedItem)
-                        .putExtra(KEY_ID, intent.extractId())
+                        .inject(this)
         )
         finish()
     }
@@ -90,16 +90,13 @@ class PropertyChooseActivity : AppCompatActivity(), PropertyChooseView {
                         .putExtra(KEY_TITLE, title)
                         .putStringArrayListExtra(KEY_ITEMS, ArrayList(items))
                         .putExtra(KEY_SELECTED_ITEM, selectedItem)
-                        .putExtra(KEY_ID, id)
+                        .inject(id)
 
         fun Intent.extractSelectedItem() = getIntExtra(KEY_SELECTED_ITEM, -1)
-
-        fun Intent.extractId() = getLongExtra(KEY_ID, 0)
 
         private const val KEY_SELECTED_ITEM = "selectedItem"
         private const val KEY_ITEMS = "items"
         private const val KEY_TITLE = "title"
-        private const val KEY_ID = "id"
 
     }
 }

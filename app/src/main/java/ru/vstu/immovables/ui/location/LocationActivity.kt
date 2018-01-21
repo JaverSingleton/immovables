@@ -11,6 +11,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
 import ru.vstu.immovables.getContainerView
+import ru.vstu.immovables.inject
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.location.di.LocationModule
 import javax.inject.Inject
@@ -54,7 +55,9 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
     override fun applySelecting(locationData: LocationData) {
         setResult(
                 Activity.RESULT_OK,
-                Intent().putExtra(KEY_SELECTED_LOCATION, locationData)
+                Intent()
+                        .putExtra(KEY_SELECTED_LOCATION, locationData)
+                        .inject(this)
         )
         finish()
     }
@@ -65,9 +68,10 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
 
     companion object {
 
-        fun Context.selectLocation(selectedLocation: LocationData?) =
+        fun Context.locationSelectingScreen(selectedLocation: LocationData?, id: Long = 0) =
                 Intent(this, LocationActivity::class.java)
                         .putExtra(KEY_SELECTED_LOCATION, selectedLocation)
+                        .inject(id)
 
         fun Intent.extractLocation() = getParcelableExtra<LocationData>(KEY_SELECTED_LOCATION)
 
@@ -76,4 +80,5 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
 }
 
 const val KEY_SELECTED_LOCATION = "selectedLocation"
+const val KEY_ID = "id"
 const val KEY_PRESENTER_STATE = "presenterState"

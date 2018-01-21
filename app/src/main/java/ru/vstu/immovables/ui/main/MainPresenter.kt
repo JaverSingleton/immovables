@@ -1,10 +1,12 @@
 package ru.vstu.immovables.ui.main
 
 import android.os.Bundle
+import ru.vstu.immovables.repository.location.LocationData
 
 interface MainPresenter {
-    fun onCreate(savedState: Bundle?, propertyType: String?)
+    fun onCreate(savedState: Bundle?)
     fun onDestroy()
     fun onSaveState(): Bundle
-    fun onActivityResult(requestCode: Int, elementId: Long?, choosenPosition: Int?)
+    fun onItemSelected(id: Long, selectedValue: Int)
+    fun onLocationSelected(id: Long, selectedValue: LocationData)
 }

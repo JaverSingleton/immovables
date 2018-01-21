@@ -2,4 +2,13 @@
 <resources>
     <dimen name="divider_padding">16dp</dimen>
     <dimen name="report_top_padding">64dp</dimen>
+
+    <dimen name="text_input_padding">4dp</dimen>
+    <dimen name="text_input_text_size">16sp</dimen>
+    <dimen name="text_input_hint_expanded_size">16sp</dimen>
+    <dimen name="text_input_hint_collapsed_size">12sp</dimen>
+    <dimen name="text_input_small_padding">8dp</dimen>
+    <dimen name="text_input_big_padding">16dp</dimen>
+    <dimen name="text_input_top_padding">20dp</dimen>
+    <dimen name="text_input_min_height">56dp</dimen>
 </resources>

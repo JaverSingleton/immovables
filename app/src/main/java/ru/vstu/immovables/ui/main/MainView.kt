@@ -1,11 +1,14 @@
 package ru.vstu.immovables.ui.main
 
-import ru.vstu.immovables.ui.main.items.Filter
+import ru.vstu.immovables.repository.location.LocationData
+import ru.vstu.immovables.ui.main.item.PropertyItem
 
 interface MainView {
-    fun showHousingParameters(propertyFilters: List<Filter>)
-    fun updateHousingParameters(propertyFilters: List<Filter>)
-    fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>, selectedPosition: Int)
+    fun updateItems(items: List<PropertyItem>)
+    fun updateItem(position: Int)
+    fun selectLocation(id: Long, selectedValue: LocationData?)
+    fun selectItem(id: Long, title: String, items: List<String>, selectedValue: Int)
     fun showNotImplementedPropertyTypeMessage()
-    fun hide()
+    fun showTitle(title: String)
+    fun close()
 }

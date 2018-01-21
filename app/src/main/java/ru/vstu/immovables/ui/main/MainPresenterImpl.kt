@@ -3,114 +3,82 @@ package ru.vstu.immovables.ui.main
 import android.os.Bundle
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
-import ru.vstu.immovables.Property
+import ru.vstu.immovables.PropertiesProvider
+import ru.vstu.immovables.repository.location.LocationData
+import ru.vstu.immovables.ui.main.item.PropertyItem
 import ru.vstu.immovables.ui.main.items.Filter
 import java.util.*
 
 
 class MainPresenterImpl(
         private val view: MainView,
-        private val clicks: Observable<Filter>,
-        private val property: Property
+        private val clicks: Observable<PropertyItem>,
+        private val propertyType: String,
+        private val propertiesProvider: PropertiesProvider
 ) : MainPresenter {
 
     companion object {
-        const val INVALID = -1
-
-        const val SAVED_PROPERTY_TYPE = "propertyType"
-        const val SAVED_ITEM_LIST = "itemList"
-
-        const val APARTMENT = "Квартира"
-        const val ROOM = "Комната"
-        const val HOUSE = "Дом"
-        const val STEAD = "Земельный участок"
-        const val OFFICE = "Офис"
-        const val TRADE_PLACE = "Торговая площадка"
-        const val STOCK = "Склад"
-        const val FREE_APPOINTMENT = "Помещение свободного назначения"
-        const val GARAGE = "Гараж"
-        const val BUILDING = "Здание"
+        const val KEY_ITEMS = "items"
     }
 
-    var propertyType: String? = null
-    var filters: List<Filter> = listOf()
-    val compositeDisposable = CompositeDisposable()
+    private var items: List<PropertyItem> = listOf()
+    private val disposables = CompositeDisposable()
 
-    init {
-        compositeDisposable.add(
-                clicks.subscribeBy(
-                        onNext = { chooseFromList(it) }
-                )
+    override fun onItemSelected(id: Long, selectedValue: Int) {
+        val item: PropertyItem.Select = getItem(id)
+        item.selectedItem = selectedValue
+        update(id)
+    }
+
+    override fun onLocationSelected(id: Long, selectedValue: LocationData) {
+        val item: PropertyItem.Location = getItem(id)
+        item.locationData = selectedValue
+        update(id)
+    }
+
+    override fun onCreate(savedState: Bundle?) {
+        items = items.takeIf { it.isNotEmpty() }
+                ?: savedState?.getParcelableArrayList(KEY_ITEMS)
+                ?: propertiesProvider.getProperties(propertyType)
+
+        view.showTitle(propertiesProvider.getTitle(propertyType))
+
+        if (items.isEmpty()) {
+            view.showNotImplementedPropertyTypeMessage()
+            view.close()
+        } else {
+            view.updateItems(items)
+        }
+
+        disposables += clicks.subscribeBy(
+                onNext = {
+                    when (it) {
+                        is PropertyItem.Select -> {
+                            view.selectItem(it.id, it.title, it.items, it.selectedItem)
+                        }
+                        is PropertyItem.Location -> {
+                            view.selectLocation(it.id, it.locationData)
+                        }
+                    }
+                }
         )
     }
 
-    override fun onCreate(savedState: Bundle?, propertyType: String?) {
-        if (savedState == null && propertyType == null) {
-            view.hide()
-        }
-
-        this.propertyType = propertyType
-
-        if (savedState != null && propertyType == null) {
-            this.propertyType = savedState.getString(SAVED_PROPERTY_TYPE)
-            val savedItems: ArrayList<Filter> = savedState.getParcelableArrayList(SAVED_ITEM_LIST) ?: arrayListOf()
-
-            if (this.propertyType == null || savedItems.isEmpty()) {
-                view.hide()
-            } else {
-                view.showHousingParameters(savedItems)
-            }
-        }
-
-        if(propertyType != null){
-            val position = property.types.indexOf(propertyType)
-            performItemList(position)
-        }
-    }
-
-    override fun onSaveState(): Bundle {
-        val state = Bundle()
-        state.putString(SAVED_PROPERTY_TYPE, propertyType)
-        state.putParcelableArrayList(SAVED_ITEM_LIST, ArrayList(filters))
-        return state
+    override fun onSaveState(): Bundle = Bundle().apply {
+        putParcelableArrayList(KEY_ITEMS, ArrayList(items))
     }
 
     override fun onDestroy() {
-        compositeDisposable.clear()
+        disposables.clear()
     }
 
-    override fun onActivityResult(requestCode: Int, elementId: Long?, choosenPosition: Int?) {
-        if (choosenPosition != null) {
-            when (elementId) {
-                INVALID.toLong() -> performItemList(choosenPosition)
-                else -> {
-                    val filter = filters.findLast { it.id == elementId }
-                    if (filter is Filter.Chooser) {
-                        filter.choosenField = filter.list[choosenPosition]
-                    }
-                    view.updateHousingParameters(filters)
-                }
-
-            }
-        }
-
+    private fun update(id: Long) {
+        view.updateItem(items.indexOfFirst { it.id == id })
     }
 
-    private fun performItemList(choosenPosition: Int) = when (property.types[choosenPosition]) {
-        APARTMENT -> {
-            filters = property.apartment()
-            view.showHousingParameters(filters)
-        }
-        else -> {
-            view.showNotImplementedPropertyTypeMessage()
-            view.hide()
-        }
-    }
+    @Suppress("UNCHECKED_CAST")
+    private fun <T : PropertyItem> getItem(id: Long): T = items.first { it.id == id } as T
 
-    private fun chooseFromList(filter: Filter) {
-        if (filter is Filter.Chooser) {
-            view.chooseForResult(filter.name, filter.id, filter.list, filter.choosenPosition)
-        }
-    }
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ru.vstu.immovables.App
-import ru.vstu.immovables.Property
+import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.api.di.ApiModule
 import javax.inject.Singleton
 
@@ -18,6 +18,6 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideProperty(context: Context): Property = Property(context)
+    fun provideProperty(context: Context): PropertiesProvider = PropertiesProvider(context)
 
 }

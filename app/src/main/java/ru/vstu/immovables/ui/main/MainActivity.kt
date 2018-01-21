@@ -1,5 +1,7 @@
 package ru.vstu.immovables.ui.main
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -11,22 +13,21 @@ import android.widget.Toast
 import com.avito.konveyor.ItemBinder
 import com.avito.konveyor.adapter.AdapterPresenter
 import com.avito.konveyor.adapter.SimpleRecyclerAdapter
-import com.avito.konveyor.data_source.ListDataSource
-import dagger.android.AndroidInjection
 import ru.vstu.immovables.R
-import ru.vstu.immovables.ui.main.items.Filter
-import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractId
+import ru.vstu.immovables.appComponent
+import ru.vstu.immovables.extractId
+import ru.vstu.immovables.repository.location.LocationData
+import ru.vstu.immovables.ui.location.LocationActivity.Companion.extractLocation
+import ru.vstu.immovables.ui.location.LocationActivity.Companion.locationSelectingScreen
+import ru.vstu.immovables.ui.main.di.PropertiesModule
+import ru.vstu.immovables.ui.main.item.PropertyItem
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
+import ru.vstu.immovables.updateItems
 import ru.vstu.immovables.utils.VerticalDividerDecoration
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainView {
-
-    companion object {
-        const val SAVED_PRESENTER_STATE = "savedPresenterState"
-        const val EXTRA_PROPERTY_TYPE = "propertyType"
-    }
 
     @Inject
     lateinit var presenter: MainPresenter
@@ -40,32 +41,52 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var recyclerAdapter: SimpleRecyclerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        appComponent.plus(PropertiesModule(
+                this,
+                intent.extras.getString(KEY_PROPERTY_TYPE)
+        )).inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Квартира"
 
-        val propertyType = intent.extras.getString(EXTRA_PROPERTY_TYPE)
+        val recycler: RecyclerView = findViewById(R.id.recycler)
+        recyclerAdapter = SimpleRecyclerAdapter(adapterPresenter, binder)
 
-        presenter.onCreate(savedInstanceState?.getBundle(SAVED_PRESENTER_STATE), propertyType)
+        val padding = resources.getDimensionPixelSize(R.dimen.divider_padding)
+
+        val dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider_and_padding))
+                .setPadding(padding, padding)
+                .build()
+
+        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.adapter = recyclerAdapter
+        recycler.addItemDecoration(dividerDecoration)
+
+        presenter.onCreate(savedInstanceState?.getBundle(KEY_PRESENTER_STATE))
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
 
-        outState?.putBundle(SAVED_PRESENTER_STATE, presenter.onSaveState())
+        outState?.putBundle(KEY_PRESENTER_STATE, presenter.onSaveState())
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK || data == null) {
+            return
+        }
+
         when (requestCode) {
-            REQ_SELECT_ITEM -> presenter.onActivityResult(
-                    resultCode,
-                    data?.extractId(),
-                    data?.extractSelectedItem()
+            REQ_SELECT_ITEM -> presenter.onItemSelected(
+                    data.extractId(),
+                    data.extractSelectedItem()
+            )
+            REQ_SELECT_LOCATION -> presenter.onLocationSelected(
+                    data.extractId(),
+                    data.extractLocation()
             )
             else -> {
                 /*Ignore*/
@@ -76,6 +97,10 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDestroy()
+    }
+
+    override fun showTitle(title: String) {
+        supportActionBar?.title = title
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -95,44 +120,51 @@ class MainActivity : AppCompatActivity(), MainView {
         Toast.makeText(this, R.string.not_implemented_property_type, Toast.LENGTH_SHORT).show()
     }
 
-    override fun hide() {
+    override fun close() {
         finish()
     }
 
-    override fun showHousingParameters(propertyFilters: List<Filter>) {
-        val recycler: RecyclerView = findViewById(R.id.recycler)
-        recyclerAdapter = SimpleRecyclerAdapter(adapterPresenter, binder)
-
-        val padding = resources.getDimensionPixelSize(R.dimen.divider_padding)
-
-        val dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider_and_padding))
-                .setPadding(padding, padding)
-                .build()
-
-        recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = recyclerAdapter
-        recycler.addItemDecoration(dividerDecoration)
-
-        updateHousingParameters(propertyFilters)
-    }
-
-    override fun updateHousingParameters(propertyFilters: List<Filter>) {
-        adapterPresenter.onDataSourceChanged(ListDataSource(propertyFilters))
+    override fun updateItems(items: List<PropertyItem>) {
+        adapterPresenter.updateItems(items)
         recyclerAdapter.notifyDataSetChanged()
     }
 
-    override fun chooseForResult(title: String, elementId: Long, chooseIn: List<String>, selectedPosition: Int) {
+    override fun updateItem(position: Int) {
+        recyclerAdapter.notifyItemChanged(position)
+    }
+
+    override fun selectItem(id: Long, title: String, items: List<String>, selectedValue: Int) {
         startActivityForResult(
                 propertyChooseScreen(
                         title = title,
-                        items = chooseIn,
-                        selectedItem = selectedPosition,
-                        id = elementId
+                        items = items,
+                        selectedItem = selectedValue,
+                        id = id
                 ),
                 REQ_SELECT_ITEM
         )
     }
 
+    override fun selectLocation(id: Long, selectedValue: LocationData?) {
+        startActivityForResult(
+                locationSelectingScreen(
+                        selectedLocation = selectedValue,
+                        id = id
+                ),
+                REQ_SELECT_LOCATION
+        )
+    }
+
+    companion object {
+
+        fun Context.propertiesScreen(propertyType: String): Intent = Intent(this, MainActivity::class.java)
+                .putExtra(KEY_PROPERTY_TYPE, propertyType)
+
+        private const val KEY_PRESENTER_STATE = "savedPresenterState"
+        private const val KEY_PROPERTY_TYPE = "propertyType"
+    }
+
 }
 
 private const val REQ_SELECT_ITEM = 0
+private const val REQ_SELECT_LOCATION = 1

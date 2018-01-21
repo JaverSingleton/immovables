@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextInputAppearance">
+        <item name="android:textColorHint">@color/text_input_hint_color</item>
+        <item name="colorAccent">@color/blue</item>
+        <item name="colorControlNormal">@color/blue</item>
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
+
+    <style name="TextInputAppearanceError" parent="TextInputAppearance">
+        <item name="android:textColorHint">@color/red</item>
+        <item name="colorAccent">@color/red</item>
+        <item name="colorControlNormal">@color/red</item>
+        <item name="colorControlActivated">@color/red</item>
+    </style>
+</resources>
