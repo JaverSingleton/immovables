@@ -19,7 +19,7 @@ class PropertiesProvider(private val context: Context) {
     }
 
     private fun apartment() = listOf(
-            PropertyItem.Location(38, "Адрес", isMandatory = false),
+            PropertyItem.Location(38, "Адрес", isMandatory = true),
             PropertyItem.NumberInput(10, "Число собственников", ""),
             PropertyItem.Select(1, "Класс жилья", getList(R.array.housing_class)),
             PropertyItem.Select(2, "Конструктивно-правовое состояние", getList(R.array.constructive_legal_status)),
