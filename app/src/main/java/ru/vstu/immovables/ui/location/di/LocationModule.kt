@@ -21,6 +21,7 @@ import ru.vstu.immovables.ui.location.item.LocationSearchPresenter
 @Module
 class LocationModule(
         private val context: Context,
+        private val startLocation: LocationData?,
         private val presenterState: Bundle?
 ) {
 
@@ -29,7 +30,7 @@ class LocationModule(
     @Provides
     fun providePresenter(locationRepository: LocationRepository,
                          adapterPresenter: AdapterPresenter): LocationPresenter =
-            LocationPresenterImpl(locationRepository, locationSelectedRelay, adapterPresenter, presenterState)
+            LocationPresenterImpl(locationRepository, locationSelectedRelay, adapterPresenter, startLocation, presenterState)
 
     @Provides
     fun provideRepository(): LocationRepository = LocationRepositoryImpl(Geocoder(context))

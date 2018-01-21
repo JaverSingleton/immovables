@@ -1,8 +1,8 @@
 package ru.vstu.immovables.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
@@ -80,6 +80,7 @@ class MainPresenterImpl(
         disposables += view.applyClicks()
                 .flatMapSingle {
                     estimateRepository.estimate(items)
+                            .observeOn(AndroidSchedulers.mainThread())
                             .doOnSubscribe { view.showLoading() }
                             .doAfterTerminate { view.hideLoading() }
                 }

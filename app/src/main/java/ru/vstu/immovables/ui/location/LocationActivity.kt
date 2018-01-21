@@ -14,6 +14,7 @@ import ru.vstu.immovables.getContainerView
 import ru.vstu.immovables.inject
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.location.di.LocationModule
+import ru.vstu.immovables.ui.main.MainActivity
 import javax.inject.Inject
 
 class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
@@ -25,7 +26,10 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent
-                .plus(LocationModule(this, savedInstanceState?.getBundle(KEY_PRESENTER_STATE)))
+                .plus(LocationModule(
+                        this,
+                        intent.getParcelableExtra(KEY_SELECTED_LOCATION),
+                        savedInstanceState?.getBundle(KEY_PRESENTER_STATE)))
                 .inject(this)
         setContentView(R.layout.activity_location)
         val view: LocationView = LocationViewImpl(
@@ -50,6 +54,12 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
     override fun onDestroy() {
         presenter.detachView()
         super.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+
+        outState?.putBundle(KEY_PRESENTER_STATE, presenter.onSaveState())
     }
 
     override fun applySelecting(locationData: LocationData) {
@@ -80,5 +90,4 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
 }
 
 const val KEY_SELECTED_LOCATION = "selectedLocation"
-const val KEY_ID = "id"
 const val KEY_PRESENTER_STATE = "presenterState"

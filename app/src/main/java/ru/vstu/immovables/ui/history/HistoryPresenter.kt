@@ -2,6 +2,7 @@ package ru.vstu.immovables.ui.history
 
 import com.avito.konveyor.adapter.AdapterPresenter
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import ru.vstu.immovables.repository.report.ReportRepository
@@ -58,18 +59,20 @@ class HistoryPresenterImpl(
 
     override fun attachRouter(router: HistoryPresenter.Router) {
         this.router = router
-        disposables += reportRepository.getAll().subscribe { items ->
-            val reports = items.mapIndexed { index, reportData ->
-                HistoryItem(index.toLong(), reportData)
-            }
-            adapterPresenter.updateItems(reports)
-            view?.updateItems()
-            if (reports.isEmpty()) {
-                view?.showNoElements()
-            } else {
-                view?.showItems()
-            }
-        }
+        disposables += reportRepository.getAll()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { items ->
+                    val reports = items.mapIndexed { index, reportData ->
+                        HistoryItem(index.toLong(), reportData)
+                    }
+                    adapterPresenter.updateItems(reports)
+                    view?.updateItems()
+                    if (reports.isEmpty()) {
+                        view?.showNoElements()
+                    } else {
+                        view?.showItems()
+                    }
+                }
     }
 
     override fun detachRouter() {

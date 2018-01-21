@@ -15,6 +15,7 @@ import ru.vstu.immovables.repository.location.LocationRepository
 import ru.vstu.immovables.singleMap
 import ru.vstu.immovables.toObservable
 import ru.vstu.immovables.ui.location.item.LocationSearchItem
+import ru.vstu.immovables.updateItems
 
 interface LocationPresenter {
 
@@ -25,6 +26,8 @@ interface LocationPresenter {
     fun attachRouter(router: Router)
 
     fun detachRouter()
+
+    fun onSaveState(): Bundle
 
     interface Router {
 
@@ -40,22 +43,24 @@ class LocationPresenterImpl(
         private val locationRepository: LocationRepository,
         private val locationSelectedRelay: Observable<LocationData>,
         private val adapterPresenter: AdapterPresenter,
+        startLocation: LocationData?,
         state: Bundle?
 ) : LocationPresenter {
 
     private var view: LocationView? = null
     private var router: LocationPresenter.Router? = null
     private val disposables = CompositeDisposable()
-    private var selectedLocation: LocationData? = state?.getParcelable(KEY_SELECTED_LOCATION)
+    private var selectedLocation: LocationData? = state?.getParcelable(KEY_LOCATION) ?: startLocation
     private var locations: List<LocationData> = state?.getParcelableArrayList(KEY_LOCATIONS) ?: emptyList()
-    private var query: String? = state?.getString(KEY_STATE)
+    private var query: String? = state?.getString(KEY_QUERY)
 
     override fun attachView(view: LocationView) {
         this.view = view
 
         updateApplyState()
 
-        disposables += query.toObservable().updateSearchResult()
+        query?.let { view.showQuery(it) }
+        view.updateSearch()
         disposables += selectedLocation.toObservable().updateMarker()
 
         disposables += view.queryChanged()
@@ -97,6 +102,12 @@ class LocationPresenterImpl(
         this.router = null
     }
 
+    override fun onSaveState(): Bundle = Bundle().apply {
+        putParcelable(KEY_LOCATION, selectedLocation)
+        putString(KEY_QUERY, query)
+        putParcelableArrayList(KEY_LOCATIONS, ArrayList(locations))
+    }
+
     private fun updateApplyState() {
         view?.setApplyVisible(selectedLocation != null)
     }
@@ -123,15 +134,16 @@ class LocationPresenterImpl(
             }
 
     private fun LocationView.updateSearch() {
-        adapterPresenter.onDataSourceChanged(
-                ListDataSource(locations.mapIndexed { index, locationData ->
+        adapterPresenter.updateItems(
+                locations.mapIndexed { index, locationData ->
                     LocationSearchItem(index.toLong(), locationData)
-                })
+                }
         )
         updateSearchResult()
     }
 
 }
 
-private const val KEY_STATE = "state"
+private const val KEY_QUERY = "query"
 private const val KEY_LOCATIONS = "locations"
+private const val KEY_LOCATION = "selectedLocation"
