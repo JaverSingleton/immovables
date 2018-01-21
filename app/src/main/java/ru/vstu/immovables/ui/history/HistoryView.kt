@@ -47,11 +47,11 @@ class HistoryViewImpl(
 
     init {
         toolbar.title = context.getString(R.string.History_Title)
+        recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(context)
         recycler.addItemDecoration(VerticalDividerDecoration.Builder(
                 context.getDrawable(R.drawable.divider)
         ).build())
-        recycler.adapter = adapter
-        recycler.layoutManager = LinearLayoutManager(context)
     }
 
     override fun updateItems() {
