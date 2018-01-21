@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context="ru.vstu.immovables.ui.main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler"
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/progress_app_bar" />
+
+        <FrameLayout
+            android:id="@+id/content_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            android:paddingTop="?actionBarSize"
-            android:paddingBottom="60dp"/>
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/apply_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/bg_btn_fab"
-            android:drawablePadding="-4dp"
-            android:drawableRight="@drawable/ic_chevron_right_white_24dp"
-            android:gravity="center"
-            android:minHeight="72dp"
-            android:minWidth="0dp"
-            android:paddingLeft="20dp"
-            android:text="@string/Button.Apply"
-            android:textColor="@color/white"
-            tools:ignore="RtlHardcoded,RtlSymmetry" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp"
+                android:clipToPadding="false"
+                android:paddingBottom="60dp" />
 
-    </FrameLayout>
+            <Button
+                android:id="@+id/apply_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_btn_fab"
+                android:drawablePadding="-4dp"
+                android:drawableRight="@drawable/ic_chevron_right_white_24dp"
+                android:gravity="center"
+                android:minHeight="72dp"
+                android:minWidth="0dp"
+                android:paddingLeft="20dp"
+                android:text="@string/Button.Apply"
+                android:textColor="@color/white"
+                tools:ignore="RtlHardcoded,RtlSymmetry" />
+
+        </FrameLayout>
+
+    </LinearLayout>
 
 
     <FrameLayout
-        android:id="@+id/progress"
+        android:id="@+id/loading_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:indeterminate="true" />
 
     </FrameLayout>
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="0dp"
-        app:navigationIcon="@drawable/ic_back"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </FrameLayout>

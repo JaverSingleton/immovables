@@ -16,6 +16,7 @@ interface MainView {
     fun applyClicks(): Observable<Unit>
     fun showReport(reportData: ReportData)
     fun close()
-    fun showProgress()
-    fun hideProgress()
+    fun showLoading()
+    fun hideLoading()
+    fun showProgress(progress: Float)
 }

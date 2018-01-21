@@ -80,8 +80,8 @@ class MainPresenterImpl(
         disposables += view.applyClicks()
                 .flatMapSingle {
                     estimateRepository.estimate(items)
-                            .doOnSubscribe { view.showProgress() }
-                            .doAfterTerminate { view.hideProgress() }
+                            .doOnSubscribe { view.showLoading() }
+                            .doAfterTerminate { view.hideLoading() }
                 }
                 .subscribeBy(
                         onNext = {
@@ -103,8 +103,7 @@ class MainPresenterImpl(
     }
 
     private fun updatePercent() {
-        val percent = items.count { it.hasValue() }.toFloat() / items.count().toFloat()
-        Log.d("Percent", percent.toString())
+        view.showProgress(items.count { it.hasValue() }.toFloat() / items.count().toFloat())
         val mandatoryItems = items.filter { it.isMandatory }
         val isMandatoryItemsFilled = mandatoryItems.count { it.hasValue() } == mandatoryItems.count()
         view.setApplyButtonVisible(isMandatoryItemsFilled)

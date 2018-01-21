@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.avito.konveyor.ItemBinder
 import com.avito.konveyor.adapter.AdapterPresenter
@@ -44,8 +45,9 @@ class MainActivity : AppCompatActivity(), MainView {
 
     private lateinit var applyButton: View
 
-    private lateinit var progressLayout: View
-    private lateinit var contentLayout: View
+    private lateinit var loadingContainer: View
+    private lateinit var contentContainer: View
+    private lateinit var progressView: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.plus(PropertiesModule(
@@ -72,10 +74,11 @@ class MainActivity : AppCompatActivity(), MainView {
         recycler.addItemDecoration(dividerDecoration)
 
         applyButton = findViewById(R.id.apply_button)
-        progressLayout = findViewById(R.id.progress)
-        contentLayout = findViewById(R.id.content)
+        loadingContainer = findViewById(R.id.loading_container)
+        contentContainer = findViewById(R.id.content_container)
+        progressView = findViewById(R.id.progress)
 
-        hideProgress()
+        hideLoading()
 
         presenter.onCreate(savedInstanceState?.getBundle(KEY_PRESENTER_STATE))
     }
@@ -179,14 +182,18 @@ class MainActivity : AppCompatActivity(), MainView {
         startActivity(reportScreen(reportData.id))
     }
 
-    override fun showProgress() {
-        progressLayout.show()
-        contentLayout.hide()
+    override fun showLoading() {
+        loadingContainer.show()
+        contentContainer.hide()
     }
 
-    override fun hideProgress() {
-        progressLayout.hide()
-        contentLayout.show()
+    override fun hideLoading() {
+        loadingContainer.hide()
+        contentContainer.show()
+    }
+
+    override fun showProgress(progress: Float) {
+        progressView.progress = (progress * progressView.max).toInt()
     }
 
     companion object {
