@@ -17,7 +17,8 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             val title: String,
             val items: List<String>,
             var selectedItem: Int = -1,
-            override val isMandatory: Boolean = false
+            override val isMandatory: Boolean = false,
+            val info: PropertyInfo? = null
     ) : PropertyItem() {
 
         override fun hasValue(): Boolean = selectedItem > -1
@@ -26,6 +27,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             writeLong(id)
             writeBoolean(isMandatory)
             writeString(title)
+            writeValue(info)
             writeStringList(items)
             writeInt(selectedItem)
         }
@@ -40,6 +42,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
                         id = readLong(),
                         isMandatory = readBoolean(),
                         title = readString(),
+                        info = readNullableValue(),
                         items = readStringList(),
                         selectedItem = readInt()
                 )
@@ -53,7 +56,8 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             override val id: Long,
             val title: String,
             var locationData: LocationData? = null,
-            override val isMandatory: Boolean = false
+            override val isMandatory: Boolean = false,
+            val info: PropertyInfo? = null
     ) : PropertyItem() {
 
         override fun hasValue(): Boolean = locationData != null
@@ -62,6 +66,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             writeLong(id)
             writeBoolean(isMandatory)
             writeString(title)
+            writeValue(info)
             writeValue(locationData)
         }
 
@@ -75,6 +80,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
                         id = readLong(),
                         isMandatory = readBoolean(),
                         title = readString(),
+                        info = readNullableValue(),
                         locationData = readNullableValue()
                 )
             }
@@ -87,7 +93,8 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             override val id: Long,
             val title: String,
             var value: String = "",
-            override val isMandatory: Boolean = false
+            override val isMandatory: Boolean = false,
+            val info: PropertyInfo? = null
     ) : PropertyItem() {
 
         override fun hasValue(): Boolean = value.isNotEmpty()
@@ -96,6 +103,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             writeLong(id)
             writeBoolean(isMandatory)
             writeString(title)
+            writeValue(info)
             writeString(value)
         }
 
@@ -109,6 +117,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
                         id = readLong(),
                         isMandatory = readBoolean(),
                         title = readString(),
+                        info = readNullableValue(),
                         value = readString()
                 )
             }

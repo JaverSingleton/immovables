@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="info_label_color_normal">@color/blue</color>
+    <color name="info_label_color_warning">@color/orange</color>
+    <color name="info_label_color_error">@color/red</color>
+    <color name="info_label_color_hidden">@color/transparent</color>
+
+</resources>

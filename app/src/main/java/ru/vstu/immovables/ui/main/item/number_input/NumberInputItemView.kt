@@ -3,12 +3,17 @@ package ru.vstu.immovables.ui.main.item.number_input
 import android.text.InputType
 import android.view.View
 import com.avito.konveyor.adapter.BaseViewHolder
-import ru.vstu.immovables.ui.view.SimpleTextWatcher
-import ru.vstu.immovables.ui.view.TextInputView
+import ru.vstu.immovables.R
+import ru.vstu.immovables.ui.view.*
 
 class NumberInputItemView(view: View) : BaseViewHolder(view) {
 
-    private val valueView = view as TextInputView
+    private val valueView: TextInputView = view.findViewById(R.id.input)
+    private val infoView: InfoLabel = InfoLabel(view.findViewById(R.id.info))
+
+    fun setInfo(info: String?, level: InfoLevel = InfoLevel.INFO) {
+        infoView.setValues(info, level)
+    }
 
     init {
         valueView.inputType = InputType.TYPE_CLASS_NUMBER

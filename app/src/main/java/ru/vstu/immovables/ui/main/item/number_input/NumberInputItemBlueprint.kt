@@ -11,7 +11,7 @@ class NumberInputItemBlueprint(
         override val presenter: ItemPresenter<NumberInputItemView, PropertyItem.NumberInput>
 ) : ItemBlueprint<NumberInputItemView, PropertyItem.NumberInput> {
     override val viewHolderProvider = ViewHolderBuilder.ViewHolderProvider(
-            layoutId = R.layout.view_item_input,
+            layoutId = R.layout.view_item_number_input,
             creator = { _, view -> NumberInputItemView(view) }
     )
 

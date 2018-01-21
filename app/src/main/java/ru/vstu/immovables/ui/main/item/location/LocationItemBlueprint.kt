@@ -11,7 +11,7 @@ class LocationItemBlueprint(
         override val presenter: ItemPresenter<LocationItemView, PropertyItem.Location>
 ) : ItemBlueprint<LocationItemView, PropertyItem.Location> {
     override val viewHolderProvider = ViewHolderBuilder.ViewHolderProvider(
-            layoutId = R.layout.view_selectable_single_line,
+            layoutId = R.layout.view_item_select,
             creator = { _, view -> LocationItemView(view) }
     )
 

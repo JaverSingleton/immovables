@@ -16,7 +16,7 @@ class InputBlueprint(
         override val presenter: ItemPresenter<InputView, Filter.Input>
 ) : ItemBlueprint<InputView, Filter.Input> {
     override val viewHolderProvider = ViewHolderBuilder.ViewHolderProvider(
-            layoutId = R.layout.view_item_input,
+            layoutId = R.layout.text_input,
             creator = { _, view -> InputViewHolder(view) }
     )
 

@@ -3,6 +3,7 @@ package ru.vstu.immovables.ui.main.item.location
 import com.avito.konveyor.blueprint.ItemPresenter
 import io.reactivex.functions.Consumer
 import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.view.InfoLevel
 
 class LocationItemPresenter(
         private val clicksConsumer: Consumer<PropertyItem>,
@@ -17,5 +18,9 @@ class LocationItemPresenter(
             view.setValue(null)
             valueChangesConsumer.accept(item)
         }
+        view.setInfo(
+                info = item.info?.text ?: item.isMandatory.takeIf { it }?.let { "Обязательное поле" },
+                level = item.info?.level ?: item.isMandatory.takeIf { it }?.let { InfoLevel.WARNING } ?: InfoLevel.INFO
+        )
     }
 }

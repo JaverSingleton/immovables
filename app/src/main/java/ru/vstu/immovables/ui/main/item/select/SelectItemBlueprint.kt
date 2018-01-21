@@ -11,7 +11,7 @@ class SelectItemBlueprint(
         override val presenter: ItemPresenter<SelectItemView, PropertyItem.Select>
 ) : ItemBlueprint<SelectItemView, PropertyItem.Select> {
     override val viewHolderProvider = ViewHolderBuilder.ViewHolderProvider(
-            layoutId = R.layout.view_selectable_single_line,
+            layoutId = R.layout.view_item_select,
             creator = { _, view -> SelectItemView(view) }
     )
 
