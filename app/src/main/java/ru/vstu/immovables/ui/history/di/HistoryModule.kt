@@ -28,10 +28,6 @@ class HistoryModule() {
             HistoryPresenterImpl(reportRepository, adapterPresenter, reportSelectedRelay)
 
     @Provides
-    fun provideRepository(database: MainDatabase): ReportRepository =
-            ReportRepositoryImpl(database.getReportDao())
-
-    @Provides
     @PerActivity
     internal fun provideAdapterPresenter(provider: ItemBinder): AdapterPresenter =
             SimpleAdapterPresenter(provider, provider)

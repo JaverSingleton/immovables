@@ -6,7 +6,7 @@ import ru.vstu.immovables.Parcels
 import ru.vstu.immovables.database.entities.Report
 
 class ReportData(
-        val id: Long = -1,
+        val id: Long = 0,
         val address: String,
         val metres: Long,
         val cost: Long,

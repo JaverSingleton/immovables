@@ -1,22 +1,25 @@
 package ru.vstu.immovables.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import ru.vstu.immovables.PropertiesProvider
+import ru.vstu.immovables.repository.estimate.EstimateRepository
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.main.item.PropertyItem
-import ru.vstu.immovables.ui.main.items.Filter
 import java.util.*
 
 
 class MainPresenterImpl(
         private val view: MainView,
         private val clicks: Observable<PropertyItem>,
+        private val valueChanges: Observable<PropertyItem>,
         private val propertyType: String,
-        private val propertiesProvider: PropertiesProvider
+        private val propertiesProvider: PropertiesProvider,
+        private val estimateRepository: EstimateRepository
 ) : MainPresenter {
 
     companion object {
@@ -30,12 +33,14 @@ class MainPresenterImpl(
         val item: PropertyItem.Select = getItem(id)
         item.selectedItem = selectedValue
         update(id)
+        updatePercent()
     }
 
     override fun onLocationSelected(id: Long, selectedValue: LocationData) {
         val item: PropertyItem.Location = getItem(id)
         item.locationData = selectedValue
         update(id)
+        updatePercent()
     }
 
     override fun onCreate(savedState: Bundle?) {
@@ -43,6 +48,7 @@ class MainPresenterImpl(
                 ?: savedState?.getParcelableArrayList(KEY_ITEMS)
                 ?: propertiesProvider.getProperties(propertyType)
 
+        updatePercent()
         view.showTitle(propertiesProvider.getTitle(propertyType))
 
         if (items.isEmpty()) {
@@ -64,6 +70,24 @@ class MainPresenterImpl(
                     }
                 }
         )
+
+        disposables += valueChanges.subscribeBy(
+                onNext = {
+                    updatePercent()
+                }
+        )
+
+        disposables += view.applyClicks()
+                .flatMapSingle {
+                    estimateRepository.estimate(items)
+                            .doOnSubscribe { view.showProgress() }
+                            .doAfterTerminate { view.hideProgress() }
+                }
+                .subscribeBy(
+                        onNext = {
+                            view.showReport(it)
+                        }
+                )
     }
 
     override fun onSaveState(): Bundle = Bundle().apply {
@@ -76,6 +100,14 @@ class MainPresenterImpl(
 
     private fun update(id: Long) {
         view.updateItem(items.indexOfFirst { it.id == id })
+    }
+
+    private fun updatePercent() {
+        val percent = items.count { it.hasValue() }.toFloat() / items.count().toFloat()
+        Log.d("Percent", percent.toString())
+        val mandatoryItems = items.filter { it.isMandatory }
+        val isMandatoryItemsFilled = mandatoryItems.count { it.hasValue() } == mandatoryItems.count()
+        view.setApplyButtonVisible(isMandatoryItemsFilled)
     }
 
     @Suppress("UNCHECKED_CAST")

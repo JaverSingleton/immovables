@@ -3,12 +3,10 @@ package ru.vstu.immovables.ui.main.item
 import android.os.Parcel
 import android.os.Parcelable
 import com.avito.konveyor.blueprint.Item
-import ru.vstu.immovables.Parcels
-import ru.vstu.immovables.readNullableValue
-import ru.vstu.immovables.readStringList
+import ru.vstu.immovables.*
 import ru.vstu.immovables.repository.location.LocationData
 
-sealed class PropertyItem : Item, Parcelable {
+sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcelable {
 
     override fun describeContents(): Int = 0
 
@@ -18,13 +16,15 @@ sealed class PropertyItem : Item, Parcelable {
             override val id: Long,
             val title: String,
             val items: List<String>,
-            var selectedItem: Int = -1
+            var selectedItem: Int = -1,
+            override val isMandatory: Boolean = false
     ) : PropertyItem() {
 
         override fun hasValue(): Boolean = selectedItem > -1
 
         override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
             writeLong(id)
+            writeBoolean(isMandatory)
             writeString(title)
             writeStringList(items)
             writeInt(selectedItem)
@@ -38,6 +38,7 @@ sealed class PropertyItem : Item, Parcelable {
             val CREATOR = Parcels.creator {
                 Select(
                         id = readLong(),
+                        isMandatory = readBoolean(),
                         title = readString(),
                         items = readStringList(),
                         selectedItem = readInt()
@@ -51,13 +52,15 @@ sealed class PropertyItem : Item, Parcelable {
     class Location(
             override val id: Long,
             val title: String,
-            var locationData: LocationData? = null
+            var locationData: LocationData? = null,
+            override val isMandatory: Boolean = false
     ) : PropertyItem() {
 
         override fun hasValue(): Boolean = locationData != null
 
         override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
             writeLong(id)
+            writeBoolean(isMandatory)
             writeString(title)
             writeValue(locationData)
         }
@@ -70,6 +73,7 @@ sealed class PropertyItem : Item, Parcelable {
             val CREATOR = Parcels.creator {
                 Location(
                         id = readLong(),
+                        isMandatory = readBoolean(),
                         title = readString(),
                         locationData = readNullableValue()
                 )
@@ -82,13 +86,15 @@ sealed class PropertyItem : Item, Parcelable {
     class NumberInput(
             override val id: Long,
             val title: String,
-            var value: String = ""
+            var value: String = "",
+            override val isMandatory: Boolean = false
     ) : PropertyItem() {
 
         override fun hasValue(): Boolean = value.isNotEmpty()
 
         override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
             writeLong(id)
+            writeBoolean(isMandatory)
             writeString(title)
             writeString(value)
         }
@@ -101,6 +107,7 @@ sealed class PropertyItem : Item, Parcelable {
             val CREATOR = Parcels.creator {
                 NumberInput(
                         id = readLong(),
+                        isMandatory = readBoolean(),
                         title = readString(),
                         value = readString()
                 )

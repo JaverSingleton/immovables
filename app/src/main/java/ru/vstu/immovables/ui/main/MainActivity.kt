@@ -9,21 +9,23 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import com.avito.konveyor.ItemBinder
 import com.avito.konveyor.adapter.AdapterPresenter
 import com.avito.konveyor.adapter.SimpleRecyclerAdapter
-import ru.vstu.immovables.R
-import ru.vstu.immovables.appComponent
-import ru.vstu.immovables.extractId
+import com.jakewharton.rxbinding2.view.clicks
+import io.reactivex.Observable
+import ru.vstu.immovables.*
 import ru.vstu.immovables.repository.location.LocationData
+import ru.vstu.immovables.repository.report.ReportData
 import ru.vstu.immovables.ui.location.LocationActivity.Companion.extractLocation
 import ru.vstu.immovables.ui.location.LocationActivity.Companion.locationSelectingScreen
 import ru.vstu.immovables.ui.main.di.PropertiesModule
 import ru.vstu.immovables.ui.main.item.PropertyItem
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
-import ru.vstu.immovables.updateItems
+import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
 import ru.vstu.immovables.utils.VerticalDividerDecoration
 import javax.inject.Inject
 
@@ -39,6 +41,11 @@ class MainActivity : AppCompatActivity(), MainView {
     lateinit var adapterPresenter: AdapterPresenter
 
     private lateinit var recyclerAdapter: SimpleRecyclerAdapter
+
+    private lateinit var applyButton: View
+
+    private lateinit var progressLayout: View
+    private lateinit var contentLayout: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.plus(PropertiesModule(
@@ -63,6 +70,12 @@ class MainActivity : AppCompatActivity(), MainView {
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = recyclerAdapter
         recycler.addItemDecoration(dividerDecoration)
+
+        applyButton = findViewById(R.id.apply_button)
+        progressLayout = findViewById(R.id.progress)
+        contentLayout = findViewById(R.id.content)
+
+        hideProgress()
 
         presenter.onCreate(savedInstanceState?.getBundle(KEY_PRESENTER_STATE))
     }
@@ -97,6 +110,10 @@ class MainActivity : AppCompatActivity(), MainView {
     override fun onDestroy() {
         super.onDestroy()
         presenter.onDestroy()
+    }
+
+    override fun setApplyButtonVisible(visible: Boolean) {
+        applyButton.setVisible(visible)
     }
 
     override fun showTitle(title: String) {
@@ -153,6 +170,23 @@ class MainActivity : AppCompatActivity(), MainView {
                 ),
                 REQ_SELECT_LOCATION
         )
+    }
+
+    override fun applyClicks(): Observable<Unit> = applyButton.clicks()
+
+    override fun showReport(reportData: ReportData) {
+        finish()
+        startActivity(reportScreen(reportData.id))
+    }
+
+    override fun showProgress() {
+        progressLayout.show()
+        contentLayout.hide()
+    }
+
+    override fun hideProgress() {
+        progressLayout.hide()
+        contentLayout.show()
     }
 
     companion object {

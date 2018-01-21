@@ -5,15 +5,17 @@ import io.reactivex.functions.Consumer
 import ru.vstu.immovables.ui.main.item.PropertyItem
 
 class SelectItemPresenter(
-        private val valueConsumer: Consumer<PropertyItem>
+        private val clicksConsumer: Consumer<PropertyItem>,
+        private val valueChangesConsumer: Consumer<PropertyItem>
 ) : ItemPresenter<SelectItemView, PropertyItem.Select> {
     override fun bindView(view: SelectItemView, item: PropertyItem.Select, position: Int) {
         view.setValue(item.items.getOrNull(item.selectedItem))
         view.setTitle(item.title)
-        view.setClickListener { valueConsumer.accept(item) }
+        view.setClickListener { clicksConsumer.accept(item) }
         view.setClearClickListener {
             item.selectedItem = -1
             view.setValue(null)
+            valueChangesConsumer.accept(item)
         }
     }
 }

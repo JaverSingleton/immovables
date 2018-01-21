@@ -12,11 +12,10 @@ import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
 import ru.vstu.immovables.getContainerView
 import ru.vstu.immovables.ui.history.di.HistoryModule
-import ru.vstu.immovables.ui.main.MainActivity
 import ru.vstu.immovables.ui.main.MainActivity.Companion.propertiesScreen
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
-import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportSreen
+import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
 import javax.inject.Inject
 
 class HistoryActivity : AppCompatActivity(), HistoryPresenter.Router {
@@ -55,7 +54,7 @@ class HistoryActivity : AppCompatActivity(), HistoryPresenter.Router {
     }
 
     override fun openReport(reportId: Long) {
-        startActivity(reportSreen(reportId))
+        startActivity(reportScreen(reportId))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -68,7 +68,7 @@ class ReportActivity : AppCompatActivity(), ReportPresenter.Router {
 
     companion object {
 
-        fun Context.reportSreen(reportId: Long) =
+        fun Context.reportScreen(reportId: Long) =
                 Intent(this, ReportActivity::class.java)
                         .putExtra(KEY_REPORT_ID, reportId)
 

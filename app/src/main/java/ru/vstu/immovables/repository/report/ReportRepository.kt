@@ -1,6 +1,7 @@
 package ru.vstu.immovables.repository.report
 
 import io.reactivex.Single
+import io.reactivex.schedulers.Schedulers
 import ru.vstu.immovables.database.dao.ReportDao
 
 interface ReportRepository {
@@ -13,21 +14,21 @@ interface ReportRepository {
 
 }
 
-class ReportRepositoryImpl(val reportDao: ReportDao) : ReportRepository {
+class ReportRepositoryImpl(private val reportDao: ReportDao) : ReportRepository {
 
     override fun find(id: Long): Single<ReportData> =
             reportDao.getReportByIdOnce(id)
+                    .subscribeOn(Schedulers.io())
                     .map { ReportData(report = it) }
-//            ReportData(id = id, address = "Дом #1", metres = 38, cost = 5000000000, filePath = "Path").toSingle()
 
     override fun save(report: ReportData): Single<ReportData> =
             Single.fromCallable { reportDao.insert(report.toEntity()) }
+                    .subscribeOn(Schedulers.io())
                     .flatMap { find(it) }
-//            ReportData(1, address = "Дом #1", metres = 38, cost = 5000000000, filePath = "Path").toSingle()
 
     override fun getAll(): Single<List<ReportData>> =
             reportDao.getAllReportsOnce()
+                    .subscribeOn(Schedulers.io())
                     .map { it.map { ReportData(it) } }
-//            find(1).map { listOf(it) }
-//            listOf<ReportData>().toSingle()
+
 }

@@ -8,6 +8,7 @@ import dagger.Module
 import dagger.Provides
 import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.di.PerActivity
+import ru.vstu.immovables.repository.estimate.EstimateRepository
 import ru.vstu.immovables.ui.main.MainActivity
 import ru.vstu.immovables.ui.main.MainPresenter
 import ru.vstu.immovables.ui.main.MainPresenterImpl
@@ -27,6 +28,7 @@ class PropertiesModule(
 ) {
 
     private val clicks: PublishRelay<PropertyItem> = PublishRelay.create()
+    private val valueChanges: PublishRelay<PropertyItem> = PublishRelay.create()
 
     @Provides
     @PerActivity
@@ -34,16 +36,25 @@ class PropertiesModule(
 
     @Provides
     @PerActivity
-    fun provideMainPresenter(mainView: MainView, propertiesProvider: PropertiesProvider): MainPresenter =
-            MainPresenterImpl(mainView, clicks, propertyType, propertiesProvider)
+    fun provideMainPresenter(mainView: MainView,
+                             propertiesProvider: PropertiesProvider,
+                             estimateRepository: EstimateRepository): MainPresenter =
+            MainPresenterImpl(
+                    mainView,
+                    clicks,
+                    valueChanges,
+                    propertyType,
+                    propertiesProvider,
+                    estimateRepository
+            )
 
     @Provides
     @PerActivity
     fun provideBinder(): ItemBinder =
             ItemBinder.Builder()
-                    .registerItem(SelectItemBlueprint(SelectItemPresenter(clicks)))
-                    .registerItem(LocationItemBlueprint(LocationItemPresenter(clicks)))
-                    .registerItem(NumberInputItemBlueprint(NumberInputItemPresenter()))
+                    .registerItem(SelectItemBlueprint(SelectItemPresenter(clicks, valueChanges)))
+                    .registerItem(LocationItemBlueprint(LocationItemPresenter(clicks, valueChanges)))
+                    .registerItem(NumberInputItemBlueprint(NumberInputItemPresenter(valueChanges)))
                     .build()
 
     @Provides

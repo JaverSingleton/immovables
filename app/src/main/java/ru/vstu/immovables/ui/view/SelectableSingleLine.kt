@@ -58,6 +58,7 @@ class SelectableSingleLineImpl(private val rootView: View) : SelectableSingleLin
         hasValue = !value.isNullOrEmpty()
         hintView.setVisible(hasValue)
         valueView.setCenterVertical(!hasValue)
+        setClearButtonVisible(hasValue)
         updateIconViewVisibility()
     }
 
