@@ -1,4 +1,4 @@
-package ru.vstu.immovables.ui.history
+package ru.vstu.immovables.ui.history.list
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -19,8 +19,6 @@ interface HistoryView {
 
     fun updateItems()
 
-    fun addClicks(): Observable<Unit>
-
     fun showNoElements()
 
     fun showItems()
@@ -35,18 +33,13 @@ class HistoryViewImpl(
 
     private val context = view.context
 
-    private val addButton: View = view.findViewById(R.id.add_button)
-
     private val recycler: RecyclerView = view.findViewById(R.id.reports_recycler)
 
     private val noElements: View = view.findViewById(R.id.no_elements)
 
-    private val toolbar: Toolbar = view.findViewById(R.id.toolbar)
-
     private val adapter = SimpleRecyclerAdapter(adapterPresenter, viewHolderFactory)
 
     init {
-        toolbar.title = context.getString(R.string.History_Title)
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
         recycler.addItemDecoration(VerticalDividerDecoration.Builder(
@@ -57,8 +50,6 @@ class HistoryViewImpl(
     override fun updateItems() {
         adapter.notifyDataSetChanged()
     }
-
-    override fun addClicks(): Observable<Unit> = addButton.clicks()
 
     override fun showNoElements() {
         noElements.show()

@@ -5,52 +5,44 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import com.avito.konveyor.ItemBinder
-import com.avito.konveyor.adapter.AdapterPresenter
+import android.support.v7.widget.Toolbar
+import android.view.View
 import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
-import ru.vstu.immovables.getContainerView
+import ru.vstu.immovables.di.ComponentProvider
+import ru.vstu.immovables.ui.history.di.HistoryComponent
 import ru.vstu.immovables.ui.history.di.HistoryModule
+import ru.vstu.immovables.ui.history.list.HistoryListPresenter
 import ru.vstu.immovables.ui.main.MainActivity.Companion.propertiesScreen
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
 import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
 import javax.inject.Inject
 
-class HistoryActivity : AppCompatActivity(), HistoryPresenter.Router {
+class HistoryActivity : AppCompatActivity(),
+        HistoryRouter,
+ComponentProvider<HistoryComponent>{
 
-    @Inject lateinit var presenter: HistoryPresenter
-    @Inject lateinit var adapterPresenter: AdapterPresenter
-    @Inject lateinit var itemBinder: ItemBinder
     @Inject lateinit var propertiesProvider: PropertiesProvider
+
+    override lateinit var component: HistoryComponent
+
+    private lateinit var toolbar: Toolbar
+    private lateinit var addButton: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        appComponent
+        component = appComponent
                 .plus(HistoryModule())
-                .inject(this)
+        component.inject(this)
         setContentView(R.layout.activity_history)
-        presenter.attachView(HistoryViewImpl(
-                getContainerView(),
-                adapterPresenter,
-                itemBinder
-        ))
-    }
 
-    override fun onStart() {
-        super.onStart()
-        presenter.attachRouter(this)
-    }
+        toolbar = findViewById(R.id.toolbar)
+        addButton = findViewById(R.id.add_button)
 
-    override fun onStop() {
-        presenter.detachRouter()
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        presenter.detachView()
-        super.onDestroy()
+        addButton.setOnClickListener { addImmovable() }
+        toolbar.title = getString(R.string.History_Title)
     }
 
     override fun openReport(reportId: Long) {
