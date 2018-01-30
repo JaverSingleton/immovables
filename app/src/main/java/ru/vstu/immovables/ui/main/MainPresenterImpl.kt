@@ -9,14 +9,15 @@ import io.reactivex.rxkotlin.subscribeBy
 import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.repository.estimate.EstimateRepository
 import ru.vstu.immovables.repository.location.LocationData
-import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.main.item.Field
+import ru.vstu.immovables.ui.main.item.Property
 import java.util.*
 
 
 class MainPresenterImpl(
         private val view: MainView,
-        private val clicks: Observable<PropertyItem>,
-        private val valueChanges: Observable<PropertyItem>,
+        private val clicks: Observable<Field>,
+        private val valueChanges: Observable<Field>,
         private val propertyType: String,
         private val propertiesProvider: PropertiesProvider,
         private val estimateRepository: EstimateRepository
@@ -24,20 +25,23 @@ class MainPresenterImpl(
 
     companion object {
         const val KEY_ITEMS = "items"
+        const val KEY_MORE_BUTTON = "moreButton"
     }
 
-    private var items: List<PropertyItem> = listOf()
+    private var items: List<Field> = listOf()
+    private lateinit var moreButton: Field.MoreButton
+    private var currentItems: List<Field> = listOf()
     private val disposables = CompositeDisposable()
 
     override fun onItemSelected(id: Long, selectedValue: Int) {
-        val item: PropertyItem.Select = getItem(id)
+        val item: Field.Select = getItem(id)
         item.selectedItem = selectedValue
         update(id)
         updatePercent()
     }
 
     override fun onLocationSelected(id: Long, selectedValue: LocationData) {
-        val item: PropertyItem.Location = getItem(id)
+        val item: Field.Location = getItem(id)
         item.locationData = selectedValue
         update(id)
         updatePercent()
@@ -47,25 +51,30 @@ class MainPresenterImpl(
         items = items.takeIf { it.isNotEmpty() }
                 ?: savedState?.getParcelableArrayList(KEY_ITEMS)
                 ?: propertiesProvider.getProperties(propertyType)
+        moreButton = savedState?.getParcelable(KEY_MORE_BUTTON)
+                ?: Field.MoreButton(Long.MAX_VALUE, false)
 
-        updatePercent()
         view.showTitle(propertiesProvider.getTitle(propertyType))
 
         if (items.isEmpty()) {
             view.showNotImplementedPropertyTypeMessage()
             view.close()
         } else {
-            view.updateItems(items)
+            updateFields()
         }
 
         disposables += clicks.subscribeBy(
                 onNext = {
                     when (it) {
-                        is PropertyItem.Select -> {
+                        is Field.Select -> {
                             view.selectItem(it.id, it.title, it.items, it.selectedItem)
                         }
-                        is PropertyItem.Location -> {
+                        is Field.Location -> {
                             view.selectLocation(it.id, it.locationData)
+                        }
+                        is Field.MoreButton -> {
+                            it.more =!it.more
+                            updateFields()
                         }
                     }
                 }
@@ -79,7 +88,7 @@ class MainPresenterImpl(
 
         disposables += view.applyClicks()
                 .flatMapSingle {
-                    estimateRepository.estimate(items)
+                    estimateRepository.estimate(items.filter { it is Property })
                             .observeOn(AndroidSchedulers.mainThread())
                             .doOnSubscribe { view.showLoading() }
                             .doAfterTerminate { view.hideLoading() }
@@ -93,24 +102,38 @@ class MainPresenterImpl(
 
     override fun onSaveState(): Bundle = Bundle().apply {
         putParcelableArrayList(KEY_ITEMS, ArrayList(items))
+        putParcelable(KEY_MORE_BUTTON, moreButton)
     }
 
     override fun onDestroy() {
         disposables.clear()
     }
 
+    override val more: Boolean get() = moreButton.more
+
     private fun update(id: Long) {
         view.updateItem(items.indexOfFirst { it.id == id })
     }
 
+    private fun updateFields() {
+        currentItems = if (moreButton.more) {
+            items
+        } else {
+            items.filter { it.isMandatory }
+        } + moreButton
+        view.updateItems(currentItems)
+        updatePercent()
+    }
+
     private fun updatePercent() {
-        view.showProgress(items.count { it.hasValue() }.toFloat() / items.count().toFloat())
-        val mandatoryItems = items.filter { it.isMandatory }
+        val properties = currentItems.filter { it is Property }.map { it as Property }
+        view.showProgress(properties.count { it.hasValue() }.toFloat() / properties.count().toFloat())
+        val mandatoryItems = properties.filter { it.isMandatory }
         val isMandatoryItemsFilled = mandatoryItems.count { it.hasValue() } == mandatoryItems.count()
         view.setApplyButtonVisible(isMandatoryItemsFilled)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <T : PropertyItem> getItem(id: Long): T = items.first { it.id == id } as T
+    private fun <T : Field> getItem(id: Long): T = items.first { it.id == id } as T
 
 }

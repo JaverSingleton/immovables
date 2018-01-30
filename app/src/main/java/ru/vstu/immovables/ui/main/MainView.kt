@@ -3,10 +3,10 @@ package ru.vstu.immovables.ui.main
 import io.reactivex.Observable
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.repository.report.ReportData
-import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.main.item.Field
 
 interface MainView {
-    fun updateItems(items: List<PropertyItem>)
+    fun updateItems(items: List<Field>)
     fun updateItem(position: Int)
     fun setApplyButtonVisible(visible: Boolean)
     fun selectLocation(id: Long, selectedValue: LocationData?)

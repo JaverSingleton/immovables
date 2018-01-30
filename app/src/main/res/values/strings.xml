@@ -5,6 +5,8 @@
     <string name="to">По</string>
     <string name="title_activity_location">Map</string>
     <string name="Button.Apply">Продолжить</string>
+    <string name="Button.Open">Отобразить все</string>
+    <string name="Button.Close">Только обязательные</string>
     <string name="Location.InputAddress">Введите адрес</string>
     <string name="Report.AveCost">%s руб./м²</string>
     <string name="Report.Cost.Hint">Возможный дипазон цен</string>

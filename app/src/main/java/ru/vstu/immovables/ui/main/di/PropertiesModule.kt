@@ -13,9 +13,11 @@ import ru.vstu.immovables.ui.main.MainActivity
 import ru.vstu.immovables.ui.main.MainPresenter
 import ru.vstu.immovables.ui.main.MainPresenterImpl
 import ru.vstu.immovables.ui.main.MainView
-import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.main.item.Field
 import ru.vstu.immovables.ui.main.item.location.LocationItemBlueprint
 import ru.vstu.immovables.ui.main.item.location.LocationItemPresenter
+import ru.vstu.immovables.ui.main.item.more_button.MoreButtonItemBlueprint
+import ru.vstu.immovables.ui.main.item.more_button.MoreButtonItemPresenter
 import ru.vstu.immovables.ui.main.item.number_input.NumberInputItemBlueprint
 import ru.vstu.immovables.ui.main.item.number_input.NumberInputItemPresenter
 import ru.vstu.immovables.ui.main.item.select.SelectItemBlueprint
@@ -27,8 +29,8 @@ class PropertiesModule(
         private val propertyType: String
 ) {
 
-    private val clicks: PublishRelay<PropertyItem> = PublishRelay.create()
-    private val valueChanges: PublishRelay<PropertyItem> = PublishRelay.create()
+    private val clicks: PublishRelay<Field> = PublishRelay.create()
+    private val valueChanges: PublishRelay<Field> = PublishRelay.create()
 
     @Provides
     @PerActivity
@@ -50,11 +52,12 @@ class PropertiesModule(
 
     @Provides
     @PerActivity
-    fun provideBinder(): ItemBinder =
+    fun provideBinder(presenter: MainPresenter): ItemBinder =
             ItemBinder.Builder()
-                    .registerItem(SelectItemBlueprint(SelectItemPresenter(clicks, valueChanges)))
-                    .registerItem(LocationItemBlueprint(LocationItemPresenter(clicks, valueChanges)))
-                    .registerItem(NumberInputItemBlueprint(NumberInputItemPresenter(valueChanges)))
+                    .registerItem(SelectItemBlueprint(SelectItemPresenter(presenter, clicks, valueChanges)))
+                    .registerItem(LocationItemBlueprint(LocationItemPresenter(presenter, clicks, valueChanges)))
+                    .registerItem(NumberInputItemBlueprint(NumberInputItemPresenter(presenter, valueChanges)))
+                    .registerItem(MoreButtonItemBlueprint(MoreButtonItemPresenter(clicks)))
                     .build()
 
     @Provides

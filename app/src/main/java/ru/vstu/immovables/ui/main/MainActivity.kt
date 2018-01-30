@@ -23,7 +23,7 @@ import ru.vstu.immovables.repository.report.ReportData
 import ru.vstu.immovables.ui.location.LocationActivity.Companion.extractLocation
 import ru.vstu.immovables.ui.location.LocationActivity.Companion.locationSelectingScreen
 import ru.vstu.immovables.ui.main.di.PropertiesModule
-import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.main.item.Field
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
 import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
@@ -48,6 +48,9 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var loadingContainer: View
     private lateinit var contentContainer: View
     private lateinit var progressView: ProgressBar
+    private lateinit var recycler: RecyclerView
+
+    private var dividerDecoration: RecyclerView.ItemDecoration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.plus(PropertiesModule(
@@ -60,18 +63,11 @@ class MainActivity : AppCompatActivity(), MainView {
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val recycler: RecyclerView = findViewById(R.id.recycler)
+        recycler = findViewById(R.id.recycler)
         recyclerAdapter = SimpleRecyclerAdapter(adapterPresenter, binder)
-
-        val padding = resources.getDimensionPixelSize(R.dimen.divider_padding)
-
-        val dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider_and_padding))
-                .setPadding(padding, padding)
-                .build()
 
         recycler.layoutManager = LinearLayoutManager(this)
         recycler.adapter = recyclerAdapter
-        recycler.addItemDecoration(dividerDecoration)
 
         applyButton = findViewById(R.id.apply_button)
         loadingContainer = findViewById(R.id.loading_container)
@@ -144,9 +140,18 @@ class MainActivity : AppCompatActivity(), MainView {
         finish()
     }
 
-    override fun updateItems(items: List<PropertyItem>) {
+    override fun updateItems(items: List<Field>) {
         adapterPresenter.updateItems(items)
         recyclerAdapter.notifyDataSetChanged()
+
+        val padding = resources.getDimensionPixelSize(R.dimen.divider_padding)
+        recycler.removeItemDecoration(dividerDecoration)
+        dividerDecoration = VerticalDividerDecoration.Builder(getDrawable(R.drawable.divider_and_padding))
+                .setPadding(padding, padding)
+                .disableDividerForItemAt(items.count() - 1)
+                .disableDividerForItemAt(items.count() - 2)
+                .build()
+        recycler.addItemDecoration(dividerDecoration)
     }
 
     override fun updateItem(position: Int) {

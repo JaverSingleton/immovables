@@ -5,15 +5,15 @@ import com.avito.konveyor.blueprint.ItemBlueprint
 import com.avito.konveyor.blueprint.ItemPresenter
 import com.avito.konveyor.blueprint.ViewHolderBuilder
 import ru.vstu.immovables.R
-import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.main.item.Field
 
 class SelectItemBlueprint(
-        override val presenter: ItemPresenter<SelectItemView, PropertyItem.Select>
-) : ItemBlueprint<SelectItemView, PropertyItem.Select> {
+        override val presenter: ItemPresenter<SelectItemView, Field.Select>
+) : ItemBlueprint<SelectItemView, Field.Select> {
     override val viewHolderProvider = ViewHolderBuilder.ViewHolderProvider(
             layoutId = R.layout.view_item_select,
             creator = { _, view -> SelectItemView(view) }
     )
 
-    override fun isRelevantItem(item: Item): Boolean = item is PropertyItem.Select
+    override fun isRelevantItem(item: Item): Boolean = item is Field.Select
 }

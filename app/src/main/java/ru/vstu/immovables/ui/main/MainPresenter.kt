@@ -3,7 +3,7 @@ package ru.vstu.immovables.ui.main
 import android.os.Bundle
 import ru.vstu.immovables.repository.location.LocationData
 
-interface MainPresenter {
+interface MainPresenter: PropertiesInfoProvider {
     fun onCreate(savedState: Bundle?)
     fun onDestroy()
     fun onSaveState(): Bundle

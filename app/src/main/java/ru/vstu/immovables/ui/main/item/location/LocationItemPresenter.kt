@@ -2,14 +2,16 @@ package ru.vstu.immovables.ui.main.item.location
 
 import com.avito.konveyor.blueprint.ItemPresenter
 import io.reactivex.functions.Consumer
-import ru.vstu.immovables.ui.main.item.PropertyItem
+import ru.vstu.immovables.ui.main.PropertiesInfoProvider
+import ru.vstu.immovables.ui.main.item.Field
 import ru.vstu.immovables.ui.view.InfoLevel
 
 class LocationItemPresenter(
-        private val clicksConsumer: Consumer<PropertyItem>,
-        private val valueChangesConsumer: Consumer<PropertyItem>
-) : ItemPresenter<LocationItemView, PropertyItem.Location> {
-    override fun bindView(view: LocationItemView, item: PropertyItem.Location, position: Int) {
+        private val propertiesInfoProvider: PropertiesInfoProvider,
+        private val clicksConsumer: Consumer<Field>,
+        private val valueChangesConsumer: Consumer<Field>
+) : ItemPresenter<LocationItemView, Field.Location> {
+    override fun bindView(view: LocationItemView, item: Field.Location, position: Int) {
         view.setValue(item.locationData?.name)
         view.setTitle(item.title)
         view.setClickListener { clicksConsumer.accept(item) }
@@ -19,8 +21,14 @@ class LocationItemPresenter(
             valueChangesConsumer.accept(item)
         }
         view.setInfo(
-                info = item.info?.text ?: item.isMandatory.takeIf { it }?.let { "Обязательное поле" },
-                level = item.info?.level ?: item.isMandatory.takeIf { it }?.let { InfoLevel.WARNING } ?: InfoLevel.INFO
+                info = item.info?.text
+                        ?: item.isMandatory
+                        .takeIf { it && propertiesInfoProvider.more }
+                        ?.let { "Обязательное поле" },
+                level = item.info?.level
+                        ?: item.isMandatory
+                        .takeIf { it && propertiesInfoProvider.more }
+                        ?.let { InfoLevel.WARNING } ?: InfoLevel.INFO
         )
     }
 }

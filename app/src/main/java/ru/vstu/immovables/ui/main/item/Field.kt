@@ -6,11 +6,9 @@ import com.avito.konveyor.blueprint.Item
 import ru.vstu.immovables.*
 import ru.vstu.immovables.repository.location.LocationData
 
-sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcelable {
+sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
 
     override fun describeContents(): Int = 0
-
-    abstract fun hasValue(): Boolean
 
     class Select(
             override val id: Long,
@@ -19,7 +17,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             var selectedItem: Int = -1,
             override val isMandatory: Boolean = false,
             val info: PropertyInfo? = null
-    ) : PropertyItem() {
+    ) : Field(), Property {
 
         override fun hasValue(): Boolean = selectedItem > -1
 
@@ -58,7 +56,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             var locationData: LocationData? = null,
             override val isMandatory: Boolean = false,
             val info: PropertyInfo? = null
-    ) : PropertyItem() {
+    ) : Field(), Property {
 
         override fun hasValue(): Boolean = locationData != null
 
@@ -95,7 +93,7 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
             var value: String = "",
             override val isMandatory: Boolean = false,
             val info: PropertyInfo? = null
-    ) : PropertyItem() {
+    ) : Field(), Property {
 
         override fun hasValue(): Boolean = value.isNotEmpty()
 
@@ -119,6 +117,32 @@ sealed class PropertyItem(open val isMandatory: Boolean = false) : Item, Parcela
                         title = readString(),
                         info = readNullableValue(),
                         value = readString()
+                )
+            }
+
+        }
+
+    }
+
+    class MoreButton(
+            override val id: Long,
+            var more: Boolean = false
+    ) : Field() {
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
+            writeLong(id)
+            writeBoolean(more)
+        }
+
+        override fun describeContents(): Int = 0
+
+        companion object {
+
+            @JvmField
+            val CREATOR = Parcels.creator {
+                MoreButton(
+                        id = readLong(),
+                        more = readBoolean()
                 )
             }
 
