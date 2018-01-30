@@ -60,13 +60,14 @@ class HistoryMapsViewImpl(
     }
 
     override fun zoomTo(points: List<LatLng>): Completable = changeMap { map ->
+        points.takeIf { !it.isEmpty() } ?: return@changeMap
         val bounds = points.fold(LatLngBounds.Builder()) { builder, point ->
             builder.include(point)
         }.build()
-//        map.animateCamera(CameraUpdateFactory.newLatLngBounds(
-//                bounds,
-//                context.getDimen(R.dimen.maps_padding)
-//        ))
+        map.animateCamera(CameraUpdateFactory.newLatLngBounds(
+                bounds,
+                context.getDimen(R.dimen.maps_padding)
+        ))
     }
 
     private fun getMap(): Single<GoogleMap> = mapRelay.firstElement().toSingle()
