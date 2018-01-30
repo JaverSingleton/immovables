@@ -8,6 +8,7 @@ import io.reactivex.rxkotlin.toSingle
 import ru.vstu.immovables.repository.report.ReportData
 import ru.vstu.immovables.repository.report.ReportRepository
 import ru.vstu.immovables.toNumberString
+import ru.vstu.immovables.use
 import java.text.NumberFormat
 
 interface ReportPresenter {
@@ -25,6 +26,8 @@ interface ReportPresenter {
     interface Router {
 
         fun openFile(file: String)
+
+        fun shareFile(file: String)
 
         fun close()
 
@@ -68,6 +71,12 @@ class ReportPresenterImpl(
 
         disposables += view.closeClicks().subscribe {
             router?.close()
+        }
+
+        disposables += view.shareClicks().subscribe {
+            use(router, report) { router, report ->
+                router.shareFile(report.filePath)
+            }
         }
     }
 

@@ -49,7 +49,7 @@ class MainPresenterImpl(
 
     override fun onCreate(savedState: Bundle?) {
         items = items.takeIf { it.isNotEmpty() }
-                ?: savedState?.getParcelableArrayList(KEY_ITEMS)
+                ?: savedState?.getParcelableArrayList<Field>(KEY_ITEMS)
                 ?: propertiesProvider.getProperties(propertyType)
         moreButton = savedState?.getParcelable(KEY_MORE_BUTTON)
                 ?: Field.MoreButton(Long.MAX_VALUE, false)
@@ -112,7 +112,7 @@ class MainPresenterImpl(
     override val more: Boolean get() = moreButton.more
 
     private fun update(id: Long) {
-        view.updateItem(items.indexOfFirst { it.id == id })
+        view.updateItem(currentItems.indexOfFirst { it.id == id })
     }
 
     private fun updateFields() {

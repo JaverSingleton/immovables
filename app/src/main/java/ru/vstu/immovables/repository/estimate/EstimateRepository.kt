@@ -12,17 +12,31 @@ interface EstimateRepository {
 
 }
 
+class Properties {
+    companion object {
+        const val ADDRESS = 1L
+        const val AREA = 2L
+    }
+}
+
 class EstimateRepositoryImpl(private val reportRepository: ReportRepository) : EstimateRepository {
 
     override fun estimate(properties: List<Field>): Single<ReportData> =
             Single.timer(2, TimeUnit.SECONDS)
                     .flatMap {
+                        val location: Field.Location = properties.getField(Properties.ADDRESS)
+                        val area: Field.NumberInput = properties.getField(Properties.AREA)
                         reportRepository.save(ReportData(
-                                address = "Address",
-                                metres = 28,
+                                address = location.locationData?.name.orEmpty(),
+                                metres = area.value.toLong(),
+                                latitude = location.locationData?.location?.latitude?.toLong() ?: 0L,
+                                longitude = location.locationData?.location?.longitude?.toLong() ?: 0L,
                                 cost = 20000001,
                                 filePath = "File Path"
                         ))
                     }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun <T: Field>List<Field>.getField(id: Long): T = first { it.id == id } as T
 
 }

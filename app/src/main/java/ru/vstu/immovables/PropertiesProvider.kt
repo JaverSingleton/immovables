@@ -2,6 +2,7 @@ package ru.vstu.immovables
 
 import android.content.Context
 import android.support.annotation.ArrayRes
+import ru.vstu.immovables.repository.estimate.Properties
 import ru.vstu.immovables.ui.main.item.Field
 
 class PropertiesProvider(private val context: Context) {
@@ -19,15 +20,15 @@ class PropertiesProvider(private val context: Context) {
     }
 
     private fun apartment(): List<Field> = listOf(
-            Field.Location(38, "Адрес", isMandatory = true),
+            Field.Location(Properties.ADDRESS, "Адрес", isMandatory = true),
             Field.NumberInput(10, "Число собственников", ""),
-            Field.Select(1, "Класс жилья", getList(R.array.housing_class)),
-            Field.Select(2, "Конструктивно-правовое состояние", getList(R.array.constructive_legal_status)),
+            Field.Select(40, "Класс жилья", getList(R.array.housing_class)),
+            Field.Select(41, "Конструктивно-правовое состояние", getList(R.array.constructive_legal_status)),
             Field.Select(3, "Тип дома", getList(R.array.house_type)),
             Field.Select(4, "Количество комнат в квартире", getList(R.array.room_count), isMandatory = true),
             Field.NumberInput(5, "Этажность дома", ""),
             Field.NumberInput(6, "Этаж", "", isMandatory = true),
-            Field.NumberInput(7, "Общая площадь квартиры", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры", "", isMandatory = true),
             Field.NumberInput(9, "Размер доли", ""),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
             Field.NumberInput(12, "Жилая площадь", ""),

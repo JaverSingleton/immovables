@@ -22,6 +22,8 @@ interface ReportView {
 
     fun closeClicks(): Observable<Unit>
 
+    fun shareClicks(): Observable<Unit>
+
 }
 
 class ReportViewImpl(view: View): ReportView {
@@ -35,6 +37,7 @@ class ReportViewImpl(view: View): ReportView {
     private val minCostView: TextView = view.findViewById(R.id.min)
 
     private val reportButton: View = view.findViewById(R.id.report)
+    private val shareButton: View = view.findViewById(R.id.share)
 
     override fun showCost(cost: String) {
         costView.text = context.getString(R.string.Common_Cost, cost)
@@ -55,5 +58,7 @@ class ReportViewImpl(view: View): ReportView {
     override fun reportClicks(): Observable<Unit> = reportButton.clicks()
 
     override fun closeClicks(): Observable<Unit> = toolbar.navigationClicks()
+
+    override fun shareClicks(): Observable<Unit> = shareButton.clicks()
 
 }

@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
 import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
 import ru.vstu.immovables.getContainerView
@@ -57,11 +56,25 @@ class ReportActivity : AppCompatActivity(), ReportPresenter.Router {
             val reportFile = File(file)
             startActivity(
                     Intent().apply {
-                        action = android.content.Intent.ACTION_VIEW
+                        action = Intent.ACTION_VIEW
                         setDataAndType(Uri.fromFile(reportFile), reportFile.extension)
                     }
             )
-        } catch(e: Exception) {
+        } catch (e: Exception) {
+            showToast(R.string.Report_Error_WrongFormat)
+        }
+    }
+
+    override fun shareFile(file: String) {
+        try {
+            val reportFile = File(file)
+            startActivity(
+                    Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_STREAM, Uri.fromFile(reportFile))
+                    }
+            )
+        } catch (e: Exception) {
             showToast(R.string.Report_Error_WrongFormat)
         }
     }

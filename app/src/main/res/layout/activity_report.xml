@@ -1,134 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
 
-    <TextView
-        android:id="@+id/cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:paddingTop="46dp"
-        android:textColor="#de000000"
-        android:textSize="24sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        tools:text="7 400 363 руб." />
-
-    <TextView
-        android:id="@+id/ave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:fontFamily="sans-serif"
-        android:textColor="#de000000"
-        android:textSize="18sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cost"
-        tools:text="185 659 руб./м²" />
-
     <LinearLayout
-        android:id="@+id/range"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ave">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="?actionBarSize">
 
-        <TextView
-            android:id="@+id/min"
-            android:layout_width="75dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="sans-serif"
-            android:gravity="right|center_vertical"
-            android:lineSpacingExtra="6sp"
-            android:textColor="#de000000"
-            android:textSize="10sp"
-            android:textStyle="normal"
-            android:maxLines="1"
-            tools:text="6 077 914 руб." />
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="#de000000"
+                android:textSize="24sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                tools:text="7 400 363 руб." />
+
+            <TextView
+                android:id="@+id/ave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif"
+                android:textColor="#de000000"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cost"
+                tools:text="185 659 руб./м²" />
+
+            <LinearLayout
+                android:id="@+id/range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ave">
+
+                <TextView
+                    android:id="@+id/min"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="right|center_vertical"
+                    android:lineSpacingExtra="6sp"
+                    android:maxLines="1"
+                    android:textColor="#de000000"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    tools:text="6 077 914 руб." />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <View
+                        android:id="@+id/line"
+                        android:layout_width="160dp"
+                        android:layout_height="4dp"
+                        android:layout_gravity="center"
+                        android:background="#9d84fc" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="13dp"
+                        android:layout_gravity="center"
+                        android:background="#000000" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/max"
+                    android:layout_width="75dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="left|center_vertical"
+                    android:lineSpacingExtra="6sp"
+                    android:textColor="#de000000"
+                    android:textSize="10sp"
+                    android:textStyle="normal"
+                    tools:text="8 744 811 руб." />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:text="@string/Report.Cost.Hint"
+                android:textColor="#de000000"
+                android:textSize="14sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|bottom"
+            android:orientation="vertical">
 
-            <View
-                android:id="@+id/line"
-                android:layout_width="160dp"
-                android:layout_height="4dp"
-                android:layout_gravity="center"
-                android:background="#9d84fc" />
+            <Button
+                android:id="@+id/report"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Report.Button.Title" />
 
-            <View
-                android:layout_width="2dp"
-                android:layout_height="13dp"
-                android:layout_gravity="center"
-                android:background="#000000" />
+            <Button
+                android:id="@+id/share"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/Report.Button.Share" />
 
-        </FrameLayout>
-
-        <TextView
-            android:id="@+id/max"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:fontFamily="sans-serif"
-            android:gravity="left|center_vertical"
-            android:lineSpacingExtra="6sp"
-            android:textColor="#de000000"
-            android:textSize="10sp"
-            android:textStyle="normal"
-            tools:text="8 744 811 руб." />
+        </LinearLayout>
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:fontFamily="sans-serif"
-        android:text="@string/Report.Cost.Hint"
-        android:textColor="#de000000"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/range" />
-
-    <Button
-        android:id="@+id/report"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
-        android:background="#00aaff"
-        android:fontFamily="sans-serif-medium"
-        android:shadowColor="#4700aaff"
-        android:text="@string/Report.Button.Title"
-        android:textColor="#ffffff"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -139,4 +163,4 @@
         app:navigationIcon="@drawable/ic_close"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
