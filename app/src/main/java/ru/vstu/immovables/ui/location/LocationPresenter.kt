@@ -126,7 +126,10 @@ class LocationPresenterImpl(
             }
 
     private fun Observable<String>.updateSearchResult() = this
-            .singleMap { locationRepository.find(it) }
+            .singleMap {
+                locationRepository.find(it)
+                        .onErrorReturn { listOf() }
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 locations = it
