@@ -1,6 +1,5 @@
 package ru.vstu.immovables.ui.location
 
-import android.location.Geocoder
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.text.Spannable
@@ -20,15 +19,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChangeEvents
-import com.jakewharton.rxbinding2.widget.textChanges
 import com.jakewharton.rxrelay2.BehaviorRelay
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
-import ru.vstu.immovables.R
-import ru.vstu.immovables.fromListener
-import ru.vstu.immovables.hideKeyboard
-import ru.vstu.immovables.setVisible
+import ru.vstu.immovables.*
+import ru.vstu.immovables.utils.VerticalDividerDecoration
 import java.util.concurrent.TimeUnit
 
 interface LocationView {
@@ -80,6 +76,12 @@ class LocationViewImpl(
 
         recycler.adapter = adapter
         recycler.layoutManager = LinearLayoutManager(context)
+        recycler.addItemDecoration(
+                VerticalDividerDecoration.Builder(context.getDrawable(R.drawable.divider))
+                        .setPadding(context.getDimen(R.dimen.search_divider_padding), 0)
+                        .drawForLastItem(false)
+                        .build()
+        )
     }
 
     private fun buildTextWithIcon(hint: String): CharSequence? {
