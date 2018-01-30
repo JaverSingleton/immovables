@@ -7,13 +7,13 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import ru.vstu.immovables.repository.report.ReportRepository
 import ru.vstu.immovables.ui.history.HistoryRouter
-import ru.vstu.immovables.ui.history.item.HistoryItem
+import ru.vstu.immovables.ui.history.list.item.HistoryItem
 import ru.vstu.immovables.updateItems
 import ru.vstu.immovables.use
 
 interface HistoryListPresenter {
 
-    fun attachView(view: HistoryView)
+    fun attachView(view: HistoryListView)
 
     fun attachRouter(router: HistoryRouter)
 
@@ -29,13 +29,13 @@ class HistoryListPresenterImpl(
         private val itemsClicks: Observable<HistoryItem>
 ) : HistoryListPresenter {
 
-    private var view: HistoryView? = null
+    private var view: HistoryListView? = null
     private var router: HistoryRouter? = null
 
     private val disposables = CompositeDisposable()
     private val viewDisposables = CompositeDisposable()
 
-    override fun attachView(view: HistoryView) {
+    override fun attachView(view: HistoryListView) {
         this.view = view
 
         viewDisposables += itemsClicks.subscribe {

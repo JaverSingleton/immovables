@@ -19,6 +19,14 @@ import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.prop
 import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
 import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
 import javax.inject.Inject
+import android.R.id.tabs
+import android.support.design.widget.TabLayout
+import android.support.v4.app.Fragment
+import android.support.v4.view.ViewPager
+import android.support.v4.app.FragmentPagerAdapter
+import ru.vstu.immovables.ui.history.list.HistoryListFragment
+import ru.vstu.immovables.ui.history.maps.HistoryMapsFragment
+
 
 class HistoryActivity : AppCompatActivity(),
         HistoryRouter,
@@ -43,6 +51,13 @@ ComponentProvider<HistoryComponent>{
 
         addButton.setOnClickListener { addImmovable() }
         toolbar.title = getString(R.string.History_Title)
+
+        val viewPager: ViewPager = findViewById(R.id.pager)
+        viewPager.adapter = ViewPagerAdapter()
+
+        val tabLayout: TabLayout = findViewById(R.id.tabs)
+        tabLayout.setupWithViewPager(viewPager)
+
     }
 
     override fun openReport(reportId: Long) {
@@ -68,6 +83,17 @@ ComponentProvider<HistoryComponent>{
                 ),
                 REQ_IMMOVABLES_TYPE
         )
+    }
+
+    internal inner class ViewPagerAdapter : FragmentPagerAdapter(supportFragmentManager) {
+        private val fragments = listOf(HistoryListFragment(), HistoryMapsFragment())
+        private val fragmentTitles = listOf("Список", "Карта")
+
+        override fun getItem(position: Int): Fragment = fragments[position]
+
+        override fun getCount(): Int = fragments.size
+
+        override fun getPageTitle(position: Int): CharSequence = fragmentTitles[position]
     }
 
     companion object {

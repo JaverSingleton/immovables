@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="divider_padding">16dp</dimen>
+    <dimen name="maps_padding">16dp</dimen>
     <dimen name="report_top_padding">64dp</dimen>
 
     <dimen name="search_divider_padding">64dp</dimen>

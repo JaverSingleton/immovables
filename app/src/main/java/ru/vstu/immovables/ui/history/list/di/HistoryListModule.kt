@@ -10,9 +10,9 @@ import ru.vstu.immovables.di.PerFragment
 import ru.vstu.immovables.repository.report.ReportRepository
 import ru.vstu.immovables.ui.history.list.HistoryListPresenter
 import ru.vstu.immovables.ui.history.list.HistoryListPresenterImpl
-import ru.vstu.immovables.ui.history.item.HistoryItem
-import ru.vstu.immovables.ui.history.item.HistoryItemBlueprint
-import ru.vstu.immovables.ui.history.item.HistoryItemPresenter
+import ru.vstu.immovables.ui.history.list.item.HistoryItem
+import ru.vstu.immovables.ui.history.list.item.HistoryItemBlueprint
+import ru.vstu.immovables.ui.history.list.item.HistoryItemPresenter
 
 
 @Module

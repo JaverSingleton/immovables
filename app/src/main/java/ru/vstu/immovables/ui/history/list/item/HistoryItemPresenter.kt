@@ -1,4 +1,4 @@
-package ru.vstu.immovables.ui.history.item
+package ru.vstu.immovables.ui.history.list.item
 
 import com.avito.konveyor.blueprint.ItemPresenter
 import io.reactivex.functions.Consumer
