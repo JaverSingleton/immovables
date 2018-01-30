@@ -8,8 +8,8 @@ import ru.vstu.immovables.database.entities.Report
 class ReportData(
         val id: Long = 0,
         val address: String,
-        val latitude: Long,
-        val longitude: Long,
+        val latitude: Double,
+        val longitude: Double,
         val metres: Long,
         val cost: Long,
         val filePath: String
@@ -38,8 +38,8 @@ class ReportData(
     override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
         writeLong(id)
         writeString(address)
-        writeLong(latitude)
-        writeLong(longitude)
+        writeDouble(latitude)
+        writeDouble(longitude)
         writeLong(metres)
         writeLong(cost)
         writeString(filePath)
@@ -54,8 +54,8 @@ class ReportData(
             ReportData(
                     id = readLong(),
                     address = readString(),
-                    latitude = readLong(),
-                    longitude = readLong(),
+                    latitude = readDouble(),
+                    longitude = readDouble(),
                     metres = readLong(),
                     cost = readLong(),
                     filePath = readString()

@@ -13,7 +13,7 @@ import ru.vstu.immovables.database.entities.Report
         entities = arrayOf(
                 Report::class
         ),
-        version = 2
+        version = 3
 )
 abstract class MainDatabase : RoomDatabase() {
 

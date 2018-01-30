@@ -9,8 +9,8 @@ import android.arch.persistence.room.PrimaryKey
 class Report(
         @PrimaryKey(autoGenerate = true) var id: Long = 0L,
         @ColumnInfo(name = "address") var address: String = "",
-        @ColumnInfo(name = "latitude") var latitude: Long = 0L,
-        @ColumnInfo(name = "longitude") var longitude: Long = 0L,
+        @ColumnInfo(name = "latitude") var latitude: Double = 0.0,
+        @ColumnInfo(name = "longitude") var longitude: Double = 0.0,
         @ColumnInfo(name = "metres") var metres: Long = 0L,
         @ColumnInfo(name = "cost") var cost: Long = 0L,
         @ColumnInfo(name = "file_path") var filePath: String = ""

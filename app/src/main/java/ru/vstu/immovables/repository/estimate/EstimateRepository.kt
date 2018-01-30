@@ -29,8 +29,8 @@ class EstimateRepositoryImpl(private val reportRepository: ReportRepository) : E
                         reportRepository.save(ReportData(
                                 address = location.locationData?.name.orEmpty(),
                                 metres = area.value.toLong(),
-                                latitude = location.locationData?.location?.latitude?.toLong() ?: 0L,
-                                longitude = location.locationData?.location?.longitude?.toLong() ?: 0L,
+                                latitude = location.locationData?.location?.latitude ?: 0.0,
+                                longitude = location.locationData?.location?.longitude ?: 0.0,
                                 cost = 20000001,
                                 filePath = "File Path"
                         ))
