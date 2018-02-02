@@ -27,7 +27,7 @@ class PropertiesProvider(private val context: Context) {
             Field.Select(41, "Конструктивно-правовое состояние", getList(R.array.constructive_legal_status)),
             Field.Select(3, "Тип дома", getList(R.array.house_type)),
             Field.Select(4, "Количество комнат в квартире", getList(R.array.room_count), isMandatory = true),
-            Field.Photo(42, "Документы на собственность", maxSelectable = 1, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
+            Field.Photo(42, "Документы на собственность", maxSelectable = 3, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(5, "Этажность дома", ""),
             Field.NumberInput(6, "Этаж", "", isMandatory = true),

@@ -93,17 +93,19 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             val title: String,
             var photos: List<Uri> = listOf(),
             val maxSelectable: Int = 0,
+            val minSelectable: Int = 1,
             override val isMandatory: Boolean = false,
             val info: PropertyInfo? = null
     ) : Field(), Property {
 
-        override fun hasValue(): Boolean = photos.size >= maxSelectable
+        override fun hasValue(): Boolean = photos.size >= minSelectable
 
         override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
             writeLong(id)
             writeString(title)
             writeParcelableList(photos)
             writeInt(maxSelectable)
+            writeInt(minSelectable)
             writeBoolean(isMandatory)
             writeValue(info)
         }
@@ -119,6 +121,7 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
                         title = readString(),
                         photos = createParcelableList() ?: listOf(),
                         maxSelectable = readInt(),
+                        minSelectable = readInt(),
                         isMandatory = readBoolean(),
                         info = readNullableValue()
                 )
