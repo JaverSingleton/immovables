@@ -1,5 +1,6 @@
 package ru.vstu.immovables.ui.main.item
 
+import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 import com.avito.konveyor.blueprint.Item
@@ -80,6 +81,46 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
                         title = readString(),
                         info = readNullableValue(),
                         locationData = readNullableValue()
+                )
+            }
+
+        }
+
+    }
+
+    class Photo(
+            override val id: Long,
+            val title: String,
+            var photos: List<Uri> = listOf(),
+            val maxSelectable: Int = 0,
+            override val isMandatory: Boolean = false,
+            val info: PropertyInfo? = null
+    ) : Field(), Property {
+
+        override fun hasValue(): Boolean = photos.size >= maxSelectable
+
+        override fun writeToParcel(parcel: Parcel, flags: Int) = with(parcel) {
+            writeLong(id)
+            writeString(title)
+            writeParcelableList(photos)
+            writeInt(maxSelectable)
+            writeBoolean(isMandatory)
+            writeValue(info)
+        }
+
+        override fun describeContents(): Int = 0
+
+        companion object {
+
+            @JvmField
+            val CREATOR = Parcels.creator {
+                Photo(
+                        id = readLong(),
+                        title = readString(),
+                        photos = createParcelableList() ?: listOf(),
+                        maxSelectable = readInt(),
+                        isMandatory = readBoolean(),
+                        info = readNullableValue()
                 )
             }
 

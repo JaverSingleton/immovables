@@ -1,5 +1,6 @@
 package ru.vstu.immovables.ui.main
 
+import android.net.Uri
 import android.os.Bundle
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,6 +48,13 @@ class MainPresenterImpl(
         updatePercent()
     }
 
+    override fun onPhotoSelected(id: Long, selectedValue: List<Uri>) {
+        val item: Field.Photo = getItem(id)
+        item.photos = selectedValue
+        update(id)
+        updatePercent()
+    }
+
     override fun onCreate(savedState: Bundle?) {
         items = items.takeIf { it.isNotEmpty() }
                 ?: savedState?.getParcelableArrayList<Field>(KEY_ITEMS)
@@ -75,6 +83,9 @@ class MainPresenterImpl(
                         is Field.MoreButton -> {
                             it.more =!it.more
                             updateFields()
+                        }
+                        is Field.Photo -> {
+                            view.selectPhotos(it.id, it.photos, it.maxSelectable)
                         }
                     }
                 }

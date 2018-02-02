@@ -20,6 +20,8 @@ import ru.vstu.immovables.ui.main.item.more_button.MoreButtonItemBlueprint
 import ru.vstu.immovables.ui.main.item.more_button.MoreButtonItemPresenter
 import ru.vstu.immovables.ui.main.item.number_input.NumberInputItemBlueprint
 import ru.vstu.immovables.ui.main.item.number_input.NumberInputItemPresenter
+import ru.vstu.immovables.ui.main.item.photo.PhotoItemBlueprint
+import ru.vstu.immovables.ui.main.item.photo.PhotoItemPresenter
 import ru.vstu.immovables.ui.main.item.select.SelectItemBlueprint
 import ru.vstu.immovables.ui.main.item.select.SelectItemPresenter
 
@@ -58,6 +60,7 @@ class PropertiesModule(
                     .registerItem(LocationItemBlueprint(LocationItemPresenter(presenter, clicks, valueChanges)))
                     .registerItem(NumberInputItemBlueprint(NumberInputItemPresenter(presenter, valueChanges)))
                     .registerItem(MoreButtonItemBlueprint(MoreButtonItemPresenter(clicks)))
+                    .registerItem(PhotoItemBlueprint(PhotoItemPresenter(presenter, clicks, valueChanges)))
                     .build()
 
     @Provides

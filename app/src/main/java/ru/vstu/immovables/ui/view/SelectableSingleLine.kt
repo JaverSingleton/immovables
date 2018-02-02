@@ -14,7 +14,7 @@ import ru.vstu.immovables.*
 
 interface SelectableSingleLine {
 
-    fun setValue(value: String?)
+    fun setValue(value: CharSequence?)
 
     fun setClearButtonVisible(visible: Boolean)
 
@@ -53,7 +53,7 @@ class SelectableSingleLineImpl(private val rootView: View) : SelectableSingleLin
     private val errorTextColor: ColorStateList = ContextCompat.getColorStateList(rootView.context, R.color.text_error_disableable)!!
     private var hasValue: Boolean = false
 
-    override fun setValue(value: String?) {
+    override fun setValue(value: CharSequence?) {
         valueView.text = value
         hasValue = !value.isNullOrEmpty()
         hintView.setVisible(hasValue)

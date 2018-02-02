@@ -1,8 +1,12 @@
 package ru.vstu.immovables.ui.main
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -16,6 +20,10 @@ import com.avito.konveyor.ItemBinder
 import com.avito.konveyor.adapter.AdapterPresenter
 import com.avito.konveyor.adapter.SimpleRecyclerAdapter
 import com.jakewharton.rxbinding2.view.clicks
+import com.tbruyelle.rxpermissions2.RxPermissions
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.engine.impl.PicassoEngine
 import io.reactivex.Observable
 import ru.vstu.immovables.*
 import ru.vstu.immovables.repository.location.LocationData
@@ -29,6 +37,7 @@ import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.prop
 import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
 import ru.vstu.immovables.utils.VerticalDividerDecoration
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity(), MainView {
 
@@ -51,6 +60,8 @@ class MainActivity : AppCompatActivity(), MainView {
     private lateinit var recycler: RecyclerView
 
     private var dividerDecoration: RecyclerView.ItemDecoration? = null
+
+    private lateinit var rxPermissions: RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         appComponent.plus(PropertiesModule(
@@ -76,6 +87,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
         hideLoading()
 
+        rxPermissions = RxPermissions(this)
         presenter.onCreate(savedInstanceState?.getBundle(KEY_PRESENTER_STATE))
     }
 
@@ -91,14 +103,18 @@ class MainActivity : AppCompatActivity(), MainView {
             return
         }
 
-        when (requestCode) {
-            REQ_SELECT_ITEM -> presenter.onItemSelected(
+        when {
+            requestCode == REQ_SELECT_ITEM -> presenter.onItemSelected(
                     data.extractId(),
                     data.extractSelectedItem()
             )
-            REQ_SELECT_LOCATION -> presenter.onLocationSelected(
+            requestCode == REQ_SELECT_LOCATION -> presenter.onLocationSelected(
                     data.extractId(),
                     data.extractLocation()
+            )
+            requestCode > REQ_SELECT_PHOTO -> presenter.onPhotoSelected(
+                    (requestCode - REQ_SELECT_PHOTO).toLong(),
+                    Matisse.obtainResult(data)
             )
             else -> {
                 /*Ignore*/
@@ -180,6 +196,24 @@ class MainActivity : AppCompatActivity(), MainView {
         )
     }
 
+    override fun selectPhotos(id: Long, selectedValue: List<Uri>, maxSelectable: Int) {
+        rxPermissions
+                .request(READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE)
+                .subscribe({ granted ->
+                    if (granted) {
+                        with(Matisse.from(this).choose(setOf(MimeType.JPEG, MimeType.PNG))) {
+                            countable(true)
+                            maxSelectable(maxSelectable.takeIf { it > 0 } ?: 10)
+                            restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                            imageEngine(PicassoEngine())
+                            forResult(REQ_SELECT_PHOTO + id.toInt())
+                        }
+                    } else {
+                        showToast(R.string.Field_Photo_Permissions)
+                    }
+                })
+    }
+
     override fun applyClicks(): Observable<Unit> = applyButton.clicks()
 
     override fun showReport(reportData: ReportData) {
@@ -214,3 +248,4 @@ class MainActivity : AppCompatActivity(), MainView {
 
 private const val REQ_SELECT_ITEM = 0
 private const val REQ_SELECT_LOCATION = 1
+private const val REQ_SELECT_PHOTO = 10000

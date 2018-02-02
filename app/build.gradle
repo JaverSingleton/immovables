@@ -60,6 +60,11 @@ dependencies {
     compile "com.jakewharton.rxbinding2:rxbinding-kotlin:$rx_binding_version"
     compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rx_binding_version"
     //endregion
+    //region Photo Picker
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.zhihu.android:matisse:0.5.0-beta3'
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    //endregion
     //region Konveyor
     compile "com.github.avito-tech:Konveyor:$konveyor_version"
     //endregion
