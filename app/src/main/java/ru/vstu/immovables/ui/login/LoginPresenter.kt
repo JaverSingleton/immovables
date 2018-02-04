@@ -22,6 +22,8 @@ interface LoginPresenter {
 
         fun finishLogin()
 
+        fun close()
+
     }
 
 }
@@ -32,23 +34,15 @@ class LoginPresenterImpl(
 ) : LoginPresenter {
 
     private val disposables = CompositeDisposable()
+    private val requestDisposabled = CompositeDisposable()
 
     private var view: LoginView? = null
     private var router: LoginPresenter.Router? = null
 
     override fun attachView(view: LoginView) {
         this.view = view
-        disposables += view.loginClicks().subscribe {
-            accountRepository.login(view.getLogin(), view.getPassword())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { view.showProgress() }
-                    .doOnTerminate { view.hideProgress() }
-                    .subscribe({
-                        router?.finishLogin()
-                    }, {
-                        view.showError()
-                    })
-        }
+        disposables += view.loginClicks().subscribe { login() }
+        disposables += view.navigationClicks().subscribe { router?.close() }
     }
 
     override fun attachRouter(router: LoginPresenter.Router) {
@@ -60,6 +54,7 @@ class LoginPresenterImpl(
     }
 
     override fun detachRouter() {
+        requestDisposabled.clear()
         this.router = null
     }
 
@@ -69,6 +64,22 @@ class LoginPresenterImpl(
     }
 
     override fun onSaveState(): Bundle = Bundle()
+
+    private fun login() {
+        val view = view ?: return
+        val login = view.getLogin().takeIf { it.isNotEmpty() } ?: return
+        val password = view.getPassword().takeIf { it.isNotEmpty() }  ?: return
+        requestDisposabled.clear()
+        requestDisposabled += accountRepository.login(login, password)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { view.showProgress() }
+                .doAfterTerminate { view.hideProgress() }
+                .subscribe({
+                    router?.finishLogin()
+                }, {
+                    view.showError()
+                })
+    }
 
 }
 

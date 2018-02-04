@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "accounts")
 class Account(
-        @PrimaryKey() var id: Long = 1L,
-        @ColumnInfo(name = "login") var login: String = ""
+        @PrimaryKey(autoGenerate = true) var id: Long = 0L,
+        @ColumnInfo(name = "login") var login: String = "",
+        @ColumnInfo(name = "password") var password: String = ""
 )

@@ -5,16 +5,19 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 import ru.vstu.immovables.database.dao.AccountDao
+import ru.vstu.immovables.database.dao.CurrentAccountDao
 import ru.vstu.immovables.database.dao.ReportDao
 import ru.vstu.immovables.database.entities.Account
+import ru.vstu.immovables.database.entities.CurrentAccount
 import ru.vstu.immovables.database.entities.Report
 
 @Database(
         entities = arrayOf(
                 Report::class,
-                Account::class
+                Account::class,
+                CurrentAccount::class
         ),
-        version = 4
+        version = 5
 )
 abstract class MainDatabase : RoomDatabase() {
 
@@ -34,6 +37,8 @@ abstract class MainDatabase : RoomDatabase() {
     abstract fun getReportDao(): ReportDao
 
     abstract fun getAccountDao(): AccountDao
+
+    abstract fun getCurrentAccountDao(): CurrentAccountDao
 
 
 }

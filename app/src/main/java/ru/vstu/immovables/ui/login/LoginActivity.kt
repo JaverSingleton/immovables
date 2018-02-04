@@ -52,6 +52,10 @@ class LoginActivity : AppCompatActivity(), LoginPresenter.Router {
         finish()
     }
 
+    override fun close() {
+        finish()
+    }
+
     companion object {
 
         fun Context.loginScreen(resultIntent: Intent) =
