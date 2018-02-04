@@ -12,8 +12,8 @@ class PropertiesProvider(private val context: Context) {
 
     fun getProperties(propertyType: String): List<Field> = when (propertyType) {
         APARTMENT -> apartment()
-        ROOM -> apartment()
-        HOUSE -> apartment()
+        ROOM -> room()
+        HOUSE -> house()
         else -> listOf()
     }
 
@@ -35,8 +35,7 @@ class PropertiesProvider(private val context: Context) {
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(5, "Этажность дома", ""),
             Field.NumberInput(6, "Этаж", "", isMandatory = true),
-            Field.NumberInput(Properties.AREA, "Общая площадь квартиры", "", isMandatory = true),
-            Field.NumberInput(9, "Размер доли", ""),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры(м²)", "", isMandatory = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
             Field.NumberInput(12, "Жилая площадь", ""),
             Field.NumberInput(13, "Площадь кухни", ""),
@@ -54,13 +53,75 @@ class PropertiesProvider(private val context: Context) {
             Field.Select(25, "Телефон", getList(R.array.common)),
             Field.Select(26, "Кабельное ТВ", getList(R.array.common)),
             Field.Select(27, "Кондиционер", getList(R.array.common)),
-            Field.NumberInput(28, "Год постройки", ""),
-            Field.NumberInput(29, "Год ввода в эксплуатацию", ""),
-            Field.Select(30, "Лифт", getList(R.array.lift)),
-            Field.Select(31, "Лифт", getList(R.array.lift_count)),
+            Field.Select(30, "Грузовой лифт", getList(R.array.lift)),
+            Field.Select(31, "Кол-во лифтов", getList(R.array.lift_count)),
             Field.Select(32, "Парковка", getList(R.array.parking)),
             Field.Select(33, "Консьерж", getList(R.array.common)),
             Field.Select(34, "Охрана", getList(R.array.common)),
+            Field.Select(35, "Источники информации", getList(R.array.information_sources)),
+            Field.Select(36, "Отопление", getList(R.array.heating)),
+            Field.Select(37, "Тип продажи", getList(R.array.sell_type))
+    )
+
+    private fun house(): List<Field> = listOf(
+            Field.Location(Properties.ADDRESS, "Адрес", isMandatory = true),
+            Field.NumberInput(10, "Число собственников", ""),
+            Field.Select(40, "Класс жилья", getList(R.array.housing_class)),
+            Field.Select(41, "Конструктивно-правовое состояние", getList(R.array.constructive_legal_status)),
+            Field.Select(3, "Тип дома", getList(R.array.house_type)),
+            Field.NumberInput(4, "Количество комнат в доме", "", isMandatory = true),
+            Field.Photo(42, "Документы на собственность", maxSelectable = 3, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
+            Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
+            Field.NumberInput(5, "Этажность дома", ""),
+            Field.NumberInput(Properties.AREA, "Общая площадь дома(м²)", "", isMandatory = true),
+            Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
+            Field.NumberInput(12, "Жилая площадь", ""),
+            Field.NumberInput(13, "Площадь кухни", ""),
+            Field.Select(14, "Санузел", getList(R.array.bathroom)),
+            Field.Select(15, "Число санузлов", getList(R.array.bathroom), isMandatory = true),
+            Field.Select(18, "Ремонт", getList(R.array.repairs)),
+            Field.NumberInput(19, "Высота потолков", ""),
+            Field.Select(20, "Вид из окна", getList(R.array.outer_view)),
+            Field.Select(21, "Межкомнатные двери", getList(R.array.common)),
+            Field.Select(22, "Мебель", getList(R.array.common)),
+            Field.Select(23, "Кухонный гарнитур", getList(R.array.common)),
+            Field.Select(24, "Интернет", getList(R.array.common)),
+            Field.Select(25, "Телефон", getList(R.array.common)),
+            Field.Select(26, "Кабельное ТВ", getList(R.array.common)),
+            Field.Select(27, "Кондиционер", getList(R.array.common)),
+            Field.Select(34, "Охрана", getList(R.array.common)),
+            Field.Select(35, "Источники информации", getList(R.array.information_sources)),
+            Field.Select(36, "Отопление", getList(R.array.heating)),
+            Field.Select(37, "Тип продажи", getList(R.array.sell_type))
+    )
+
+    private fun room(): List<Field> = listOf(
+            Field.Location(Properties.ADDRESS, "Адрес", isMandatory = true),
+            Field.NumberInput(10, "Число собственников", ""),
+            Field.Select(40, "Класс жилья", getList(R.array.housing_class)),
+            Field.Select(3, "Тип дома", getList(R.array.house_type)),
+            Field.Photo(42, "Документы на собственность", maxSelectable = 3, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
+            Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
+            Field.NumberInput(5, "Этажность дома", ""),
+            Field.NumberInput(6, "Этаж", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры(м²)", "", isMandatory = true),
+            Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
+            Field.NumberInput(12, "Жилая площадь", ""),
+            Field.NumberInput(13, "Площадь кухни", ""),
+            Field.Select(14, "Санузел", getList(R.array.bathroom)),
+            Field.Select(15, "Число санузлов", getList(R.array.bathroom), isMandatory = true),
+            Field.Select(18, "Ремонт", getList(R.array.repairs)),
+            Field.NumberInput(19, "Высота потолков", ""),
+            Field.Select(20, "Вид из окна", getList(R.array.outer_view)),
+            Field.Select(21, "Межкомнатные двери", getList(R.array.common)),
+            Field.Select(22, "Мебель", getList(R.array.common)),
+            Field.Select(23, "Кухонный гарнитур", getList(R.array.common)),
+            Field.Select(24, "Интернет", getList(R.array.common)),
+            Field.Select(26, "Кабельное ТВ", getList(R.array.common)),
+            Field.Select(27, "Кондиционер", getList(R.array.common)),
+            Field.Select(30, "Грузовой лифт", getList(R.array.lift)),
+            Field.Select(31, "Кол-во лифтов", getList(R.array.lift_count)),
+            Field.Select(32, "Парковка", getList(R.array.parking)),
             Field.Select(35, "Источники информации", getList(R.array.information_sources)),
             Field.Select(36, "Отопление", getList(R.array.heating)),
             Field.Select(37, "Тип продажи", getList(R.array.sell_type))
