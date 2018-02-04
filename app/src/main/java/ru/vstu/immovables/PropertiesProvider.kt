@@ -12,11 +12,15 @@ class PropertiesProvider(private val context: Context) {
 
     fun getProperties(propertyType: String): List<Field> = when (propertyType) {
         APARTMENT -> apartment()
+        ROOM -> apartment()
+        HOUSE -> apartment()
         else -> listOf()
     }
 
     fun getTitle(propertyType: String) = when (propertyType) {
         APARTMENT -> context.getString(R.string.Property_Type_Apartment)
+        ROOM -> context.getString(R.string.Property_Type_Room)
+        HOUSE -> context.getString(R.string.Property_Type_House)
         else -> ""
     }
 
@@ -70,10 +74,3 @@ class PropertiesProvider(private val context: Context) {
 private const val APARTMENT = "Квартира"
 private const val ROOM = "Комната"
 private const val HOUSE = "Дом"
-private const val STEAD = "Земельный участок"
-private const val OFFICE = "Офис"
-private const val TRADE_PLACE = "Торговая площадка"
-private const val STOCK = "Склад"
-private const val FREE_APPOINTMENT = "Помещение свободного назначения"
-private const val GARAGE = "Гараж"
-private const val BUILDING = "Здание"
