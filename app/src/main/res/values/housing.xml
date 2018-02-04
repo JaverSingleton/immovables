@@ -14,21 +14,18 @@
     </string-array>
 
     <string-array name="housing_class">
-        <item>Неважно</item>
         <item>Эконом</item>
         <item>Бизнес</item>
         <item>Элитное</item>
     </string-array>
 
     <string-array name="constructive_legal_status">
-        <item>Неважно</item>
         <item>Строящиеся</item>
         <item>Новостройка</item>
         <item>Вторичное</item>
     </string-array>
 
     <string-array name="house_type">
-        <item>Неважно</item>
         <item>Кирпичный</item>
         <item>Деревянный</item>
         <item>Монолитный</item>
@@ -48,41 +45,35 @@
     </string-array>
 
     <string-array name="encumbrance_type">
-        <item>Неважно</item>
         <item>Аренда</item>
         <item>Ипотека</item>
         <item>Другое</item>
     </string-array>
 
     <string-array name="bathroom">
-        <item>Неважно</item>
         <item>Совмещенный</item>
         <item>Раздельный</item>
     </string-array>
 
     <string-array name="bathroom_count">
-        <item>Неважно</item>
         <item>1</item>
         <item>2</item>
         <item>3+</item>
     </string-array>
 
     <string-array name="balcony">
-        <item>Неважно</item>
         <item>Балкон</item>
         <item>Лоджия</item>
         <item>Оба варианта</item>
     </string-array>
 
     <string-array name="balcony_count">
-        <item>Неважно</item>
         <item>1</item>
         <item>2</item>
         <item>3+</item>
     </string-array>
 
     <string-array name="repairs">
-        <item>Неважно</item>
         <item>Косметический</item>
         <item>Евроремонт</item>
         <item>Дизайнерский</item>
@@ -90,26 +81,22 @@
     </string-array>
 
     <string-array name="outer_view">
-        <item>Неважно</item>
-        <item>во двор</item>
+        <item>Во двор</item>
         <item>На улицу</item>
         <item>Оба варианта</item>
     </string-array>
 
     <string-array name="common">
-        <item>Неважно</item>
         <item>Есть</item>
         <item>Нет</item>
     </string-array>
 
     <string-array name="lift">
-        <item>Неважно</item>
         <item>Есть грузовой</item>
         <item>Нет грузового</item>
     </string-array>
 
     <string-array name="lift_count">
-        <item>Неважно</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
@@ -117,7 +104,6 @@
     </string-array>
 
     <string-array name="parking">
-        <item>Неважно</item>
         <item>Наземная</item>
         <item>Подземная</item>
         <item>Многоуровневая</item>
@@ -125,19 +111,16 @@
     </string-array>
 
     <string-array name="information_sources">
-        <item>Неважно</item>
         <item>Сайты объявлений</item>
         <item>Аукционы</item>
     </string-array>
 
     <string-array name="heating">
-        <item>Неважно</item>
         <item>Автономное</item>
         <item>Централизованное</item>
     </string-array>
 
     <string-array name="sell_type">
-        <item>Неважно</item>
         <item>Свободная</item>
         <item>Альтернативная</item>
         <item>Возможная ипотека</item>
