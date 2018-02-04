@@ -12,7 +12,7 @@ interface AccountDao {
     @Delete
     fun delete(account: Account)
 
-    @Query("SELECT * FROM accounts WHERE id = 1")
-    fun getAccount(): Account?
+    @Query("SELECT * FROM accounts WHERE login = :arg0")
+    fun getAccount(login: String): Account?
 
 }

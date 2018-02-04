@@ -15,6 +15,8 @@ interface LoginView {
 
     fun loginClicks(): Observable<Unit>
 
+    fun navigationClicks(): Observable<Unit>
+
     fun getLogin(): String
 
     fun getPassword(): String
@@ -47,6 +49,8 @@ class LoginViewImpl(view: View) : LoginView {
     }
 
     override fun loginClicks(): Observable<Unit> = loginButton.clicks()
+
+    override fun navigationClicks(): Observable<Unit> = toolbar.clicks()
 
     override fun getLogin(): String = loginView.text.toString()
 

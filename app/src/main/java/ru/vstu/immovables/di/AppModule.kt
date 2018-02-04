@@ -41,6 +41,6 @@ class AppModule {
     @Provides
     @Singleton
     fun provideAccountRepository(database: MainDatabase): AccountRepository =
-            AccountRepositoryImpl(database.getAccountDao())
+            AccountRepositoryImpl(database.getAccountDao(), database.getCurrentAccountDao())
 
 }

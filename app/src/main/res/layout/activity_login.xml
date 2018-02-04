@@ -73,6 +73,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="0dp"
+        app:navigationIcon="@drawable/ic_close"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="@string/Login.Title" />
 
