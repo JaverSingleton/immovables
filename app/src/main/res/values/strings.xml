@@ -20,6 +20,8 @@
     <string name="History.NoElements.Description">Вы еще не делали запросов на оценку.\nДля этого, нажмите на кнопку снизу</string>
     <string name="Property.ImmovableType.Title">Тип жилья</string>
     <string name="Property.Type.Apartment">Квартира</string>
+    <string name="Property.Type.Room">Комната</string>
+    <string name="Property.Type.House">Дом</string>
     <string name="Field.Photo.SelectedCount.Multi">%1s из%2s</string>
     <string name="Field.Photo.Hint">%1s %2s</string>
     <string name="Field.Photo.Hint.Count">(%s фото)</string>
