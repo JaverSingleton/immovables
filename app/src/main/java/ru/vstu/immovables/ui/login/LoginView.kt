@@ -44,7 +44,9 @@ class LoginViewImpl(view: View) : LoginView {
 
     init {
         loginView.hint = context.getString(R.string.Login_Login_Hint)
+        loginView.maxLines = 1
         passwordView.hint = context.getString(R.string.Login_Password_Hint)
+        passwordView.maxLines = 1
         passwordView.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
     }
 

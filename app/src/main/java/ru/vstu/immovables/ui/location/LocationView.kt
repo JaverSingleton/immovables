@@ -116,7 +116,7 @@ class LocationViewImpl(
             .skip(1)
             .filter { it.view().tag == null }
             .distinctUntilChanged()
-            .debounce(1, TimeUnit.SECONDS)
+            .debounce(400, TimeUnit.MILLISECONDS)
             .map { it.text().toString() }
 
     override fun applyClicked(): Observable<Unit> = applyButton.clicks()
