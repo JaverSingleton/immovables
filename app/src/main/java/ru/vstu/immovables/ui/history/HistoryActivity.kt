@@ -4,40 +4,45 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.View
-import ru.vstu.immovables.PropertiesProvider
-import ru.vstu.immovables.R
-import ru.vstu.immovables.appComponent
-import ru.vstu.immovables.di.ComponentProvider
-import ru.vstu.immovables.ui.history.di.HistoryComponent
-import ru.vstu.immovables.ui.history.di.HistoryModule
-import ru.vstu.immovables.ui.history.list.HistoryListPresenter
-import ru.vstu.immovables.ui.main.MainActivity.Companion.propertiesScreen
-import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
-import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
-import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
-import javax.inject.Inject
-import android.R.id.tabs
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
-import android.support.v4.view.ViewPager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import io.reactivex.android.schedulers.AndroidSchedulers
+import ru.vstu.immovables.*
+import ru.vstu.immovables.di.ComponentProvider
+import ru.vstu.immovables.repository.account.AccountRepository
+import ru.vstu.immovables.ui.history.di.HistoryComponent
+import ru.vstu.immovables.ui.history.di.HistoryModule
 import ru.vstu.immovables.ui.history.list.HistoryListFragment
 import ru.vstu.immovables.ui.history.maps.HistoryMapsFragment
+import ru.vstu.immovables.ui.login.LoginActivity.Companion.loginScreen
+import ru.vstu.immovables.ui.main.MainActivity.Companion.propertiesScreen
+import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.extractSelectedItem
+import ru.vstu.immovables.ui.property_type.PropertyChooseActivity.Companion.propertyChooseScreen
+import ru.vstu.immovables.ui.report.ReportActivity.Companion.reportScreen
+import javax.inject.Inject
 
 
 class HistoryActivity : AppCompatActivity(),
         HistoryRouter,
-ComponentProvider<HistoryComponent>{
+        ComponentProvider<HistoryComponent> {
 
     @Inject lateinit var propertiesProvider: PropertiesProvider
+
+    @Inject lateinit var accountRepository: AccountRepository
 
     override lateinit var component: HistoryComponent
 
     private lateinit var toolbar: Toolbar
     private lateinit var addButton: View
+
+    private lateinit var progress: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,9 +53,31 @@ ComponentProvider<HistoryComponent>{
 
         toolbar = findViewById(R.id.toolbar)
         addButton = findViewById(R.id.add_button)
+        progress = findViewById(R.id.progress)
 
         addButton.setOnClickListener { addImmovable() }
         toolbar.title = getString(R.string.History_Title)
+
+        toolbar.inflateMenu(R.menu.history_menu)
+        toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.logout -> {
+                    accountRepository.logout()
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnSubscribe { progress.show() }
+                            .doOnTerminate { progress.hide() }
+                            .subscribe({
+                                startActivity(loginScreen(intent))
+                                finish()
+                            }, {
+                                startActivity(loginScreen(intent))
+                                finish()
+                            })
+                    true
+                }
+                else -> false
+            }
+        }
 
         val viewPager: ViewPager = findViewById(R.id.pager)
         viewPager.adapter = ViewPagerAdapter()
@@ -83,6 +110,24 @@ ComponentProvider<HistoryComponent>{
                 ),
                 REQ_IMMOVABLES_TYPE
         )
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.logout -> {
+                accountRepository.logout()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSubscribe { progress.show() }
+                        .doOnTerminate { progress.hide() }
+                        .subscribe({
+                            startActivity(loginScreen(intent))
+                        }, {
+                            startActivity(loginScreen(intent))
+                        })
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     internal inner class ViewPagerAdapter : FragmentPagerAdapter(supportFragmentManager) {

@@ -12,11 +12,11 @@ import ru.vstu.immovables.database.entities.Report
 @Dao
 interface ReportDao {
 
-    @Query("SELECT * FROM reports")
-    fun getAllReportStream(): Flowable<List<Report>>
+    @Query("SELECT * FROM reports WHERE login = :arg0")
+    fun getAllReportStream(login: String): Flowable<List<Report>>
 
-    @Query("SELECT * FROM reports")
-    fun getAllReportsOnce(): Single<List<Report>>
+    @Query("SELECT * FROM reports WHERE login = :arg0")
+    fun getAllReportsOnce(login: String): Single<List<Report>>
 
     @Query("SELECT * FROM reports WHERE id = :arg0")
     fun getReportByIdOnce(id: Long): Single<Report>

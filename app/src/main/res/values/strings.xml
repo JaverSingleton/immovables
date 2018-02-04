@@ -15,6 +15,7 @@
     <string name="Report.Error.WrongFormat">Неверный формат файла</string>
     <string name="Common.Cost">%s руб.</string>
     <string name="History.Title">История</string>
+    <string name="History.Logout">Выйти</string>
     <string name="History.NoElements.Title">Ничего не найдено</string>
     <string name="History.NoElements.Description">Вы еще не делали запросов на оценку.\nДля этого, нажмите на кнопку снизу</string>
     <string name="Property.ImmovableType.Title">Тип жилья</string>
@@ -25,4 +26,9 @@
     <string name="Field.Photo.SelectedCount.Single">%1s</string>
     <string name="Field.Photo.Value">Выбрано %s фотографий</string>
     <string name="Field.Photo.Permissions">Для продолжения необходим доступ к хранилищу</string>
+    <string name="Login.Title">Вход в личный кабинет</string>
+    <string name="Login.Button">Войти</string>
+    <string name="Login.Login.Hint">Логин</string>
+    <string name="Login.Password.Hint">Пароль</string>
+    <string name="Login.Error">Ошибка авторизации</string>
 </resources>

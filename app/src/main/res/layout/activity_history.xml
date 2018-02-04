@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     android:background="#F0F0F0">
 
-    <!--<fragment-->
-    <!--android:id="@+id/history_list"-->
-    <!--android:name="ru.vstu.immovables.ui.history.maps.HistoryMapsFragment"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_marginTop="?actionBarSize" />-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -41,6 +34,22 @@
             android:layout_height="match_parent" />
 
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#AAFFFFFF"
+        android:paddingTop="?actionBarSize"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true" />
+
+    </FrameLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_button"

@@ -1,19 +1,20 @@
 package ru.vstu.immovables.database
 
-import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.migration.Migration
 import android.content.Context
+import ru.vstu.immovables.database.dao.AccountDao
 import ru.vstu.immovables.database.dao.ReportDao
+import ru.vstu.immovables.database.entities.Account
 import ru.vstu.immovables.database.entities.Report
 
 @Database(
         entities = arrayOf(
-                Report::class
+                Report::class,
+                Account::class
         ),
-        version = 3
+        version = 4
 )
 abstract class MainDatabase : RoomDatabase() {
 
@@ -30,8 +31,9 @@ abstract class MainDatabase : RoomDatabase() {
     }
 
 
-
     abstract fun getReportDao(): ReportDao
+
+    abstract fun getAccountDao(): AccountDao
 
 
 }

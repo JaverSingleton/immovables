@@ -25,8 +25,9 @@ class ReportData(
             filePath = report.filePath
     )
 
-    fun toEntity() = Report(
+    fun toEntity(login: String) = Report(
             id = id,
+            login = login,
             address = address,
             latitude = latitude,
             longitude = longitude,

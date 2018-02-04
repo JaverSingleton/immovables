@@ -8,6 +8,8 @@ import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.api.di.ApiModule
 import ru.vstu.immovables.database.MainDatabase
 import ru.vstu.immovables.database.di.DatabaseModule
+import ru.vstu.immovables.repository.account.AccountRepository
+import ru.vstu.immovables.repository.account.AccountRepositoryImpl
 import ru.vstu.immovables.repository.estimate.EstimateRepository
 import ru.vstu.immovables.repository.estimate.EstimateRepositoryImpl
 import ru.vstu.immovables.repository.report.ReportRepository
@@ -28,12 +30,17 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideReportRepository(database: MainDatabase): ReportRepository =
-            ReportRepositoryImpl(database.getReportDao())
+    fun provideReportRepository(database: MainDatabase, accountRepository: AccountRepository): ReportRepository =
+            ReportRepositoryImpl(database.getReportDao(), accountRepository)
 
     @Provides
     @Singleton
     fun provideEstimateRepository(reportRepository: ReportRepository): EstimateRepository =
             EstimateRepositoryImpl(reportRepository)
+
+    @Provides
+    @Singleton
+    fun provideAccountRepository(database: MainDatabase): AccountRepository =
+            AccountRepositoryImpl(database.getAccountDao())
 
 }
