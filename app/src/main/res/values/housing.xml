@@ -4,13 +4,6 @@
         <item>Квартира</item>
         <item>Комната</item>
         <item>Дом</item>
-        <item>Земельный участок</item>
-        <item>Офис</item>
-        <item>Торговая площадка</item>
-        <item>Склад</item>
-        <item>Помещение свободного назначения</item>
-        <item>Гараж</item>
-        <item>Здание</item>
     </string-array>
 
     <string-array name="housing_class">
