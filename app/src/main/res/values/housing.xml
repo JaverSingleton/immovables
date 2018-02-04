@@ -103,11 +103,6 @@
         <item>На крыше</item>
     </string-array>
 
-    <string-array name="information_sources">
-        <item>Сайты объявлений</item>
-        <item>Аукционы</item>
-    </string-array>
-
     <string-array name="heating">
         <item>Автономное</item>
         <item>Централизованное</item>

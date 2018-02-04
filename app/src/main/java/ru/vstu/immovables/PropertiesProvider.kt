@@ -35,10 +35,10 @@ class PropertiesProvider(private val context: Context) {
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(5, "Этажность дома", ""),
             Field.NumberInput(6, "Этаж", "", isMandatory = true),
-            Field.NumberInput(Properties.AREA, "Общая площадь квартиры(м²)", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры, м²", "", isMandatory = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
-            Field.NumberInput(12, "Жилая площадь", ""),
-            Field.NumberInput(13, "Площадь кухни", ""),
+            Field.NumberInput(12, "Жилая площадь, м²", ""),
+            Field.NumberInput(13, "Площадь кухни, м²", ""),
             Field.Select(14, "Санузел", getList(R.array.bathroom)),
             Field.Select(15, "Число санузлов", getList(R.array.bathroom), isMandatory = true),
             Field.Select(16, "Балкон", getList(R.array.balcony)),
@@ -58,7 +58,6 @@ class PropertiesProvider(private val context: Context) {
             Field.Select(32, "Парковка", getList(R.array.parking)),
             Field.Select(33, "Консьерж", getList(R.array.common)),
             Field.Select(34, "Охрана", getList(R.array.common)),
-            Field.Select(35, "Источники информации", getList(R.array.information_sources)),
             Field.Select(36, "Отопление", getList(R.array.heating)),
             Field.Select(37, "Тип продажи", getList(R.array.sell_type))
     )
@@ -73,10 +72,10 @@ class PropertiesProvider(private val context: Context) {
             Field.Photo(42, "Документы на собственность", maxSelectable = 3, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(5, "Этажность дома", ""),
-            Field.NumberInput(Properties.AREA, "Общая площадь дома(м²)", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь дома, м²", "", isMandatory = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
-            Field.NumberInput(12, "Жилая площадь", ""),
-            Field.NumberInput(13, "Площадь кухни", ""),
+            Field.NumberInput(12, "Жилая площадь, м²", ""),
+            Field.NumberInput(13, "Площадь кухни, м²", ""),
             Field.Select(14, "Санузел", getList(R.array.bathroom)),
             Field.Select(15, "Число санузлов", getList(R.array.bathroom), isMandatory = true),
             Field.Select(18, "Ремонт", getList(R.array.repairs)),
@@ -90,7 +89,6 @@ class PropertiesProvider(private val context: Context) {
             Field.Select(26, "Кабельное ТВ", getList(R.array.common)),
             Field.Select(27, "Кондиционер", getList(R.array.common)),
             Field.Select(34, "Охрана", getList(R.array.common)),
-            Field.Select(35, "Источники информации", getList(R.array.information_sources)),
             Field.Select(36, "Отопление", getList(R.array.heating)),
             Field.Select(37, "Тип продажи", getList(R.array.sell_type))
     )
@@ -100,14 +98,13 @@ class PropertiesProvider(private val context: Context) {
             Field.NumberInput(10, "Число собственников", ""),
             Field.Select(40, "Класс жилья", getList(R.array.housing_class)),
             Field.Select(3, "Тип дома", getList(R.array.house_type)),
-            Field.Photo(42, "Документы на собственность", maxSelectable = 3, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(5, "Этажность дома", ""),
             Field.NumberInput(6, "Этаж", "", isMandatory = true),
-            Field.NumberInput(Properties.AREA, "Общая площадь квартиры(м²)", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры, м²", "", isMandatory = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
-            Field.NumberInput(12, "Жилая площадь", ""),
-            Field.NumberInput(13, "Площадь кухни", ""),
+            Field.NumberInput(12, "Жилая площадь, м²", ""),
+            Field.NumberInput(13, "Площадь кухни, м²", ""),
             Field.Select(14, "Санузел", getList(R.array.bathroom)),
             Field.Select(15, "Число санузлов", getList(R.array.bathroom), isMandatory = true),
             Field.Select(18, "Ремонт", getList(R.array.repairs)),
@@ -122,9 +119,7 @@ class PropertiesProvider(private val context: Context) {
             Field.Select(30, "Грузовой лифт", getList(R.array.lift)),
             Field.Select(31, "Кол-во лифтов", getList(R.array.lift_count)),
             Field.Select(32, "Парковка", getList(R.array.parking)),
-            Field.Select(35, "Источники информации", getList(R.array.information_sources)),
-            Field.Select(36, "Отопление", getList(R.array.heating)),
-            Field.Select(37, "Тип продажи", getList(R.array.sell_type))
+            Field.Select(36, "Отопление", getList(R.array.heating))
     )
 
     private fun getList(@ArrayRes resource: Int): List<String> =
