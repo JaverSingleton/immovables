@@ -60,8 +60,8 @@ class ReportPresenterImpl(
                 .subscribe { savedReport: ReportData ->
                     report = savedReport
                     view.showCost(savedReport.cost.toNumberString())
-                    view.showMaxCost((savedReport.cost * 1.25f).toLong().toNumberString())
-                    view.showMinCost((savedReport.cost * 0.75f).toLong().toNumberString())
+                    view.showMaxCost((savedReport.cost * 1.20f).toLong().toNumberString())
+                    view.showMinCost((savedReport.cost * 0.80f).toLong().toNumberString())
                     view.showAveCost((savedReport.cost / savedReport.metres).toNumberString())
                 }
 

@@ -1,5 +1,6 @@
 package ru.vstu.immovables.ui.location
 
+import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -8,13 +9,14 @@ import android.support.v7.app.AppCompatActivity
 import com.avito.konveyor.ItemBinder
 import com.avito.konveyor.adapter.AdapterPresenter
 import com.google.android.gms.maps.SupportMapFragment
+import com.tbruyelle.rxpermissions2.RxPermissions
+import io.reactivex.Completable
 import ru.vstu.immovables.R
 import ru.vstu.immovables.appComponent
 import ru.vstu.immovables.getContainerView
 import ru.vstu.immovables.inject
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.location.di.LocationModule
-import ru.vstu.immovables.ui.main.MainActivity
 import javax.inject.Inject
 
 class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
@@ -22,6 +24,9 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
     @Inject lateinit var presenter: LocationPresenter
     @Inject lateinit var adapterPresenter: AdapterPresenter
     @Inject lateinit var itemBinder: ItemBinder
+
+    private lateinit var rxPermissions: RxPermissions
+    private lateinit var view: LocationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +37,8 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
                         savedInstanceState?.getBundle(KEY_PRESENTER_STATE)))
                 .inject(this)
         setContentView(R.layout.activity_location)
-        val view: LocationView = LocationViewImpl(
+        rxPermissions = RxPermissions(this)
+        view = LocationViewImpl(
                 getContainerView(),
                 supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment,
                 adapterPresenter,
@@ -44,6 +50,14 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
     override fun onStart() {
         super.onStart()
         presenter.attachRouter(this)
+        rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION)
+                .flatMapCompletable { granted ->
+                    if (granted) {
+                        view.enableMyLocation()
+                    } else {
+                        Completable.complete()
+                    }
+                }.subscribe()
     }
 
     override fun onStop() {

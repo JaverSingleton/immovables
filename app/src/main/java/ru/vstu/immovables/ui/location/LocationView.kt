@@ -16,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.widget.textChangeEvents
@@ -45,6 +46,8 @@ interface LocationView {
 
     fun mapClicked(): Observable<LatLng>
 
+    fun enableMyLocation(): Completable
+
     fun hideKeyboard()
 
 }
@@ -71,7 +74,9 @@ class LocationViewImpl(
     private val recycler: RecyclerView = view.findViewById(R.id.suggests_recycler)
 
     init {
-        mapFragment.getMapAsync { mapRelay.accept(it) }
+        mapFragment.getMapAsync {
+            mapRelay.accept(it)
+        }
         searchInput.hint = buildTextWithIcon(context.getString(R.string.Location_InputAddress))
 
         recycler.adapter = adapter
@@ -129,11 +134,22 @@ class LocationViewImpl(
     override fun showMarker(location: LatLng, name: String): Completable = changeMap { map ->
         map.clear()
         map.addMarker(MarkerOptions().position(location).title(name))
-        map.moveCamera(CameraUpdateFactory.newLatLng(location))
+        map.animateCamera(CameraUpdateFactory.newLatLngBounds(
+                LatLngBounds.Builder().include(location).build(),
+                context.getDimen(R.dimen.maps_padding)
+        ))
     }
 
     override fun hideKeyboard() {
         searchInput.hideKeyboard()
+    }
+
+    override fun enableMyLocation(): Completable = changeMap { map ->
+        try {
+            map.isMyLocationEnabled = true
+        }catch(e: SecurityException){
+
+        }
     }
 
     private fun getMap(): Single<GoogleMap> = mapRelay.firstElement().toSingle()

@@ -54,7 +54,7 @@ class HistoryListPresenterImpl(
                     val reports = items.mapIndexed { index, reportData ->
                         HistoryItem(index.toLong(), reportData)
                     }
-                    adapterPresenter.updateItems(reports)
+                    adapterPresenter.updateItems(reports.reversed())
                     view?.updateItems()
                     if (reports.isEmpty()) {
                         view?.showNoElements()
