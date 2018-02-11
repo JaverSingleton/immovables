@@ -57,7 +57,7 @@ class LocationActivity : AppCompatActivity(), LocationPresenter.Router {
                     } else {
                         Completable.complete()
                     }
-                }.subscribe()
+                }.subscribe({}, {})
     }
 
     override fun onStop() {

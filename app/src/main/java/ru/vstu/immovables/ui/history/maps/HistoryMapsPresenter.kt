@@ -42,7 +42,9 @@ class HistoryMapsPresenterImpl(
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap { reports -> view!!.clearMarkers().toSingleDefault(reports) }
                 .flatMap { reports ->
-                    view!!.zoomTo(reports.map { it.latLng }).toSingleDefault(reports)
+                    view!!.zoomTo(reports.map { it.latLng })
+                            .toSingleDefault(reports)
+                            .onErrorReturn { reports }
                 }
                 .flatMapObservable { Observable.fromIterable(it) }
                 .flatMap { report ->
@@ -66,6 +68,6 @@ class HistoryMapsPresenterImpl(
         this.view = null
     }
 
-    private val ReportData.latLng get() = LatLng(latitude.toDouble(), longitude.toDouble())
+    private val ReportData.latLng get() = LatLng(latitude, longitude)
 
 }
