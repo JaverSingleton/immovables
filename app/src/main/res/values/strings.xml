@@ -33,4 +33,7 @@
     <string name="Login.Login.Hint">Логин</string>
     <string name="Login.Password.Hint">Пароль</string>
     <string name="Login.Error">Ошибка авторизации</string>
+    <string name="Dialog.Message">Вы уверены, что хотите выйти?</string>
+    <string name="Dialog.Quit">Выйти</string>
+    <string name="Dialog.Cancel">Отмена</string>
 </resources>

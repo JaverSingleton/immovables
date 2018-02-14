@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.net.Uri
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -127,6 +128,20 @@ class MainActivity : AppCompatActivity(), MainView {
         presenter.onDestroy()
     }
 
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+                .setMessage(R.string.Dialog_Message)
+                .setPositiveButton(R.string.Dialog_Quit) { dialog, _ ->
+                    dialog.cancel()
+                    finish()
+                }
+                .setCancelable(false)
+                .setNegativeButton(R.string.Dialog_Cancel) { dialog, _ ->
+                    dialog.cancel()
+                }
+                .show()
+    }
+
     override fun setApplyButtonVisible(visible: Boolean) {
         applyButton.setVisible(visible)
     }
@@ -141,7 +156,7 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
         android.R.id.home -> {
-            finish()
+            onBackPressed()
             true
         }
         else -> super.onOptionsItemSelected(item)

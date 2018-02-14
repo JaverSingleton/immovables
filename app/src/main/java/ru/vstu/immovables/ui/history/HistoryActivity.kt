@@ -8,10 +8,9 @@ import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
 import ru.vstu.immovables.*
@@ -62,17 +61,18 @@ class HistoryActivity : AppCompatActivity(),
         toolbar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.logout -> {
-                    accountRepository.logout()
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .doOnSubscribe { progress.show() }
-                            .doOnTerminate { progress.hide() }
-                            .subscribe({
-                                startActivity(loginScreen(intent))
-                                finish()
-                            }, {
-                                startActivity(loginScreen(intent))
-                                finish()
-                            })
+                    AlertDialog.Builder(this)
+                            .setTitle(accountRepository.getLogin())
+                            .setMessage(R.string.Dialog_Message)
+                            .setPositiveButton(R.string.Dialog_Quit) { dialog, _ ->
+                                dialog.cancel()
+                                logout()
+                            }
+                            .setNegativeButton(R.string.Dialog_Cancel) { dialog, _ ->
+                                dialog.cancel()
+                            }
+                            .setCancelable(false)
+                            .show()
                     true
                 }
                 else -> false
@@ -112,22 +112,18 @@ class HistoryActivity : AppCompatActivity(),
         )
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.logout -> {
-                accountRepository.logout()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .doOnSubscribe { progress.show() }
-                        .doOnTerminate { progress.hide() }
-                        .subscribe({
-                            startActivity(loginScreen(intent))
-                        }, {
-                            startActivity(loginScreen(intent))
-                        })
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    private fun logout() {
+        accountRepository.logout()
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { progress.show() }
+                .doOnTerminate { progress.hide() }
+                .subscribe({
+                    startActivity(loginScreen(intent))
+                    finish()
+                }, {
+                    startActivity(loginScreen(intent))
+                    finish()
+                })
     }
 
     internal inner class ViewPagerAdapter : FragmentPagerAdapter(supportFragmentManager) {
