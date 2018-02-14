@@ -9,6 +9,7 @@ import ru.vstu.immovables.ui.main.item.Field
 interface MainView {
     fun updateItems(items: List<Field>)
     fun updateItem(position: Int)
+    fun scrollToItem(position: Int)
     fun setApplyButtonVisible(visible: Boolean)
     fun selectLocation(id: Long, selectedValue: LocationData?)
     fun selectPhotos(id: Long, selectedValue: List<Uri>, maxSelectable: Int)

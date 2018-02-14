@@ -6,4 +6,6 @@ interface Property {
 
     val isMandatory: Boolean
 
+    var info: PropertyInfo?
+
 }

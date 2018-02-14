@@ -3,18 +3,22 @@ package ru.vstu.immovables.ui.main
 import android.net.Uri
 import android.os.Bundle
 import io.reactivex.Observable
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.repository.estimate.EstimateRepository
+import ru.vstu.immovables.repository.estimate.IncorrectDataException
 import ru.vstu.immovables.repository.estimate.Properties.Companion.AREA
 import ru.vstu.immovables.repository.estimate.Properties.Companion.KITCHEN_AREA
 import ru.vstu.immovables.repository.estimate.Properties.Companion.LIVING_AREA
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.main.item.Field
 import ru.vstu.immovables.ui.main.item.Property
+import ru.vstu.immovables.ui.main.item.PropertyInfo
+import ru.vstu.immovables.ui.view.InfoLevel
 import java.util.*
 
 
@@ -84,7 +88,7 @@ class MainPresenterImpl(
                             view.selectLocation(it.id, it.locationData)
                         }
                         is Field.MoreButton -> {
-                            it.more =!it.more
+                            it.more = !it.more
                             updateFields()
                         }
                         is Field.Photo -> {
@@ -104,8 +108,25 @@ class MainPresenterImpl(
                 .flatMapSingle {
                     estimateRepository.estimate(items.filter { it is Property })
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doOnSubscribe { view.showLoading() }
+                            .doOnSubscribe {
+                                items.filterIsInstance(Property::class.java)
+                                        .filter { it.info?.level == InfoLevel.ERROR }
+                                        .forEach { it.info = null }
+                                updateFields()
+                                view.showLoading()
+                            }
                             .doAfterTerminate { view.hideLoading() }
+                            .onErrorResumeNext { error ->
+                                if (error is IncorrectDataException) {
+                                    error.errors.forEach {
+                                        val item: Field.NumberInput = getItem(it.key)
+                                        item.info = PropertyInfo(it.value, InfoLevel.ERROR)
+                                        update(it.key)
+                                        scrollTo(it.key)
+                                    }
+                                }
+                                Single.never()
+                            }
                 }
                 .subscribeBy(
                         onNext = {
@@ -133,6 +154,10 @@ class MainPresenterImpl(
 
     private fun update(id: Long) {
         view.updateItem(currentItems.indexOfFirst { it.id == id })
+    }
+
+    private fun scrollTo(id: Long) {
+        view.scrollToItem(currentItems.indexOfFirst { it.id == id })
     }
 
     private fun updateFields() {

@@ -174,6 +174,10 @@ class MainActivity : AppCompatActivity(), MainView {
         recyclerAdapter.notifyItemChanged(position)
     }
 
+    override fun scrollToItem(position: Int) {
+        recycler.scrollToPosition(position)
+    }
+
     override fun selectItem(id: Long, title: String, items: List<String>, selectedValue: Int) {
         startActivityForResult(
                 propertyChooseScreen(

@@ -2,6 +2,7 @@ package ru.vstu.immovables.repository.estimate
 
 import com.google.android.gms.maps.model.LatLng
 import io.reactivex.Single
+import ru.vstu.immovables.repository.estimate.Properties.Companion.AREA
 import ru.vstu.immovables.repository.report.ReportData
 import ru.vstu.immovables.repository.report.ReportRepository
 import ru.vstu.immovables.ui.main.item.Field
@@ -29,6 +30,7 @@ class EstimateRepositoryImpl(private val reportRepository: ReportRepository) : E
 
     override fun estimate(properties: List<Field>): Single<ReportData> =
             Single.timer(2, TimeUnit.SECONDS)
+                    .doOnSuccess { validate(properties) }
                     .flatMap {
                         val location: Field.Location = properties.getField(Properties.ADDRESS)
                         val area: Field.NumberInput = properties.getField(Properties.AREA)
@@ -45,6 +47,22 @@ class EstimateRepositoryImpl(private val reportRepository: ReportRepository) : E
                                 filePath = "File Path"
                         ))
                     }
+
+    private fun validate(properties: List<Field>) {
+        val area: Field.NumberInput = properties.getField(Properties.AREA)
+        val livingArea: Field.NumberInput? = properties.getNullableField(Properties.LIVING_AREA)
+        val kitchenArea: Field.NumberInput? = properties.getNullableField(Properties.KITCHEN_AREA)
+
+        val areaValue = area.value.toFloatOrNull() ?: 0f
+        val livinAreaValue = livingArea?.value?.toFloatOrNull() ?: 0f
+        val kitchenAreaValue = kitchenArea?.value?.toFloatOrNull() ?: 0f
+
+        if (areaValue < livinAreaValue + kitchenAreaValue) {
+            throw IncorrectDataException(mapOf(
+                    AREA to "Общая площадь должна быть больше чем жилая и площадь кухни"
+            ))
+        }
+    }
 
     private fun calculateCost(
             area: Long,

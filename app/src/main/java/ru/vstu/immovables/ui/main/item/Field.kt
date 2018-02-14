@@ -17,7 +17,7 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             val items: List<String>,
             var selectedItem: Int = -1,
             override val isMandatory: Boolean = false,
-            val info: PropertyInfo? = null
+            override var info: PropertyInfo? = null
     ) : Field(), Property {
 
         override fun hasValue(): Boolean = selectedItem > -1
@@ -56,7 +56,7 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             val title: String,
             var locationData: LocationData? = null,
             override val isMandatory: Boolean = false,
-            val info: PropertyInfo? = null
+            override var info: PropertyInfo? = null
     ) : Field(), Property {
 
         override fun hasValue(): Boolean = locationData != null
@@ -95,7 +95,7 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             val maxSelectable: Int = 0,
             val minSelectable: Int = 1,
             override val isMandatory: Boolean = false,
-            val info: PropertyInfo? = null
+            override var info: PropertyInfo? = null
     ) : Field(), Property {
 
         override fun hasValue(): Boolean = photos.size >= minSelectable
@@ -136,7 +136,7 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             val title: String,
             var value: String = "",
             override val isMandatory: Boolean = false,
-            val info: PropertyInfo? = null,
+            override var info: PropertyInfo? = null,
             val isFloat: Boolean = false
     ) : Field(), Property {
 
