@@ -135,7 +135,6 @@ class MainActivity : AppCompatActivity(), MainView {
                     dialog.cancel()
                     finish()
                 }
-                .setCancelable(false)
                 .setNegativeButton(R.string.Dialog_Cancel) { dialog, _ ->
                     dialog.cancel()
                 }

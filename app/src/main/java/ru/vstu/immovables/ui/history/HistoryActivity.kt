@@ -71,7 +71,6 @@ class HistoryActivity : AppCompatActivity(),
                             .setNegativeButton(R.string.Dialog_Cancel) { dialog, _ ->
                                 dialog.cancel()
                             }
-                            .setCancelable(false)
                             .show()
                     true
                 }
