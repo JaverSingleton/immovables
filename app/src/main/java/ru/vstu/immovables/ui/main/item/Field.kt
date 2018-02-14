@@ -136,7 +136,8 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             val title: String,
             var value: String = "",
             override val isMandatory: Boolean = false,
-            val info: PropertyInfo? = null
+            val info: PropertyInfo? = null,
+            val isFloat: Boolean = false
     ) : Field(), Property {
 
         override fun hasValue(): Boolean = value.isNotEmpty()
@@ -147,6 +148,7 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
             writeString(title)
             writeValue(info)
             writeString(value)
+            writeBoolean(isFloat)
         }
 
         override fun describeContents(): Int = 0
@@ -160,7 +162,8 @@ sealed class Field(open val isMandatory: Boolean = false) : Item, Parcelable {
                         isMandatory = readBoolean(),
                         title = readString(),
                         info = readNullableValue(),
-                        value = readString()
+                        value = readString(),
+                        isFloat = readBoolean()
                 )
             }
 

@@ -4,4 +4,10 @@ interface PropertiesInfoProvider {
 
     val more: Boolean
 
+    val area: Float
+
+    val kitchenArea: Float
+
+    val livingArea: Float
+
 }

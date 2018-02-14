@@ -9,6 +9,9 @@ import io.reactivex.rxkotlin.plusAssign
 import io.reactivex.rxkotlin.subscribeBy
 import ru.vstu.immovables.PropertiesProvider
 import ru.vstu.immovables.repository.estimate.EstimateRepository
+import ru.vstu.immovables.repository.estimate.Properties.Companion.AREA
+import ru.vstu.immovables.repository.estimate.Properties.Companion.KITCHEN_AREA
+import ru.vstu.immovables.repository.estimate.Properties.Companion.LIVING_AREA
 import ru.vstu.immovables.repository.location.LocationData
 import ru.vstu.immovables.ui.main.item.Field
 import ru.vstu.immovables.ui.main.item.Property
@@ -122,6 +125,12 @@ class MainPresenterImpl(
 
     override val more: Boolean get() = moreButton.more
 
+    override val area: Float get() = findItem<Field.NumberInput>(AREA)?.value?.toFloatOrNull() ?: 0f
+
+    override val kitchenArea: Float get() = findItem<Field.NumberInput>(KITCHEN_AREA)?.value?.toFloatOrNull() ?: 0f
+
+    override val livingArea: Float get() = findItem<Field.NumberInput>(LIVING_AREA)?.value?.toFloatOrNull() ?: 0f
+
     private fun update(id: Long) {
         view.updateItem(currentItems.indexOfFirst { it.id == id })
     }
@@ -146,5 +155,8 @@ class MainPresenterImpl(
 
     @Suppress("UNCHECKED_CAST")
     private fun <T : Field> getItem(id: Long): T = items.first { it.id == id } as T
+
+    @Suppress("UNCHECKED_CAST")
+    private fun <T : Field> findItem(id: Long): T? = items.firstOrNull { it.id == id } as? T?
 
 }

@@ -17,6 +17,8 @@ class Properties {
     companion object {
         const val ADDRESS = 1L
         const val AREA = 2L
+        const val LIVING_AREA = 12L
+        const val KITCHEN_AREA = 13L
         const val ROOMS = 4L
         const val FLOOR = 6L
         const val MAX_FLOOR = 5L
@@ -31,7 +33,7 @@ class EstimateRepositoryImpl(private val reportRepository: ReportRepository) : E
                         val location: Field.Location = properties.getField(Properties.ADDRESS)
                         val area: Field.NumberInput = properties.getField(Properties.AREA)
                         val rooms: Field.Select? = properties.getNullableField(Properties.ROOMS)
-                        val areaValue = area.value.toLong()
+                        val areaValue = area.value.toFloat().toLong()
                         val roomsValue = rooms?.selectedItem ?: 1
                         val locationValue = location.locationData!!.location
                         reportRepository.save(ReportData(

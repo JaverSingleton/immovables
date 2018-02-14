@@ -3,6 +3,8 @@ package ru.vstu.immovables
 import android.content.Context
 import android.support.annotation.ArrayRes
 import ru.vstu.immovables.repository.estimate.Properties
+import ru.vstu.immovables.repository.estimate.Properties.Companion.KITCHEN_AREA
+import ru.vstu.immovables.repository.estimate.Properties.Companion.LIVING_AREA
 import ru.vstu.immovables.ui.main.item.Field
 import ru.vstu.immovables.ui.main.item.PropertyInfo
 
@@ -35,10 +37,10 @@ class PropertiesProvider(private val context: Context) {
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(Properties.MAX_FLOOR, "Этажность дома", ""),
             Field.NumberInput(Properties.FLOOR, "Этаж", ""),
-            Field.NumberInput(Properties.AREA, "Общая площадь квартиры, м²", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры, м²", "", isMandatory = true, isFloat = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
-            Field.NumberInput(12, "Жилая площадь, м²", ""),
-            Field.NumberInput(13, "Площадь кухни, м²", ""),
+            Field.NumberInput(LIVING_AREA, "Жилая площадь, м²", "", isFloat = true),
+            Field.NumberInput(KITCHEN_AREA, "Площадь кухни, м²", "", isFloat = true),
             Field.Select(14, "Санузел", getList(R.array.bathroom)),
             Field.Select(15, "Число санузлов", getList(R.array.bathroom)),
             Field.Select(16, "Балкон", getList(R.array.balcony)),
@@ -72,10 +74,10 @@ class PropertiesProvider(private val context: Context) {
             Field.Photo(42, "Документы на собственность", maxSelectable = 3, info = PropertyInfo("Укажите фото документов, на оцениваемую недвижимость")),
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(Properties.MAX_FLOOR, "Этажность дома", ""),
-            Field.NumberInput(Properties.AREA, "Общая площадь дома, м²", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь дома, м²", "", isMandatory = true, isFloat = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
-            Field.NumberInput(12, "Жилая площадь, м²", ""),
-            Field.NumberInput(13, "Площадь кухни, м²", ""),
+            Field.NumberInput(LIVING_AREA, "Жилая площадь, м²", "", isFloat = true),
+            Field.NumberInput(KITCHEN_AREA, "Площадь кухни, м²", "", isFloat = true),
             Field.Select(14, "Санузел", getList(R.array.bathroom)),
             Field.Select(15, "Число санузлов", getList(R.array.bathroom)),
             Field.Select(18, "Ремонт", getList(R.array.repairs)),
@@ -101,10 +103,10 @@ class PropertiesProvider(private val context: Context) {
             Field.Photo(43, "Фото недвижимости", info = PropertyInfo("Фотографии внутренней отделки квартиры и планировки")),
             Field.NumberInput(Properties.MAX_FLOOR, "Этажность дома", ""),
             Field.NumberInput(Properties.FLOOR, "Этаж", ""),
-            Field.NumberInput(Properties.AREA, "Общая площадь квартиры, м²", "", isMandatory = true),
+            Field.NumberInput(Properties.AREA, "Общая площадь квартиры, м²", "", isMandatory = true, isFloat = true),
             Field.Select(11, "Тип обременения", getList(R.array.encumbrance_type)),
-            Field.NumberInput(12, "Жилая площадь, м²", ""),
-            Field.NumberInput(13, "Площадь кухни, м²", ""),
+            Field.NumberInput(LIVING_AREA, "Жилая площадь, м²", "", isFloat = true),
+            Field.NumberInput(KITCHEN_AREA, "Площадь кухни, м²", "", isFloat = true),
             Field.Select(14, "Санузел", getList(R.array.bathroom)),
             Field.Select(15, "Число санузлов", getList(R.array.bathroom)),
             Field.Select(18, "Ремонт", getList(R.array.repairs)),

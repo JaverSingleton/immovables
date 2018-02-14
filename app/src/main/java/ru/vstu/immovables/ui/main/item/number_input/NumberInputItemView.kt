@@ -39,4 +39,12 @@ class NumberInputItemView(view: View) : BaseViewHolder(view) {
         }
     }
 
+    fun setFloatType(isFloat: Boolean) {
+        valueView.inputType = if (isFloat) {
+            InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        } else {
+            InputType.TYPE_CLASS_NUMBER
+        }
+    }
+
 }

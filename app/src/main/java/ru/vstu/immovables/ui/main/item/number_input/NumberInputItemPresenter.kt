@@ -27,5 +27,6 @@ class NumberInputItemPresenter(
                         .takeIf { it && propertiesInfoProvider.more }
                         ?.let { InfoLevel.WARNING } ?: InfoLevel.INFO
         )
+        view.setFloatType(isFloat = item.isFloat)
     }
 }
