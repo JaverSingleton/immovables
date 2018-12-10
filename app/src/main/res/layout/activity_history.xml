@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
-        android:backgroundTint="#00AAFF"
+        app:backgroundTint="#00AAFF"
         android:src="@drawable/ic_add_white_16dp"
         app:elevation="6dp"
         app:fabSize="normal"
